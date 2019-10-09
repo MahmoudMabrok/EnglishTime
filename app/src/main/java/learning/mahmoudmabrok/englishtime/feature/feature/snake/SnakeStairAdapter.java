@@ -86,11 +86,14 @@ public class SnakeStairAdapter extends RecyclerView.Adapter<SnakeStairAdapter.Ho
     }
 
     public int checkPoint(int pos) {
-        if (KTUtils.Companion.isStairHere(stairs, pos)) {
+        Stair resSt = KTUtils.Companion.stairAt(stairs, pos);
+        Snack resSN = KTUtils.Companion.snackAt(snackes, pos);
+        if (resSt != null) {
+            return resSt.getEnd();
         }
-        if (KTUtils.Companion.isStnackHere(snackes, pos)) {
+        if (resSN != null) {
+            return resSN.getEnd();
         }
-
         return -1;
     }
 

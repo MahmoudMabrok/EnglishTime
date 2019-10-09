@@ -19,10 +19,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import learning.mahmoudmabrok.englishtime.R;
+import learning.mahmoudmabrok.englishtime.feature.utils.Utils;
 
 public class SnakeStair extends AppCompatActivity {
 
-    private static final int SIZE = 9;
+    private static final int SIZE = 12;
 
     @BindView(R.id.snakeRoot)
     FrameLayout mSnakeRoot;
@@ -72,10 +73,16 @@ public class SnakeStair extends AppCompatActivity {
         return points;
     }
 
-    private void animateAA(int start, int nSteps) {
+    private void animateAA(int start, int nSteps, boolean up) {
         boardItems = new ArrayList<>();
-        for (int i = 0; i < nSteps; i++) {
-            boardItems.add(start + i + 1);
+        if (up) {
+            for (int i = 0; i < nSteps; i++) {
+                boardItems.add(start + i + 1);
+            }
+        } else {
+            for (int i = 0; i < nSteps; i++) {
+                boardItems.add(start - (i + 1));
+            }
         }
         int millsUnit = 700;
         int total = boardItems.size() * millsUnit;
@@ -85,7 +92,7 @@ public class SnakeStair extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {
                 try {
                     anim(boardItems.get(iteration++));
-                    current++;
+                    current = boardItems.get(--iteration);
                     if (current >= SIZE) {
                         WonState();
                         cancel();
@@ -100,10 +107,28 @@ public class SnakeStair extends AppCompatActivity {
             public void onFinish() {
                 if (current >= SIZE) {
                     WonState();
+                } else {
+                    checkAfterTurn();
                 }
             }
         }.start();
 
+    }
+
+    private void checkAfterTurn() {
+        showMessage("curre  " + current);
+        int next = adapter.checkPoint(current);
+        showMessage("next " + next);
+        if (next > -1) {
+            if (next > current) {
+                // stair
+                animateAA(current, next - current, true);
+            } else {
+                // snack
+                animateAA(current, current - next, false);
+                Utils.vibrate(this);
+            }
+        }
     }
 
     private void WonState() {
@@ -128,7 +153,7 @@ public class SnakeStair extends AppCompatActivity {
     }
 
     private void initRV() {
-        adapter = new SnakeStairAdapter(12);
+        adapter = new SnakeStairAdapter(SIZE);
         mRvSnake.setAdapter(adapter);
         mRvSnake.setLayoutManager(new GridLayoutManager(this, 3));
         mRvSnake.setHasFixedSize(true);
@@ -141,7 +166,7 @@ public class SnakeStair extends AppCompatActivity {
     public void onMBtnPlayClicked() {
         int nSteps = new Random().nextInt(4) + 1; // to prevent 0
         showMessage("" + nSteps);
-        animateAA(current, nSteps);
+        animateAA(current, nSteps, true);
     }
 
 
