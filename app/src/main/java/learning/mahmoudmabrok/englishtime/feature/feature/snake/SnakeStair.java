@@ -75,7 +75,7 @@ public class SnakeStair extends AppCompatActivity {
     private void animateAA(int start, int nSteps) {
         boardItems = new ArrayList<>();
         for (int i = 0; i < nSteps; i++) {
-            boardItems.add(start + i);
+            boardItems.add(start + i + 1);
         }
         int millsUnit = 700;
         int total = boardItems.size() * millsUnit;
@@ -87,6 +87,7 @@ public class SnakeStair extends AppCompatActivity {
                     anim(boardItems.get(iteration++));
                     current++;
                     if (current >= SIZE) {
+                        WonState();
                         cancel();
                     }
 
@@ -115,18 +116,6 @@ public class SnakeStair extends AppCompatActivity {
     }
 
     private void loadData() {
-        List<String> list = new ArrayList<>();
-        list.add("a");
-        list.add("a");
-        list.add("a");
-        list.add("a");
-        list.add("a");
-        list.add("a");
-        list.add("a");
-        list.add("a");
-        list.add("a");
-        adapter.setStringList(list);
-
         List<Snack> snakes = new ArrayList<>();
         snakes.add(new Snack(4, 2));
         snakes.add(new Snack(8, 1));
@@ -136,12 +125,10 @@ public class SnakeStair extends AppCompatActivity {
         adapter.setStairs(stairs);
         adapter.setSnackes(snakes);
 
-        SnackGame snackGame = new SnackGame(snakes, stairs);
-
     }
 
     private void initRV() {
-        adapter = new SnakeStairAdapter();
+        adapter = new SnakeStairAdapter(12);
         mRvSnake.setAdapter(adapter);
         mRvSnake.setLayoutManager(new GridLayoutManager(this, 3));
         mRvSnake.setHasFixedSize(true);

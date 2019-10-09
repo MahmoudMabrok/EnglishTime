@@ -24,10 +24,12 @@ public class SnakeStairAdapter extends RecyclerView.Adapter<SnakeStairAdapter.Ho
     private int posOfCircle = -1;
     private List<Stair> stairs;
     private List<Snack> snackes;
+    private int ITEMES_COUNT;
 
-    public SnakeStairAdapter() {
+    public SnakeStairAdapter(int size) {
         list = new ArrayList<>();
         items = new ArrayList<>();
+        ITEMES_COUNT = size;
     }
 
     public void addString(String item) {
@@ -64,9 +66,6 @@ public class SnakeStairAdapter extends RecyclerView.Adapter<SnakeStairAdapter.Ho
         holder.mTvSnake.setBackgroundResource(R.drawable.unit_bg);
         String item = String.valueOf((i + 1));
         holder.mTvSnake.setText(item);
-        //  items.add(new Point(holder.itemView.getX(), holder.itemView.getY()));
-        // Log.d(TAG, "onBindViewHolder: size $$ " + items.size());
-
 
         if (i == posOfCircle) {
             holder.mTvSnake.setVisibility(View.GONE);
@@ -77,9 +76,22 @@ public class SnakeStairAdapter extends RecyclerView.Adapter<SnakeStairAdapter.Ho
         }
 
         if (snackes != null && stairs != null) {
+            if (KTUtils.Companion.isStairHere(stairs, i)) {
+                holder.mTvSnake.setBackgroundResource(R.drawable.stair);
+            }
+            if (KTUtils.Companion.isStnackHere(snackes, i)) {
+                holder.mTvSnake.setBackgroundResource(R.drawable.snack);
+            }
+        }
+    }
 
+    public int checkPoint(int pos) {
+        if (KTUtils.Companion.isStairHere(stairs, pos)) {
+        }
+        if (KTUtils.Companion.isStnackHere(snackes, pos)) {
         }
 
+        return -1;
     }
 
     public List<Point> getItems() {
@@ -89,7 +101,7 @@ public class SnakeStairAdapter extends RecyclerView.Adapter<SnakeStairAdapter.Ho
     @Override
     public int getItemCount() {
         Log.d(TAG, "getItemCount: ");
-        return list.size();
+        return ITEMES_COUNT;
     }
 
     public void setCircle(int pose) {
