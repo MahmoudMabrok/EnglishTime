@@ -38,6 +38,7 @@ public class SnakeStair extends AppCompatActivity {
     private int current = 0;
     private List<Integer> boardItems;
     private int iteration;
+    private CountDownTimer timer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +49,10 @@ public class SnakeStair extends AppCompatActivity {
         initRV();
         loadData();
 
-        playerView = new PlayerView(this);
+      /*  playerView = new PlayerView(this);
         mSnakeRoot.addView(playerView);
-        playerView.path(getItems());
+        playerView.path(getItems());*/
+
         startGame();
 
     }
@@ -87,7 +89,7 @@ public class SnakeStair extends AppCompatActivity {
         int millsUnit = 700;
         int total = boardItems.size() * millsUnit;
         iteration = 0;
-        new CountDownTimer(total, millsUnit) {
+        timer = new CountDownTimer(total, millsUnit) {
             @Override
             public void onTick(long millisUntilFinished) {
                 try {
@@ -111,7 +113,9 @@ public class SnakeStair extends AppCompatActivity {
                     checkAfterTurn();
                 }
             }
-        }.start();
+        };
+
+        timer.start();
 
     }
 
@@ -174,4 +178,12 @@ public class SnakeStair extends AppCompatActivity {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
+        }
+    }
 }
