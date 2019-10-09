@@ -22,6 +22,8 @@ public class SnakeStairAdapter extends RecyclerView.Adapter<SnakeStairAdapter.Ho
     private List<String> list;
     private List<Point> items;
     private int posOfCircle = -1;
+    private List<Stair> stairs;
+    private List<Snack> snackes;
 
     public SnakeStairAdapter() {
         list = new ArrayList<>();
@@ -59,10 +61,12 @@ public class SnakeStairAdapter extends RecyclerView.Adapter<SnakeStairAdapter.Ho
 
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int i) {
+        holder.mTvSnake.setBackgroundResource(R.drawable.unit_bg);
         String item = String.valueOf((i + 1));
         holder.mTvSnake.setText(item);
         //  items.add(new Point(holder.itemView.getX(), holder.itemView.getY()));
-        Log.d(TAG, "onBindViewHolder: size $$ " + items.size());
+        // Log.d(TAG, "onBindViewHolder: size $$ " + items.size());
+
 
         if (i == posOfCircle) {
             holder.mTvSnake.setVisibility(View.GONE);
@@ -70,6 +74,10 @@ public class SnakeStairAdapter extends RecyclerView.Adapter<SnakeStairAdapter.Ho
         } else {
             holder.mTvSnake.setVisibility(View.VISIBLE);
             holder.mImSnake.setVisibility(View.GONE);
+        }
+
+        if (snackes != null && stairs != null) {
+
         }
 
     }
@@ -94,6 +102,22 @@ public class SnakeStairAdapter extends RecyclerView.Adapter<SnakeStairAdapter.Ho
         for (Point holder : items) {
             Log.d(TAG, "logItems: X$ " + holder.getX() + " , Y " + holder.getY());
         }
+    }
+
+    public List<Stair> getStairs() {
+        return stairs;
+    }
+
+    public void setStairs(List<Stair> stairs) {
+        this.stairs = stairs;
+    }
+
+    public List<Snack> getSnackes() {
+        return snackes;
+    }
+
+    public void setSnackes(List<Snack> snackes) {
+        this.snackes = snackes;
     }
 
     class Holder extends RecyclerView.ViewHolder {

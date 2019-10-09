@@ -3,10 +3,13 @@ package learning.mahmoudmabrok.englishtime.feature.feature.snake;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -14,19 +17,26 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import learning.mahmoudmabrok.englishtime.R;
 
 public class SnakeStair extends AppCompatActivity {
 
+    private static final int SIZE = 9;
+
     @BindView(R.id.snakeRoot)
     FrameLayout mSnakeRoot;
-
     @BindView(R.id.rvSnake)
     RecyclerView mRvSnake;
+    @BindView(R.id.btnPlay)
+    Button mBtnPlay;
 
     private SnakeStairAdapter adapter;
     private PlayerView playerView;
-    private int current;
+
+    private int current = 0;
+    private List<Integer> boardItems;
+    private int iteration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,36 +47,67 @@ public class SnakeStair extends AppCompatActivity {
         initRV();
         loadData();
 
-
         playerView = new PlayerView(this);
         mSnakeRoot.addView(playerView);
-        adapter.logItems();
+        playerView.path(getItems());
+        startGame();
 
-        playerView.path(adapter.getItems());
-        animateAA();
     }
 
-    private void animateAA() {
-        int[] poses = new int[]{0, 1, 2, 3, 4};
-        int millsUnit = 700;
-        int total = poses.length * millsUnit;
+    private void startGame() {
         current = 0;
+        anim(0);
+    }
+
+    private List<Point> getItems() {
+        List<Point> points = new ArrayList<>();
+        points.add(new Point(0, 0));
+        points.add(new Point(300, 0));
+        points.add(new Point(500, 0));
+        points.add(new Point(10, 200));
+        points.add(new Point(0, 0));
+        points.add(new Point(300, 0));
+        points.add(new Point(500, 0));
+        points.add(new Point(0, 200));
+        return points;
+    }
+
+    private void animateAA(int start, int nSteps) {
+        boardItems = new ArrayList<>();
+        for (int i = 0; i < nSteps; i++) {
+            boardItems.add(start + i);
+        }
+        int millsUnit = 700;
+        int total = boardItems.size() * millsUnit;
+        iteration = 0;
         new CountDownTimer(total, millsUnit) {
             @Override
             public void onTick(long millisUntilFinished) {
                 try {
-                    anim(poses[current++]);
+                    anim(boardItems.get(iteration++));
+                    current++;
+                    if (current >= SIZE) {
+                        cancel();
+                    }
+
                 } catch (Exception e) {
-                    this.onFinish();
+                    cancel();
                 }
             }
 
             @Override
             public void onFinish() {
-
+                if (current >= SIZE) {
+                    WonState();
+                }
             }
         }.start();
 
+    }
+
+    private void WonState() {
+        showMessage("WON");
+        startGame();
     }
 
     private void anim(int pose) {
@@ -86,6 +127,17 @@ public class SnakeStair extends AppCompatActivity {
         list.add("a");
         adapter.setStringList(list);
 
+        List<Snack> snakes = new ArrayList<>();
+        snakes.add(new Snack(4, 2));
+        snakes.add(new Snack(8, 1));
+        List<Stair> stairs = new ArrayList<>();
+        stairs.add(new Stair(3, 6));
+
+        adapter.setStairs(stairs);
+        adapter.setSnackes(snakes);
+
+        SnackGame snackGame = new SnackGame(snakes, stairs);
+
     }
 
     private void initRV() {
@@ -97,4 +149,17 @@ public class SnakeStair extends AppCompatActivity {
         mRvSnake.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
 
     }
+
+    @OnClick(R.id.btnPlay)
+    public void onMBtnPlayClicked() {
+        int nSteps = new Random().nextInt(4) + 1; // to prevent 0
+        showMessage("" + nSteps);
+        animateAA(current, nSteps);
+    }
+
+
+    private void showMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
 }

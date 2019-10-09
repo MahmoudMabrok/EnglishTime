@@ -33,6 +33,8 @@ public class PlayerView extends AppCompatImageView implements ValueAnimator.Anim
 
     public void path(List<Point> points) {
         this.points = new ArrayList<>(points);
+
+        walkPath();
     }
 
     public void walkPath() {

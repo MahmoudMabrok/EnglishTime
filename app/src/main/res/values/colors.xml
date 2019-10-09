@@ -12,4 +12,8 @@
     <color name="blue">#29B6F6</color>
     <color name="green">#66BB6A</color>
 
+
+    <color name="snackColor">#EF5350</color>
+    <color name="stairColor">#FFEE58</color>
+
 </resources>

@@ -16,4 +16,5 @@
     <string name="snameItem">AAA</string>
     <string name="snake">Snake</string>
     <string name="currentplay">currentPlay</string>
+    <string name="play">Play</string>
 </resources>
