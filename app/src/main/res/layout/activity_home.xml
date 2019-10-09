@@ -4,11 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/screenPadding"
+    android:background="@color/colorPrimaryDark"
     tools:context=".feature.feature.home.HomeActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvHome"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark" />
 
 </LinearLayout>

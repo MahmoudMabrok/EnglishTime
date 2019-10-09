@@ -2,6 +2,7 @@ package learning.mahmoudmabrok.englishtime.feature.feature.snake;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -23,7 +24,10 @@ import learning.mahmoudmabrok.englishtime.feature.utils.Utils;
 
 public class SnakeStair extends AppCompatActivity {
 
-    private static final int SIZE = 12;
+    private static final String TAG = "SnakeStair";
+
+    private static final int SIZE = 25;
+    private static final int ROW_SIZE = 5;
 
     @BindView(R.id.snakeRoot)
     FrameLayout mSnakeRoot;
@@ -33,6 +37,7 @@ public class SnakeStair extends AppCompatActivity {
     Button mBtnPlay;
 
     private SnakeStairAdapter adapter;
+
     private PlayerView playerView;
 
     private int current = 0;
@@ -60,6 +65,7 @@ public class SnakeStair extends AppCompatActivity {
     private void startGame() {
         current = 0;
         anim(0);
+        enableBTN();
     }
 
     private List<Point> getItems() {
@@ -75,9 +81,10 @@ public class SnakeStair extends AppCompatActivity {
         return points;
     }
 
-    private void animateAA(int start, int nSteps, boolean up) {
+    private void animateAA(int start, int nSteps, int state) {
+        adapter.setDown(state);
         boardItems = new ArrayList<>();
-        if (up) {
+        if (state >= 0) {
             for (int i = 0; i < nSteps; i++) {
                 boardItems.add(start + i + 1);
             }
@@ -93,15 +100,18 @@ public class SnakeStair extends AppCompatActivity {
             @Override
             public void onTick(long millisUntilFinished) {
                 try {
-                    anim(boardItems.get(iteration++));
-                    current = boardItems.get(--iteration);
+                    int newPos = boardItems.get(iteration++);
+                    anim(newPos);
+                    current = newPos;
                     if (current >= SIZE) {
                         WonState();
                         cancel();
+
                     }
 
                 } catch (Exception e) {
                     cancel();
+                    enableBTN();
                 }
             }
 
@@ -119,18 +129,26 @@ public class SnakeStair extends AppCompatActivity {
 
     }
 
+    private void enableBTN() {
+        mBtnPlay.setVisibility(View.VISIBLE);
+    }
+
     private void checkAfterTurn() {
-        showMessage("curre  " + current);
+        //  showMessage("curre  " + current);
         int next = adapter.checkPoint(current);
-        showMessage("next " + next);
+        //  showMessage("next " + next);
         if (next > -1) {
             if (next > current) {
                 // stair
-                animateAA(current, next - current, true);
+                animateAA(current, next - current, 1);
+                Log.d(TAG, "checkAfterTurn: up " + next);
+
             } else {
                 // snack
-                animateAA(current, current - next, false);
+                animateAA(current, current - next, -1);
                 Utils.vibrate(this);
+                Log.d(TAG, "checkAfterTurn: down " + next);
+
             }
         }
     }
@@ -146,10 +164,14 @@ public class SnakeStair extends AppCompatActivity {
 
     private void loadData() {
         List<Snack> snakes = new ArrayList<>();
-        snakes.add(new Snack(4, 2));
-        snakes.add(new Snack(8, 1));
+        snakes.add(new Snack(8, 2));
+        snakes.add(new Snack(20, 12));
+        snakes.add(new Snack(24, 10));
         List<Stair> stairs = new ArrayList<>();
-        stairs.add(new Stair(3, 6));
+        stairs.add(new Stair(1, 7));
+        stairs.add(new Stair(11, 19));
+        stairs.add(new Stair(18, 22));
+
 
         adapter.setStairs(stairs);
         adapter.setSnackes(snakes);
@@ -159,7 +181,7 @@ public class SnakeStair extends AppCompatActivity {
     private void initRV() {
         adapter = new SnakeStairAdapter(SIZE);
         mRvSnake.setAdapter(adapter);
-        mRvSnake.setLayoutManager(new GridLayoutManager(this, 3));
+        mRvSnake.setLayoutManager(new GridLayoutManager(this, ROW_SIZE));
         mRvSnake.setHasFixedSize(true);
         mRvSnake.setItemAnimator(new DefaultItemAnimator());
         mRvSnake.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
@@ -168,9 +190,10 @@ public class SnakeStair extends AppCompatActivity {
 
     @OnClick(R.id.btnPlay)
     public void onMBtnPlayClicked() {
-        int nSteps = new Random().nextInt(4) + 1; // to prevent 0
-        showMessage("" + nSteps);
-        animateAA(current, nSteps, true);
+        int nSteps = new Random().nextInt(ROW_SIZE) + 1; // to prevent 0
+        showMessage("nSteps " + nSteps);
+        animateAA(current, nSteps, 0);
+        mBtnPlay.setVisibility(View.INVISIBLE);
     }
 
 

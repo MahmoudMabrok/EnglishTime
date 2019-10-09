@@ -25,6 +25,7 @@ public class SnakeStairAdapter extends RecyclerView.Adapter<SnakeStairAdapter.Ho
     private List<Stair> stairs;
     private List<Snack> snackes;
     private int ITEMES_COUNT;
+    private int walkState;
 
     public SnakeStairAdapter(int size) {
         list = new ArrayList<>();
@@ -57,7 +58,8 @@ public class SnakeStairAdapter extends RecyclerView.Adapter<SnakeStairAdapter.Ho
     @Override
     public Holder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         Log.d(TAG, "onCreateViewHolder: " + i);
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.snake_item, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.snake_item, viewGroup, false);
         return new Holder(view);
     }
 
@@ -66,6 +68,14 @@ public class SnakeStairAdapter extends RecyclerView.Adapter<SnakeStairAdapter.Ho
         holder.mTvSnake.setBackgroundResource(R.drawable.unit_bg);
         String item = String.valueOf((i + 1));
         holder.mTvSnake.setText(item);
+
+        if (walkState < 0) {
+            holder.mImSnake.setImageResource(R.drawable.ic_down);
+        } else if (walkState > 0) {
+            holder.mImSnake.setImageResource(R.drawable.ic_game_up);
+        } else {
+            holder.mImSnake.setImageResource(R.drawable.ic_drawing);
+        }
 
         if (i == posOfCircle) {
             holder.mTvSnake.setVisibility(View.GONE);
@@ -133,6 +143,10 @@ public class SnakeStairAdapter extends RecyclerView.Adapter<SnakeStairAdapter.Ho
 
     public void setSnackes(List<Snack> snackes) {
         this.snackes = snackes;
+    }
+
+    public void setDown(int b) {
+        walkState = b;
     }
 
     class Holder extends RecyclerView.ViewHolder {

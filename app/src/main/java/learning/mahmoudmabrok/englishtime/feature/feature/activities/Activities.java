@@ -2,7 +2,6 @@ package learning.mahmoudmabrok.englishtime.feature.feature.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.nightonke.boommenu.BoomButtons.BoomButton;
 import com.nightonke.boommenu.BoomButtons.HamButton;
@@ -52,7 +51,6 @@ public class Activities extends AppCompatActivity {
         mBmb.setOnBoomListener(new OnBoomListener() {
             @Override
             public void onClicked(int index, BoomButton boomButton) {
-                Toast.makeText(Activities.this, boomButton.getTextView().getText(), Toast.LENGTH_SHORT).show();
                 switch (index) {
                     case 0:
                         onButtonVocabClicked();

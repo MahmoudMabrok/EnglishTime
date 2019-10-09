@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/_5sdp"
-    android:background="@drawable/unit_bg"
+    android:background="@drawable/snack_bg"
     android:orientation="vertical">
 
 
@@ -13,7 +13,6 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:minHeight="@dimen/_100sdp"
         android:text="@string/snameItem"
         android:textSize="@dimen/SnakeSize"
         android:visibility="visible" />
@@ -26,7 +25,6 @@
         android:layout_weight="1"
         android:contentDescription="@string/currentplay"
         android:gravity="center_horizontal"
-        android:minHeight="@dimen/_100sdp"
         android:scaleType="fitXY"
         android:src="@drawable/ic_drawing"
         android:visibility="gone" />
