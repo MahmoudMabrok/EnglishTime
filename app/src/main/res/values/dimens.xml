@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="tvSizehelp">@dimen/_15ssp</dimen>
+    <dimen name="tvSizeWord">@dimen/_17ssp</dimen>
+    <dimen name="screenPadding">@dimen/_16sdp</dimen>
+    <dimen name="viewMargin">@dimen/_16sdp</dimen>
+    <dimen name="marginItem">@dimen/_10sdp</dimen>
+    <dimen name="crossHeight">@dimen/_50sdp</dimen>
+    <dimen name="crossHint">@dimen/_15ssp</dimen>
+    <dimen name="crossSize">@dimen/_27ssp</dimen>
+    <dimen name="keySize">@dimen/_12ssp</dimen>
+    <dimen name="SnakeSize">@dimen/_30ssp</dimen>
+</resources>

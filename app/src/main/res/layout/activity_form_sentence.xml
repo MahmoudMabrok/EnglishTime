@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".feature.feature.formSentace.FormSentence">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_16sdp"
+        android:gravity="center"
+        android:text="@string/form_english_sentence_fro_this_arabic_question"
+        android:textSize="@dimen/tvSizehelp" />
+
+    <TextView
+        android:id="@+id/tvArSentence"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_16sdp"
+        android:background="@drawable/tvhint_bg"
+        android:gravity="center_horizontal"
+        android:textSize="@dimen/tvSizehelp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvEnglishTo"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/marginItem"
+        android:layout_weight="1"
+        android:background="@drawable/rv_back"
+        android:padding="@dimen/_10sdp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvEnglishFrom"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/marginItem"
+        android:layout_weight="1"
+        android:background="@drawable/rv_back"
+        android:padding="@dimen/_10sdp" />
+
+
+</LinearLayout>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/screenPadding"
+    tools:context=".feature.feature.listenSelect.ListenAndSelect">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/viewMargin"
+        android:background="@drawable/tvhint_bg"
+        android:text="@string/listen_and_select"
+        android:textSize="@dimen/tvSizehelp" />
+
+
+    <ImageButton
+        android:id="@+id/btnLsiten"
+        style="@style/Base.Widget.AppCompat.Button.Borderless"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_100sdp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/viewMargin"
+        android:contentDescription="@string/sound"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_sound" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_200sdp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnFirstWord"
+            style="?android:attr/buttonStyleInset"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_bg"
+            android:textSize="@dimen/tvSizeWord" />
+
+        <Button
+            android:id="@+id/btnSecondWord"
+            style="?android:attr/buttonStyleInset"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/btn_bg"
+            android:textSize="@dimen/tvSizeWord" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

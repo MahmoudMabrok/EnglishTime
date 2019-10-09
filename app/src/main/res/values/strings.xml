@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">EnglishTime</string>
+    <string name="form_english_sentence_fro_this_arabic_question">Form English Sentence fro this Arabic Question</string>
+    <string name="select_odd_one">Select Odd One</string>
+    <string name="listen_and_select">Listen And Select</string>
+    <string name="sound">sound</string>
+    <string name="lesson2">Lesson2</string>
+    <string name="lesson1">Lesson1</string>
+    <string name="unit_1">UNIT 1</string>
+    <string name="cross">Cross</string>
+    <string name="listen">Listen</string>
+    <string name="odd">Odd</string>
+    <string name="form">Form</string>
+    <string name="vocab">Vocab</string>
+    <string name="_1">1</string>
+    <string name="snameItem">AAA</string>
+    <string name="snake">Snake</string>
+    <string name="currentplay">currentPlay</string>
+</resources>
