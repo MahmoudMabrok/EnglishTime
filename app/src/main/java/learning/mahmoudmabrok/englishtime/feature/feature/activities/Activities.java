@@ -38,7 +38,7 @@ public class Activities extends AppCompatActivity {
         int lession = intent.getIntExtra(Constants.LESSION, 1);
 
 
-        String[] names = new String[]{"Vocab", "Form", "ODD", "Listen", "Cross", "Snack", "Collect Words"};
+        String[] names = new String[]{"Collect Words", "Form", "ODD", "Listen", "Cross", "Snack", "Collect Words"};
         for (int i = 0; i < mBmb.getPiecePlaceEnum().pieceNumber(); i++) {
             HamButton.Builder builder = new HamButton.Builder()
                     .normalText(names[i]);
@@ -49,7 +49,7 @@ public class Activities extends AppCompatActivity {
             public void onClicked(int index, BoomButton boomButton) {
                 switch (index) {
                     case 0:
-                        onButtonVocabClicked();
+                        collectWords();
                         break;
                     case 1:
                         onButtonFormClicked();

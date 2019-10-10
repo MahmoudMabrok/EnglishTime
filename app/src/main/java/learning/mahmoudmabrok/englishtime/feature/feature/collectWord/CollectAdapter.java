@@ -22,6 +22,7 @@ public class CollectAdapter extends RecyclerView.Adapter<CollectAdapter.Holder> 
 
     private List<Character> chars;
     private List<String> words;
+    private List<String> downWords = new ArrayList<>();
     private List<Integer> selectedIndexes = new ArrayList<>();
     private List<Integer> doneIndexes = new ArrayList<>();
 
@@ -84,6 +85,20 @@ public class CollectAdapter extends RecyclerView.Adapter<CollectAdapter.Holder> 
     private void check() {
         String word = getWordFromSelected();
         Log.d(TAG, "check: " + word);
+        for (String aWord : words
+        ) {
+            if (aWord.equals(word)) {
+                addSelectedToDone(word);
+                break;
+            }
+        }
+    }
+
+    private void addSelectedToDone(String word) {
+        downWords.add(word);
+        doneIndexes.addAll(selectedIndexes);
+        selectedIndexes.clear();
+        notifyDataSetChanged();
     }
 
     private String getWordFromSelected() {
@@ -121,10 +136,11 @@ public class CollectAdapter extends RecyclerView.Adapter<CollectAdapter.Holder> 
             } else {
                 // here check first its allowed to click here
                 // rule that we select items in same row and col
-                if (isAllowedToClick(pos)) {
+                if (isAllowedToClick(pos) && !doneIndexes.contains(pos)) {
                     selectedIndexes.add(pos);
                     v.setBackgroundResource(R.drawable.collect_selected);
                 } else {
+                    // as it wrong click so clear screen
                     clear();
                 }
             }

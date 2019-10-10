@@ -4,6 +4,7 @@
     android:id="@+id/snakeRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
     tools:context=".feature.feature.snake.SnakeStair">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -24,7 +25,6 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/_5sdp"
             android:gravity="center_horizontal"
-            android:text="sssss"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
         <Button

@@ -38,7 +38,9 @@ public class CollectWord extends AppCompatActivity {
     private CollectGame loadData() {
         List<String> strings = new ArrayList<>();
         strings.add("abc");
-        strings.add("xyz");
+        strings.add("xy");
+        strings.add("hmr");
+        strings.add("jot");
         return new CollectGame(Keys.chars.subList(0, 25), strings);
 
     }
