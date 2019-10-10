@@ -8,6 +8,7 @@
     <dimen name="crossHeight">@dimen/_50sdp</dimen>
     <dimen name="crossHint">@dimen/_15ssp</dimen>
     <dimen name="crossSize">@dimen/_27ssp</dimen>
+    <dimen name="collectSize">@dimen/_27ssp</dimen>
     <dimen name="keySize">@dimen/_12ssp</dimen>
     <dimen name="SnakeSize">@dimen/_30ssp</dimen>
 </resources>

@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".feature.feature.collectWord.CollectWord"
+            android:exported="true" />
+        <activity
             android:name=".feature.feature.snake.SnakeStair"
             android:exported="true" />
         <activity

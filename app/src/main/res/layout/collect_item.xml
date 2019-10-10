@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/_5sdp"
+    android:layout_marginBottom="@dimen/_10sdp"
+    android:minWidth="@dimen/_50sdp"
+    android:minHeight="@dimen/_50sdp"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/tvCollect"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/_1"
+        android:textSize="@dimen/collectSize" />
+
+</LinearLayout>

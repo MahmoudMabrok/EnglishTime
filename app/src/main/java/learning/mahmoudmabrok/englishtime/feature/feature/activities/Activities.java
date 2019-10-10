@@ -13,6 +13,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import learning.mahmoudmabrok.englishtime.R;
 import learning.mahmoudmabrok.englishtime.feature.feature.circleOdd.CircleOdd;
+import learning.mahmoudmabrok.englishtime.feature.feature.collectWord.CollectWord;
 import learning.mahmoudmabrok.englishtime.feature.feature.crossword.CrossWord;
 import learning.mahmoudmabrok.englishtime.feature.feature.formSentace.FormSentence;
 import learning.mahmoudmabrok.englishtime.feature.feature.listenSelect.ListenAndSelect;
@@ -36,13 +37,8 @@ public class Activities extends AppCompatActivity {
         int unit = intent.getIntExtra(Constants.UNIT, 1);
         int lession = intent.getIntExtra(Constants.LESSION, 1);
 
-      /*  mRvMain.setLayoutManager(new LinearLayoutManager(this));
-        ItemAdapter listAdapter = new ItemAdapter(mItemArray, R.layout.list_item, R.id.image, false);
-        mRvMain.setAdapter(listAdapter);*/
 
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-
-        String[] names = new String[]{"Vocab", "Form", "ODD", "Listen", "Cross", "Snack"};
+        String[] names = new String[]{"Vocab", "Form", "ODD", "Listen", "Cross", "Snack", "Collect Words"};
         for (int i = 0; i < mBmb.getPiecePlaceEnum().pieceNumber(); i++) {
             HamButton.Builder builder = new HamButton.Builder()
                     .normalText(names[i]);
@@ -104,6 +100,7 @@ public class Activities extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         mBmb.setAutoBoom(true);
     }
 
@@ -138,4 +135,11 @@ public class Activities extends AppCompatActivity {
         Intent openAcivity = new Intent(Activities.this, SnakeStair.class);
         startActivity(openAcivity);
     }
+
+    public void collectWords() {
+        Intent openAcivity = new Intent(Activities.this, CollectWord.class);
+        startActivity(openAcivity);
+    }
+
+
 }

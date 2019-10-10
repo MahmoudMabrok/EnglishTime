@@ -6,7 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,10 +20,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import learning.mahmoudmabrok.englishtime.R;
-import learning.mahmoudmabrok.englishtime.feature.utils.Utils;
 
 public class SnakeStair extends AppCompatActivity {
-
     private static final String TAG = "SnakeStair";
 
     private static final int SIZE = 25;
@@ -36,9 +34,11 @@ public class SnakeStair extends AppCompatActivity {
     @BindView(R.id.btnPlay)
     Button mBtnPlay;
 
+    @BindView(R.id.tvNSteps)
+    TextView mTvNSteps;
+
     private SnakeStairAdapter adapter;
 
-    private PlayerView playerView;
 
     private int current = 0;
     private List<Integer> boardItems;
@@ -88,10 +88,12 @@ public class SnakeStair extends AppCompatActivity {
             for (int i = 0; i < nSteps; i++) {
                 boardItems.add(start + i + 1);
             }
+            showMessage("UP " + nSteps);
         } else {
             for (int i = 0; i < nSteps; i++) {
                 boardItems.add(start - (i + 1));
             }
+            showMessage("Down " + nSteps);
         }
         int millsUnit = 700;
         int total = boardItems.size() * millsUnit;
@@ -122,6 +124,7 @@ public class SnakeStair extends AppCompatActivity {
                 } else {
                     checkAfterTurn();
                 }
+                enableBTN();
             }
         };
 
@@ -133,11 +136,15 @@ public class SnakeStair extends AppCompatActivity {
         mBtnPlay.setVisibility(View.VISIBLE);
     }
 
+    private void disableBTN() {
+        mBtnPlay.setVisibility(View.INVISIBLE);
+    }
+
+
     private void checkAfterTurn() {
-        //  showMessage("curre  " + current);
         int next = adapter.checkPoint(current);
-        //  showMessage("next " + next);
         if (next > -1) {
+            disableBTN();
             if (next > current) {
                 // stair
                 animateAA(current, next - current, 1);
@@ -146,9 +153,8 @@ public class SnakeStair extends AppCompatActivity {
             } else {
                 // snack
                 animateAA(current, current - next, -1);
-                Utils.vibrate(this);
+                //  Utils.vibrate(this);
                 Log.d(TAG, "checkAfterTurn: down " + next);
-
             }
         }
     }
@@ -160,6 +166,7 @@ public class SnakeStair extends AppCompatActivity {
 
     private void anim(int pose) {
         adapter.setCircle(pose);
+        disableBTN();
     }
 
     private void loadData() {
@@ -191,14 +198,14 @@ public class SnakeStair extends AppCompatActivity {
     @OnClick(R.id.btnPlay)
     public void onMBtnPlayClicked() {
         int nSteps = new Random().nextInt(ROW_SIZE) + 1; // to prevent 0
-        showMessage("nSteps " + nSteps);
         animateAA(current, nSteps, 0);
         mBtnPlay.setVisibility(View.INVISIBLE);
     }
 
 
     private void showMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        // Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        mTvNSteps.setText(message);
     }
 
     @Override
@@ -209,4 +216,5 @@ public class SnakeStair extends AppCompatActivity {
             timer = null;
         }
     }
+
 }
