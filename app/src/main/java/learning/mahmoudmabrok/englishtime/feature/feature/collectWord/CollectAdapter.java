@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -32,7 +33,7 @@ public class CollectAdapter extends RecyclerView.Adapter<CollectAdapter.Holder> 
 
 
     public void clear() {
-        chars.clear();
+        selectedIndexes.clear();
         notifyDataSetChanged();
     }
 
@@ -67,13 +68,32 @@ public class CollectAdapter extends RecyclerView.Adapter<CollectAdapter.Holder> 
         if (selectedIndexes.isEmpty())
             return true;
         else {
-            // get last pos
-            int last = selectedIndexes.get(selectedIndexes.size() - 1);
-            return last % 5 == pos % 5 || last / 5 == pos / 5;
+            // get check same row or col
+            return isInSameRowOrCol(selectedIndexes, pos);
         }
     }
 
+    private boolean isInSameRowOrCol(List<Integer> selectedIndexes, int pos) {
+        for (int last : selectedIndexes) {
+            if (last % 5 != pos % 5 && last / 5 != pos / 5)
+                return false;
+        }
+        return true;
+    }
+
     private void check() {
+        String word = getWordFromSelected();
+        Log.d(TAG, "check: " + word);
+    }
+
+    private String getWordFromSelected() {
+        StringBuilder builder = new StringBuilder();
+        Collections.sort(selectedIndexes);
+        for (int i : selectedIndexes
+        ) {
+            builder.append(chars.get(i));
+        }
+        return builder.toString();
     }
 
     interface KeybordListner {
@@ -104,11 +124,10 @@ public class CollectAdapter extends RecyclerView.Adapter<CollectAdapter.Holder> 
                 if (isAllowedToClick(pos)) {
                     selectedIndexes.add(pos);
                     v.setBackgroundResource(R.drawable.collect_selected);
+                } else {
+                    clear();
                 }
-
             }
-
-
             check();
         }
     }
