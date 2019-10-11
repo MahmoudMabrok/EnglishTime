@@ -11,24 +11,45 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_form_sentence.*
 import learning.mahmoudmabrok.englishtime.R
+import learning.mahmoudmabrok.englishtime.feature.datalayer.LocalDB
 import learning.mahmoudmabrok.englishtime.feature.models.Sentence
+import learning.mahmoudmabrok.englishtime.feature.utils.setValue
+
 
 class FormSentence : AppCompatActivity() {
 
+    private lateinit var db: LocalDB
     private val TAG: String = "FormSentence"
     private lateinit var adapterTop: SentenceAdapter
     private lateinit var adapterBottom: SentenceAdapter
     private lateinit var sentences: MutableList<Sentence>
 
     var currentSentence = 0
+    var score = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_form_sentence)
-        Log.v(TAG, "start")
         setUpSentences()
-        initRv();
+        initRv()
         loadSentence()
+        tvScoreForm.setMessage("Score:: ")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        loadScore()
+    }
+
+    private fun loadScore() {
+        db = LocalDB.getINSTANCE(this)
+        score = db.score
+        tvScoreForm.setValue(score, 1500)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        db.score = score
     }
 
     private fun initRv() {
@@ -60,6 +81,7 @@ class FormSentence : AppCompatActivity() {
                 val q = sentences[currentSentence - 1].enSentence
                 if (ans == q) {
                     Toast.makeText(this, "Correct", Toast.LENGTH_SHORT).show()
+                    updateScore(10)
                     loadSentence()
                 } else {
                     // todo  make diff for wrong answer, sugeest 500ms for wa then reload, or drag
@@ -86,6 +108,11 @@ class FormSentence : AppCompatActivity() {
             adapterBottom.addSentence(item)
         }
 
+    }
+
+    private fun updateScore(i: Int) {
+        score += i
+        tvScoreForm.animateTo(score, 1000)
     }
 
     private fun setUpSentences() {
@@ -120,6 +147,4 @@ class FormSentence : AppCompatActivity() {
             (getSystemService(VIBRATOR_SERVICE) as Vibrator).vibrate(150)
         }
     }
-
-
 }

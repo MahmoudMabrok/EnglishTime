@@ -24,14 +24,15 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".feature.feature.showVocabs.ShowVocabs" />
         <activity android:name=".feature.feature.listenSelect.ListenAndSelect" />
         <activity android:name=".feature.feature.circleOdd.CircleOdd" />
-        <activity android:name=".feature.feature.formSentace.FormSentence" />
+        <activity
+            android:name=".feature.feature.formSentace.FormSentence"
+            android:exported="true" />
         <activity android:name=".feature.feature.activities.Activities" />
     </application>
 

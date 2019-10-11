@@ -59,6 +59,10 @@ public class CollectAdapter extends RecyclerView.Adapter<CollectAdapter.Holder> 
 
     }
 
+    public List<String> getWords() {
+        return words;
+    }
+
     @Override
     public int getItemCount() {
         return chars.size();

@@ -2,13 +2,13 @@ package learning.mahmoudmabrok.englishtime.feature.feature.collectWord;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -19,8 +19,10 @@ public class CollectWord extends AppCompatActivity {
 
     @BindView(R.id.rvCollectGame)
     RecyclerView mRvCollectGame;
-    @BindView(R.id.tvWordsToCollect)
-    TextView mTvWordsToCollect;
+
+
+    @BindView(R.id.rvCollectElements)
+    RecyclerView mRvCollectElements;
 
     private CollectAdapter adapter;
 
@@ -50,5 +52,11 @@ public class CollectWord extends AppCompatActivity {
         mRvCollectGame.setAdapter(adapter);
         mRvCollectGame.setLayoutManager(new GridLayoutManager(this, 5));
         mRvCollectGame.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+
+        CollectItemAdapter collectAdapter = new CollectItemAdapter();
+        mRvCollectElements.setAdapter(collectAdapter);
+        collectAdapter.setStringList(adapter.getWords());
+        mRvCollectElements.setLayoutManager(new LinearLayoutManager(this));
+        mRvCollectElements.setHasFixedSize(true);
     }
 }
