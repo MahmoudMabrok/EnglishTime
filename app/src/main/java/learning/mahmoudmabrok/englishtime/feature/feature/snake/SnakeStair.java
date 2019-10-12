@@ -95,7 +95,7 @@ public class SnakeStair extends AppCompatActivity {
             }
             showMessage("Down " + nSteps);
         }
-        int millsUnit = 700;
+        int millsUnit = 200;
         int total = boardItems.size() * millsUnit;
         iteration = 0;
         timer = new CountDownTimer(total, millsUnit) {

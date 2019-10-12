@@ -1,18 +1,15 @@
 package learning.mahmoudmabrok.englishtime.feature.feature.formSentace
 
-import android.os.Build
-import android.os.Bundle
-import android.os.VibrationEffect
-import android.os.Vibrator
+import android.os.*
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.activity_form_sentence.*
 import learning.mahmoudmabrok.englishtime.R
 import learning.mahmoudmabrok.englishtime.feature.datalayer.LocalDB
 import learning.mahmoudmabrok.englishtime.feature.models.Sentence
+import learning.mahmoudmabrok.englishtime.feature.utils.ListsOpt
 import learning.mahmoudmabrok.englishtime.feature.utils.setValue
 
 
@@ -34,6 +31,7 @@ class FormSentence : AppCompatActivity() {
         initRv()
         loadSentence()
         tvScoreForm.setMessage("Score:: ")
+
     }
 
     override fun onResume() {
@@ -46,7 +44,6 @@ class FormSentence : AppCompatActivity() {
         score = db.score
         tvScoreForm.setValue(score, 1500)
     }
-
     override fun onPause() {
         super.onPause()
         db.score = score
@@ -58,16 +55,18 @@ class FormSentence : AppCompatActivity() {
         adapterTop.setSentenceList(listOf())
         rvEnglishTo.setHasFixedSize(true)
         rvEnglishTo.adapter = adapterTop
-        val lManager2 = LinearLayoutManager(this)
-        lManager2.orientation = RecyclerView.VERTICAL
+
+        val lManager2 = GridLayoutManager(this, 3)
+        // lManager2.orientation = RecyclerView.VERTICAL
         rvEnglishTo.layoutManager = lManager2
+
         // make given rv
         adapterBottom = SentenceAdapter()
         adapterBottom.setSentenceList(listOf())
         rvEnglishFrom.setHasFixedSize(true)
         rvEnglishFrom.adapter = adapterBottom
-        val lManager = LinearLayoutManager(this)
-        lManager.orientation = RecyclerView.VERTICAL
+        val lManager = GridLayoutManager(this, 3)
+        //lManager.orientation = RecyclerView.VERTICAL
         rvEnglishFrom.layoutManager = lManager
         // Animations
 
@@ -84,20 +83,29 @@ class FormSentence : AppCompatActivity() {
                     updateScore(10)
                     loadSentence()
                 } else {
-                    // todo  make diff for wrong answer, sugeest 500ms for wa then reload, or drag
-
                     // get indexes of wrong
                     val waList = adapterTop.list
-                            .zip(adapterBottom.list)
+                            .zip(adapterBottom.originalList)
                             .mapIndexed { index, pair -> if (pair.first == pair.second) -1 else index }
-                    // .map { it}
-                    println("waList $waList")
 
-                    Toast.makeText(this, "WA", Toast.LENGTH_SHORT).show()
-                    // reload data , first decrease currentSentcne to point to question which is now updated
-                    // then load which will clear rv and fill bottom one
-                    currentSentence--
-                    loadSentence()
+                    //  Toast.makeText(this, "! WA " + waList, Toast.LENGTH_SHORT).show()
+                    val a = ListsOpt.getDiff(adapterTop.list, adapterBottom.originalList)
+                    Log.v("FormAA", "1 ${adapterTop.list} 2 ${adapterBottom.originalList} diff $a")
+                    //    Toast.makeText(this, "@ WA " + a, Toast.LENGTH_SHORT).show()
+                    adapterTop.setWA(a)
+                    object : CountDownTimer(2000, 500) {
+                        override fun onFinish() {
+                            // reload data , first decrease currentSentcne to point to question which is now updated
+                            // then load which will clear rv and fill bottom one
+                            currentSentence--
+                            loadSentence()
+
+                        }
+
+                        override fun onTick(millisUntilFinished: Long) {
+                        }
+
+                    }.start()
                     vibrate()
                 }
             }
@@ -112,7 +120,8 @@ class FormSentence : AppCompatActivity() {
 
     private fun updateScore(i: Int) {
         score += i
-        tvScoreForm.animateTo(score, 1000)
+        tvScoreForm.animateTo(score, 500)
+        tvScoreForm.updateValue(10, 1000)
     }
 
     private fun setUpSentences() {

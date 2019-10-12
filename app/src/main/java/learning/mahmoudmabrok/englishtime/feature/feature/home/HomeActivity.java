@@ -33,6 +33,7 @@ public class HomeActivity extends AppCompatActivity {
         initRV();
         mTvvvvv.setMessage("Score");
 
+
     }
 
     @Override
