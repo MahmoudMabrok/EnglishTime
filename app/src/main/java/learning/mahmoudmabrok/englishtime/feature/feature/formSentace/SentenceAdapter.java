@@ -6,14 +6,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import learning.mahmoudmabrok.englishtime.R;
@@ -121,7 +122,6 @@ public class SentenceAdapter extends RecyclerView.Adapter<SentenceAdapter.Holder
     class Holder extends RecyclerView.ViewHolder {
         @BindView(R.id.tvWordItem)
         TextView mTvWordItem;
-
 
         public Holder(@NonNull View itemView) {
             super(itemView);
