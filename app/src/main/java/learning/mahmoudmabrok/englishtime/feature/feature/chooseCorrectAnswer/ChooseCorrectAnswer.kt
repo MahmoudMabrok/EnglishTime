@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_choose_correct_answer.*
 import learning.mahmoudmabrok.englishtime.R
+import learning.mahmoudmabrok.englishtime.feature.utils.dismissKeyboard
 import learning.mahmoudmabrok.englishtime.feature.utils.show
 import kotlin.random.Random
 
@@ -23,6 +24,7 @@ class ChooseCorrectAnswer : AppCompatActivity() {
 
         btnCHeckCompleteWord.setOnClickListener {
             checkAnswer()
+            this.dismissKeyboard()
         }
     }
 
@@ -32,13 +34,13 @@ class ChooseCorrectAnswer : AppCompatActivity() {
         if (isSame) {
             current += 1
             lengthToMissed += 1
+            this.show("Right")
             try {
                 adapter.setData(getSplitedData())
             } catch (e: Exception) {
                 this.show("Finish")
                 finish()
             }
-            this.show("Right")
         } else {
             this.show("Wrong")
         }

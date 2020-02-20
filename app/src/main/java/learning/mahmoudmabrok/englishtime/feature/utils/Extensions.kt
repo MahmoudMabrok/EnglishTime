@@ -2,6 +2,7 @@ package learning.mahmoudmabrok.englishtime.feature.utils
 
 import android.content.Context
 import android.util.Log
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import views.mahmoudmabrok.animatedtextview.AnimatedNumberedTextView
 
@@ -25,3 +26,14 @@ fun Context.show(msg: String) {
 fun String.log(tag: String = "TestApp") {
     Log.i(tag, this)
 }
+
+fun Context.dismissKeyboard() {
+    val imm by lazy { this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager }
+    val windowHeightMethod = InputMethodManager::class.java.getMethod("getInputMethodWindowVisibleHeight")
+    val height = windowHeightMethod.invoke(imm) as Int
+    if (height > 0) {
+        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
+    }
+}
+
+

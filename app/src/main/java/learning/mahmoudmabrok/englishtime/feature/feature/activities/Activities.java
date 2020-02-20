@@ -3,20 +3,23 @@ package learning.mahmoudmabrok.englishtime.feature.feature.activities;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.nightonke.boommenu.BoomButtons.BoomButton;
 import com.nightonke.boommenu.BoomButtons.HamButton;
 import com.nightonke.boommenu.BoomMenuButton;
 import com.nightonke.boommenu.OnBoomListener;
 
-import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import learning.mahmoudmabrok.englishtime.R;
+import learning.mahmoudmabrok.englishtime.feature.feature.chooseCorrectAnswer.ChooseCorrectAnswer;
 import learning.mahmoudmabrok.englishtime.feature.feature.circleOdd.CircleOdd;
 import learning.mahmoudmabrok.englishtime.feature.feature.collectWord.CollectWord;
 import learning.mahmoudmabrok.englishtime.feature.feature.crossword.CrossWord;
 import learning.mahmoudmabrok.englishtime.feature.feature.formSentace.FormSentence;
 import learning.mahmoudmabrok.englishtime.feature.feature.listenSelect.ListenAndSelect;
+import learning.mahmoudmabrok.englishtime.feature.feature.puncuate.Puncate;
 import learning.mahmoudmabrok.englishtime.feature.feature.showVocabs.ShowVocabs;
 import learning.mahmoudmabrok.englishtime.feature.feature.snake.SnakeStair;
 import learning.mahmoudmabrok.englishtime.feature.utils.Constants;
@@ -38,7 +41,7 @@ public class Activities extends AppCompatActivity {
         int lession = intent.getIntExtra(Constants.LESSION, 1);
 
 
-        String[] names = new String[]{"Collect Words", "Form", "ODD", "Listen", "Cross", "Snack", "Collect Words"};
+        String[] names = new String[]{"Complete Miss", "Puncate", "Third"};
         for (int i = 0; i < mBmb.getPiecePlaceEnum().pieceNumber(); i++) {
             HamButton.Builder builder = new HamButton.Builder()
                     .normalText(names[i]);
@@ -49,10 +52,10 @@ public class Activities extends AppCompatActivity {
             public void onClicked(int index, BoomButton boomButton) {
                 switch (index) {
                     case 0:
-                        collectWords();
+                        completeWord();
                         break;
                     case 1:
-                        onButtonFormClicked();
+                        puncate();
                         break;
                     case 2:
                         onButtonOddClicked();
@@ -95,6 +98,16 @@ public class Activities extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void puncate() {
+        Intent openAcivity = new Intent(Activities.this, Puncate.class);
+        startActivity(openAcivity);
+    }
+
+    private void completeWord() {
+        Intent openAcivity = new Intent(Activities.this, ChooseCorrectAnswer.class);
+        startActivity(openAcivity);
     }
 
     @Override

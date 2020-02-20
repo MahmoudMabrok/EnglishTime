@@ -8,12 +8,13 @@ import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import learning.mahmoudmabrok.englishtime.R;
@@ -119,7 +120,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.Holder> {
 
     @Override
     public int getItemCount() {
-        return 5;
+        return 2;
     }
 
     class Holder extends RecyclerView.ViewHolder {
