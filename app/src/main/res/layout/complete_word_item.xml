@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<EditText xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/edCompleteWord"
+    android:layout_width="@dimen/_60sdp"
+    android:layout_height="@dimen/_60sdp"
+    android:enabled="false"
+    android:gravity="center"
+    android:inputType="text"
+    android:layoutDirection="ltr"
+    android:maxEms="1"
+    android:maxLines="1"
+    android:textSize="@dimen/_24ssp"
+    tools:text="AA" />
