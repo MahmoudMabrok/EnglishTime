@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_choose_correct_answer.*
 import learning.mahmoudmabrok.englishtime.R
+import learning.mahmoudmabrok.englishtime.feature.utils.show
 import kotlin.random.Random
 
 class ChooseCorrectAnswer : AppCompatActivity() {
@@ -20,15 +21,28 @@ class ChooseCorrectAnswer : AppCompatActivity() {
         rvCompleteWord.adapter = adapter
 
 
-
         btnCHeckCompleteWord.setOnClickListener {
-            // todo check answers with update score
-            current += 1
-            // go to next
-            lengthToMissed += 1
-            adapter.setData(getSplitedData())
-
+            checkAnswer()
         }
+    }
+
+    private fun checkAnswer() {
+        val word = String(adapter.data.toCharArray())
+        val isSame = data[current] == word
+        if (isSame) {
+            current += 1
+            lengthToMissed += 1
+            try {
+                adapter.setData(getSplitedData())
+            } catch (e: Exception) {
+                this.show("Finish")
+                finish()
+            }
+            this.show("Right")
+        } else {
+            this.show("Wrong")
+        }
+
     }
 
     /**
@@ -36,13 +50,15 @@ class ChooseCorrectAnswer : AppCompatActivity() {
      */
     private fun getSplitedData(): MutableList<Char> {
         val cur = data[current]
+        print("before missed $cur")
         val d = getRandomMissed(cur)
+        print("after missed $d")
         return d
     }
 
     private fun getRandomMissed(cur: String): MutableList<Char> {
         val d = cur.toCharArray().toMutableList()
-        var rnd = 0
+        var rnd: Int
         for (i in 0 until lengthToMissed) {
             rnd = Random.nextInt(cur.length)
             d[rnd] = ' '
