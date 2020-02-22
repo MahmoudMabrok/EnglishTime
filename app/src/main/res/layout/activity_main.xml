@@ -16,8 +16,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:bmb_buttonEnum="ham"
-        app:bmb_buttonPlaceEnum="buttonPlace_ham_3"
-        app:bmb_piecePlaceEnum="piecePlace_ham_3" />
+        app:bmb_buttonPlaceEnum="buttonPlace_ham_5"
+        app:bmb_piecePlaceEnum="piecePlace_ham_5" />
 
 
 </LinearLayout>

@@ -13,6 +13,7 @@ import com.nightonke.boommenu.OnBoomListener;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import learning.mahmoudmabrok.englishtime.R;
+import learning.mahmoudmabrok.englishtime.feature.feature.aorb.IsAOrB;
 import learning.mahmoudmabrok.englishtime.feature.feature.circleOdd.CircleOdd;
 import learning.mahmoudmabrok.englishtime.feature.feature.collectWord.CollectWord;
 import learning.mahmoudmabrok.englishtime.feature.feature.completeWord.CompleteWord;
@@ -42,7 +43,7 @@ public class Activities extends AppCompatActivity {
         int lession = intent.getIntExtra(Constants.LESSION, 1);
 
 
-        String[] names = new String[]{"Complete Miss", "Punctuate", "Grammar"};
+        String[] names = new String[]{"Complete Miss", "Punctuate", "Grammar", "Is A or B", "Words"};
         for (int i = 0; i < mBmb.getPiecePlaceEnum().pieceNumber(); i++) {
             HamButton.Builder builder = new HamButton.Builder()
                     .normalText(names[i]);
@@ -62,7 +63,7 @@ public class Activities extends AppCompatActivity {
                         openGrammer();
                         break;
                     case 3:
-                        onButtonListenClicked();
+                        openIsA();
                         break;
                     case 4:
                         onViewClicked();
@@ -99,6 +100,11 @@ public class Activities extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void openIsA() {
+        Intent openAcivity = new Intent(Activities.this, IsAOrB.class);
+        startActivity(openAcivity);
     }
 
     private void puncate() {
