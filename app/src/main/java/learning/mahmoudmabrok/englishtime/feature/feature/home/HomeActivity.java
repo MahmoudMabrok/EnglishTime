@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import learning.mahmoudmabrok.englishtime.R;
@@ -53,5 +54,7 @@ public class HomeActivity extends AppCompatActivity {
         mRvHome.setAdapter(adapter);
         mRvHome.setLayoutManager(new LinearLayoutManager(this));
         mRvHome.setHasFixedSize(true);
+
+
     }
 }
