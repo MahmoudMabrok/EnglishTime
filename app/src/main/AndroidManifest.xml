@@ -11,9 +11,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".feature.feature.puncuate.Puncate"></activity>
+        <activity android:name=".feature.feature.aorb.IsAOrB"></activity>
         <activity
-            android:name=".feature.feature.chooseCorrectAnswer.ChooseCorrectAnswer"
+            android:name=".feature.feature.grammer.GrammerActivity"
+            android:exported="true" />
+        <activity android:name=".feature.feature.puncuate.Puncate" />
+        <activity
+            android:name=".feature.feature.completeWord.CompleteWord"
             android:exported="true" />
         <activity
             android:name=".feature.feature.collectWord.CollectWord"

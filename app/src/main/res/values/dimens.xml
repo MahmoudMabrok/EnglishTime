@@ -11,4 +11,5 @@
     <dimen name="collectSize">@dimen/_27ssp</dimen>
     <dimen name="keySize">@dimen/_12ssp</dimen>
     <dimen name="SnakeSize">@dimen/_30ssp</dimen>
+    <dimen name="tvDisplay">@dimen/_22ssp</dimen>
 </resources>

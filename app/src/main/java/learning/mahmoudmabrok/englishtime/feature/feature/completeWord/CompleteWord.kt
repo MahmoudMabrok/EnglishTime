@@ -1,31 +1,40 @@
-package learning.mahmoudmabrok.englishtime.feature.feature.chooseCorrectAnswer
+package learning.mahmoudmabrok.englishtime.feature.feature.completeWord
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_choose_correct_answer.*
+import kotlinx.android.synthetic.main.activity_complete_word.*
 import learning.mahmoudmabrok.englishtime.R
 import learning.mahmoudmabrok.englishtime.feature.utils.dismissKeyboard
+import learning.mahmoudmabrok.englishtime.feature.utils.log
 import learning.mahmoudmabrok.englishtime.feature.utils.show
 import kotlin.random.Random
 
-class ChooseCorrectAnswer : AppCompatActivity() {
+class CompleteWord : AppCompatActivity() {
 
     val data = listOf("play", "score", "winner")
     var current = 0
     var lengthToMissed = 1
 
-    val adapter = CompleteWordAdapter(getSplitedData(), lengthToMissed)
+    val adapter: CompleteWordAdapter = CompleteWordAdapter(getSplitedData(), lengthToMissed)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_choose_correct_answer)
-        rvCompleteWord.adapter = adapter
+        setContentView(R.layout.activity_complete_word)
 
+        rvCompleteWord.adapter = adapter
 
         btnCHeckCompleteWord.setOnClickListener {
             checkAnswer()
             this.dismissKeyboard()
         }
+
+        loadData()
+
+    }
+
+    private fun loadData() {
+        adapter.setData(getSplitedData())
+        "count ${adapter.count} ${getSplitedData().size}".log()
     }
 
     private fun checkAnswer() {
@@ -36,7 +45,7 @@ class ChooseCorrectAnswer : AppCompatActivity() {
             lengthToMissed += 1
             this.show("Right")
             try {
-                adapter.setData(getSplitedData())
+                loadData()
             } catch (e: Exception) {
                 this.show("Finish")
                 finish()

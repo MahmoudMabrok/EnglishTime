@@ -13,11 +13,12 @@ import com.nightonke.boommenu.OnBoomListener;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import learning.mahmoudmabrok.englishtime.R;
-import learning.mahmoudmabrok.englishtime.feature.feature.chooseCorrectAnswer.ChooseCorrectAnswer;
 import learning.mahmoudmabrok.englishtime.feature.feature.circleOdd.CircleOdd;
 import learning.mahmoudmabrok.englishtime.feature.feature.collectWord.CollectWord;
+import learning.mahmoudmabrok.englishtime.feature.feature.completeWord.CompleteWord;
 import learning.mahmoudmabrok.englishtime.feature.feature.crossword.CrossWord;
 import learning.mahmoudmabrok.englishtime.feature.feature.formSentace.FormSentence;
+import learning.mahmoudmabrok.englishtime.feature.feature.grammer.GrammerActivity;
 import learning.mahmoudmabrok.englishtime.feature.feature.listenSelect.ListenAndSelect;
 import learning.mahmoudmabrok.englishtime.feature.feature.puncuate.Puncate;
 import learning.mahmoudmabrok.englishtime.feature.feature.showVocabs.ShowVocabs;
@@ -41,7 +42,7 @@ public class Activities extends AppCompatActivity {
         int lession = intent.getIntExtra(Constants.LESSION, 1);
 
 
-        String[] names = new String[]{"Complete Miss", "Puncate", "Third"};
+        String[] names = new String[]{"Complete Miss", "Punctuate", "Grammar"};
         for (int i = 0; i < mBmb.getPiecePlaceEnum().pieceNumber(); i++) {
             HamButton.Builder builder = new HamButton.Builder()
                     .normalText(names[i]);
@@ -58,7 +59,7 @@ public class Activities extends AppCompatActivity {
                         puncate();
                         break;
                     case 2:
-                        onButtonOddClicked();
+                        openGrammer();
                         break;
                     case 3:
                         onButtonListenClicked();
@@ -105,8 +106,13 @@ public class Activities extends AppCompatActivity {
         startActivity(openAcivity);
     }
 
+    private void openGrammer() {
+        Intent openAcivity = new Intent(Activities.this, GrammerActivity.class);
+        startActivity(openAcivity);
+    }
+
     private void completeWord() {
-        Intent openAcivity = new Intent(Activities.this, ChooseCorrectAnswer.class);
+        Intent openAcivity = new Intent(Activities.this, CompleteWord.class);
         startActivity(openAcivity);
     }
 

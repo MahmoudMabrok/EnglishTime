@@ -1,4 +1,4 @@
-package learning.mahmoudmabrok.englishtime.feature.feature.chooseCorrectAnswer
+package learning.mahmoudmabrok.englishtime.feature.feature.completeWord
 
 import android.text.Editable
 import android.text.TextWatcher
@@ -16,12 +16,6 @@ import learning.mahmoudmabrok.englishtime.feature.utils.dismissKeyboard
  */
 class CompleteWordAdapter(val data: MutableList<Char>, val count: Int) : RecyclerView.Adapter<CompleteWordAdapter.MyViewHolder>() {
 
-
-    init {
-        print("data $data")
-    }
-
-    val list = mutableListOf<Char>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.complete_word_item, parent, false)

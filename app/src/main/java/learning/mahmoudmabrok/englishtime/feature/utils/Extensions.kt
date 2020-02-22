@@ -1,7 +1,11 @@
 package learning.mahmoudmabrok.englishtime.feature.utils
 
+import android.animation.ObjectAnimator
+import android.animation.PropertyValuesHolder
 import android.content.Context
 import android.util.Log
+import android.view.View
+import android.view.animation.OvershootInterpolator
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import views.mahmoudmabrok.animatedtextview.AnimatedNumberedTextView
@@ -35,5 +39,29 @@ fun Context.dismissKeyboard() {
         imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
     }
 }
+
+
+fun View.animItem(a: () -> Unit) {
+    val scalx = PropertyValuesHolder.ofFloat(View.SCALE_X, 0.5f, 1f)
+    val scaly = PropertyValuesHolder.ofFloat(View.SCALE_Y, 0.5f, 1f)
+    val alpha = PropertyValuesHolder.ofFloat(View.ALPHA, 0f, 1f)
+    ObjectAnimator.ofPropertyValuesHolder(this, scalx, scaly, alpha).apply {
+        interpolator = OvershootInterpolator()
+        duration = 1000
+    }.start()
+            .apply {
+                postDelayed(a, 1000)
+            }
+}
+
+fun View.animateItemWithAction(a: () -> Unit) {
+    ObjectAnimator.ofFloat(this, View.ALPHA, 0f, 1.0f).apply {
+        duration = 700
+    }.start()
+            .apply {
+                postDelayed(a, 800)
+            }
+}
+
 
 
