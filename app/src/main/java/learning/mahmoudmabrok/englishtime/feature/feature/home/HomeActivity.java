@@ -3,7 +3,6 @@ package learning.mahmoudmabrok.englishtime.feature.feature.home;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import butterknife.BindView;
@@ -34,7 +33,6 @@ public class HomeActivity extends AppCompatActivity {
         initRV();
         mTvvvvv.setMessage("Score");
 
-
     }
 
     @Override
@@ -52,7 +50,6 @@ public class HomeActivity extends AppCompatActivity {
     private void initRV() {
         adapter = new HomeAdapter();
         mRvHome.setAdapter(adapter);
-        mRvHome.setLayoutManager(new LinearLayoutManager(this));
         mRvHome.setHasFixedSize(true);
 
 

@@ -29,18 +29,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.Holder> {
         list = new ArrayList<>();
     }
 
-    public void addHome(String item) {
-        list.add(item);
-        notifyItemInserted(list.size() - 1);
-        notifyItemRangeChanged(list.size() - 1, list.size());
-    }
-
-
-    public void setHomeList(List<String> newList) {
-        list = new ArrayList<>(newList);
-        notifyDataSetChanged();
-    }
-
     public void clear() {
         list.clear();
         notifyDataSetChanged();
@@ -61,12 +49,11 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.Holder> {
     public void onBindViewHolder(@NonNull Holder holder, int i) {
 
         holder.mTvUnitNO.setText(String.format(Locale.ENGLISH, "Unit %d", i + 1));
-
-        holder.mTv1.setOnClickListener(e -> {
+        holder.mTvUnitNO.setOnClickListener(e -> {
             {
                 ScaleAnimation scaleAnimation = new ScaleAnimation(1.0F, 0.5F, 1.0F, 0.5F);
                 scaleAnimation.setDuration(800);
-                holder.mTv1.startAnimation(scaleAnimation);
+                holder.mTvUnitNO.startAnimation(scaleAnimation);
                 scaleAnimation.setAnimationListener(new Animation.AnimationListener() {
                     @Override
                     public void onAnimationStart(Animation animation) {
@@ -90,46 +77,20 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.Holder> {
             }
 
         });
-        holder.mTv2.setOnClickListener(e -> {
-            ScaleAnimation scaleAnimation = new ScaleAnimation(1.0F, 0.5F, 1.0F, 0.5F);
-            scaleAnimation.setDuration(800);
-            holder.mTv2.startAnimation(scaleAnimation);
-            scaleAnimation.setAnimationListener(new Animation.AnimationListener() {
-                @Override
-                public void onAnimationStart(Animation animation) {
-
-                }
-
-                @Override
-                public void onAnimationEnd(Animation animation) {
-                    Intent openAcivity = new Intent(holder.itemView.getContext(), Activities.class);
-                    openAcivity.putExtra(Constants.UNIT, i);
-                    openAcivity.putExtra(Constants.LESSION, 2);
-                    holder.itemView.getContext().startActivity(openAcivity);
-                }
-
-                @Override
-                public void onAnimationRepeat(Animation animation) {
-
-                }
-            });
-
-        });
 
     }
 
     @Override
     public int getItemCount() {
-        return 2;
+        return 6;
     }
 
     class Holder extends RecyclerView.ViewHolder {
         @BindView(R.id.tvUnitNO)
         TextView mTvUnitNO;
-        @BindView(R.id.tv1)
-        TextView mTv1;
-        @BindView(R.id.tv2)
-        TextView mTv2;
+
+        //todo use itemHolder for anim
+
 
         public Holder(@NonNull View itemView) {
             super(itemView);
