@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="@dimen/screenPadding"
-    tools:context=".feature.feature.collectWord.CollectWord">
+    tools:context=".feature.feature.collectWordWithCross.CollectWord">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCollectGame"

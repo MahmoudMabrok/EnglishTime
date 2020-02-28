@@ -9,16 +9,20 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import learning.mahmoudmabrok.englishtime.R;
 
+/**
+ * الكلمات المتقاطعة
+ */
 public class CrossWord extends AppCompatActivity implements KeyboardAdapter.KeybordListner, CrossAdapter.CrossListener {
 
     @BindView(R.id.rvCross)
@@ -42,22 +46,6 @@ public class CrossWord extends AppCompatActivity implements KeyboardAdapter.Keyb
 
         loadData();
         initRV();
-
-
-        /*
-
-        List<String> l1 = new ArrayList<>();
-        l1.add("A");
-        l1.add("B");
-        l1.add("C");
-        List<String> l2 = new ArrayList<>();
-        l1.add("Q");
-        l1.add("D");
-        l1.add("C");
-
-        Differ differ = new Differ(l1, l2);
-        System.out.println(differ.getDiff());
-*/
 
     }
 

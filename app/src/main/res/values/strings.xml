@@ -20,4 +20,5 @@
     <string name="complete_missing_letters">Complete Missing Letters</string>
     <string name="check_puncate_of_text_below">Check Puncate of Text Below :: </string>
     <string name="pst_represent_past_events_performed_by_adding_d_ed_and_there_are_irregular_verbs">PST: represent past events, performed by adding d-ed and there are irregular verbs</string>
+    <string name="select_words_that_belong_to_belongs_category">Select Words that belong to belongs category</string>
 </resources>

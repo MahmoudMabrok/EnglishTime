@@ -14,16 +14,17 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import learning.mahmoudmabrok.englishtime.R;
 import learning.mahmoudmabrok.englishtime.feature.feature.aorb.IsAOrB;
+import learning.mahmoudmabrok.englishtime.feature.feature.categorizeWords.CategorizeWords;
 import learning.mahmoudmabrok.englishtime.feature.feature.circleOdd.CircleOdd;
-import learning.mahmoudmabrok.englishtime.feature.feature.collectWord.CollectWord;
+import learning.mahmoudmabrok.englishtime.feature.feature.collectWordWithCross.CollectWord;
 import learning.mahmoudmabrok.englishtime.feature.feature.completeWord.CompleteWord;
 import learning.mahmoudmabrok.englishtime.feature.feature.crossword.CrossWord;
-import learning.mahmoudmabrok.englishtime.feature.feature.formSentace.FormSentence;
 import learning.mahmoudmabrok.englishtime.feature.feature.grammer.GrammerActivity;
 import learning.mahmoudmabrok.englishtime.feature.feature.listenSelect.ListenAndSelect;
 import learning.mahmoudmabrok.englishtime.feature.feature.puncuate.Puncate;
 import learning.mahmoudmabrok.englishtime.feature.feature.showVocabs.ShowVocabs;
 import learning.mahmoudmabrok.englishtime.feature.feature.snake.SnakeStair;
+import learning.mahmoudmabrok.englishtime.feature.feature.wordsTwoCards.DisplayWords;
 import learning.mahmoudmabrok.englishtime.feature.utils.Constants;
 
 public class Activities extends AppCompatActivity {
@@ -49,6 +50,8 @@ public class Activities extends AppCompatActivity {
                     .normalText(names[i]);
             mBmb.addBuilder(builder);
         }
+
+
         mBmb.setOnBoomListener(new OnBoomListener() {
             @Override
             public void onClicked(int index, BoomButton boomButton) {
@@ -66,7 +69,7 @@ public class Activities extends AppCompatActivity {
                         openIsA();
                         break;
                     case 4:
-                        onViewClicked();
+                        openWords();
                         break;
                     case 5:
                         onViewClickedSnake();
@@ -102,6 +105,11 @@ public class Activities extends AppCompatActivity {
         });
     }
 
+    private void openWords() {
+        Intent openAcivity = new Intent(Activities.this, DisplayWords.class);
+        startActivity(openAcivity);
+    }
+
     private void openIsA() {
         Intent openAcivity = new Intent(Activities.this, IsAOrB.class);
         startActivity(openAcivity);
@@ -135,7 +143,7 @@ public class Activities extends AppCompatActivity {
     }
 
     public void onButtonFormClicked() {
-        Intent openAcivity = new Intent(Activities.this, FormSentence.class);
+        Intent openAcivity = new Intent(Activities.this, CategorizeWords.class);
         startActivity(openAcivity);
     }
 

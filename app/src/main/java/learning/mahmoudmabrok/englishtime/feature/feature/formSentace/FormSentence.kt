@@ -16,7 +16,7 @@ import learning.mahmoudmabrok.englishtime.feature.utils.setValue
 class FormSentence : AppCompatActivity() {
 
     private lateinit var db: LocalDB
-    private val TAG: String = "FormSentence"
+    private val TAG: String = "CategorizeWords"
     private lateinit var adapterTop: SentenceAdapter
     private lateinit var adapterBottom: SentenceAdapter
     private lateinit var sentences: MutableList<Sentence>
@@ -53,21 +53,21 @@ class FormSentence : AppCompatActivity() {
         // make rv to be filled from user
         adapterTop = SentenceAdapter()
         adapterTop.setSentenceList(listOf())
-        rvEnglishTo.setHasFixedSize(true)
-        rvEnglishTo.adapter = adapterTop
+        rvCategory.setHasFixedSize(true)
+        rvCategory.adapter = adapterTop
 
         val lManager2 = GridLayoutManager(this, 3)
         // lManager2.orientation = RecyclerView.VERTICAL
-        rvEnglishTo.layoutManager = lManager2
+        rvCategory.layoutManager = lManager2
 
         // make given rv
         adapterBottom = SentenceAdapter()
         adapterBottom.setSentenceList(listOf())
-        rvEnglishFrom.setHasFixedSize(true)
-        rvEnglishFrom.adapter = adapterBottom
+        rvAllWords.setHasFixedSize(true)
+        rvAllWords.adapter = adapterBottom
         val lManager = GridLayoutManager(this, 3)
         //lManager.orientation = RecyclerView.VERTICAL
-        rvEnglishFrom.layoutManager = lManager
+        rvAllWords.layoutManager = lManager
         // Animations
 
         // listener for each rv
@@ -138,7 +138,7 @@ class FormSentence : AppCompatActivity() {
             adapterBottom.clear()
 
             val temp = sentences.get(currentSentence)
-            tvArSentence.text = temp.arSentence
+            tvCategoryName.text = temp.arSentence
             // make given words
             val words = temp.enSentence.split(" ")
             adapterBottom.setSentenceList(words)

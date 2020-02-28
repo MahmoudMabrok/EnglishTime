@@ -21,4 +21,7 @@
     <color name="white1">#42A5F5</color>
     <color name="question">#112211</color>
 
+    <color name="txtColor">#DFDCDE</color>
+    <color name="timeColor">#D32F2F</color>
+
 </resources>

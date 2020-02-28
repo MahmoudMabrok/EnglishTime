@@ -2,7 +2,9 @@ package learning.mahmoudmabrok.englishtime.feature.utils
 
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.View
 import android.view.animation.OvershootInterpolator
@@ -63,5 +65,19 @@ fun View.animateItemWithAction(a: () -> Unit) {
             }
 }
 
+
+fun Activity.goto(dst: Class<Activity>) {
+    val intent = Intent(this, dst)
+    startActivity(intent)
+}
+
+fun Int.getNum(): String {
+    return if (this / 10 > 0) this.toString() else "0$this"
+}
+
+
+fun List<String>.isSame(list: List<String>): Boolean {
+    return this.filter { list.contains(it) }.size == this.size
+}
 
 
