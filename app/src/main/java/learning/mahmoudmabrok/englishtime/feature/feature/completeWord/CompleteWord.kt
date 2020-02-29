@@ -35,7 +35,6 @@ class CompleteWord : AppCompatActivity() {
 
         loadData()
 
-
         loadScore()
 
     }
@@ -50,8 +49,12 @@ class CompleteWord : AppCompatActivity() {
 
     private fun setupWords() {
         if (intent.hasExtra(Constants.UNIT)) {
-            val categories = DataSet.getCategory(intent.getIntExtra(Constants.UNIT, 0)).first()
-            data = categories.getWords()
+            val categories = DataSet.getCategory(intent.getIntExtra(Constants.UNIT, 0)).toMutableList()
+            categories.removeAt(categories.size - 1)
+            data = categories.flatMap { it.getWords() }
+            if (data.size > 5) {
+                data = data.subList(0, 6)
+            }
         }
     }
 
@@ -95,7 +98,7 @@ class CompleteWord : AppCompatActivity() {
     }
 
     private fun getRandomMissed(cur: String): MutableList<Char> {
-        lengthToMissed = Random.nextInt(2) + 1
+        lengthToMissed = Random.nextInt(cur.length / 2) + 1
         val d = cur.toCharArray().toMutableList()
         var rnd: Int
         for (i in 0 until lengthToMissed) {

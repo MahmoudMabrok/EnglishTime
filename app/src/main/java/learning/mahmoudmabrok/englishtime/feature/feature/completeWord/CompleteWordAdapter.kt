@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.recyclerview.widget.RecyclerView
 import learning.mahmoudmabrok.englishtime.R
-import learning.mahmoudmabrok.englishtime.feature.utils.dismissKeyboard
 
 /**
  * @property data char that displayed
@@ -46,7 +45,7 @@ class CompleteWordAdapter(val data: MutableList<Char>, val count: Int) : Recycle
                 edText.text = null
                 edText.addTextChangedListener(object : TextWatcher {
                     override fun afterTextChanged(p0: Editable) {
-                        itemView.context.dismissKeyboard()
+                        // itemView.context.dismissKeyboard()
                     }
 
                     override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {

@@ -5,13 +5,22 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_puncate.*
 import learning.mahmoudmabrok.englishtime.R
+import learning.mahmoudmabrok.englishtime.feature.datalayer.DataSet
+import learning.mahmoudmabrok.englishtime.feature.datalayer.LocalDB
+import learning.mahmoudmabrok.englishtime.feature.datalayer.models.PunctuateItem
+import learning.mahmoudmabrok.englishtime.feature.utils.Constants
 import learning.mahmoudmabrok.englishtime.feature.utils.TestText
+import learning.mahmoudmabrok.englishtime.feature.utils.setValue
 
 class Puncate : AppCompatActivity() {
 
 
+    private var score: Int = 0
+    private lateinit var db: LocalDB
     val sentnece = "what is your name"
     val correctSentnece = "What is your name?"
+
+    lateinit var puncateItem: PunctuateItem
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +34,35 @@ class Puncate : AppCompatActivity() {
             val spnaed = TestText.getDiffSpannaled(correctSentnece, userText)
             edPuncate.setText(spnaed, TextView.BufferType.SPANNABLE)
 
+            updateScore(10)
+
         }
 
+
+        if (intent.hasExtra(Constants.UNIT)) {
+            puncateItem = DataSet.getPuncatuate(intent.getIntExtra(Constants.UNIT, 0))
+        } else {
+            finish()
+        }
+
+
+        tvScoreForm.setMessage("Score:: ")
+
+        loadScore()
     }
+
+    private fun loadScore() {
+        db = LocalDB.getINSTANCE(this)
+        score = db.score
+        tvScoreForm.setValue(score, 1500)
+    }
+
+
+    private fun updateScore(i: Int) {
+        score += i
+        tvScoreForm.animateTo(score, 500)
+        db.score = score
+
+    }
+
 }
