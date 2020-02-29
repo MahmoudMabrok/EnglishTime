@@ -32,6 +32,8 @@ public class Activities extends AppCompatActivity {
     BoomMenuButton mBmb;
 
 
+    int unit = 0;  
+            
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,8 +41,7 @@ public class Activities extends AppCompatActivity {
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
-        int unit = intent.getIntExtra(Constants.UNIT, 0);
-        int lession = intent.getIntExtra(Constants.LESSION, 0);
+        unit = intent.getIntExtra(Constants.UNIT, 0);
 
 
         String[] names = new String[]{"Complete Miss", "Punctuate", "Grammar", "Is A or B", "Words"};
@@ -106,26 +107,31 @@ public class Activities extends AppCompatActivity {
 
     private void openWords() {
         Intent openAcivity = new Intent(Activities.this, CategorizeWords.class);
+        openAcivity.putExtra(Constants.UNIT, unit);
         startActivity(openAcivity);
     }
 
     private void openIsA() {
         Intent openAcivity = new Intent(Activities.this, IsAOrB.class);
+        openAcivity.putExtra(Constants.UNIT, unit);
         startActivity(openAcivity);
     }
 
     private void puncate() {
         Intent openAcivity = new Intent(Activities.this, Puncate.class);
+        openAcivity.putExtra(Constants.UNIT, unit);
         startActivity(openAcivity);
     }
 
     private void openGrammer() {
         Intent openAcivity = new Intent(Activities.this, GrammerActivity.class);
+        openAcivity.putExtra(Constants.UNIT, unit);
         startActivity(openAcivity);
     }
 
     private void completeWord() {
         Intent openAcivity = new Intent(Activities.this, CompleteWord.class);
+        openAcivity.putExtra(Constants.UNIT, unit);
         startActivity(openAcivity);
     }
 
@@ -138,38 +144,45 @@ public class Activities extends AppCompatActivity {
 
     public void onButtonVocabClicked() {
         Intent openAcivity = new Intent(Activities.this, ShowVocabs.class);
+        openAcivity.putExtra(Constants.UNIT, unit);
         startActivity(openAcivity);
     }
 
     public void onButtonFormClicked() {
         Intent openAcivity = new Intent(Activities.this, CategorizeWords.class);
+        openAcivity.putExtra(Constants.UNIT, unit);
         startActivity(openAcivity);
     }
 
     public void onButtonOddClicked() {
         Intent openAcivity = new Intent(Activities.this, CircleOdd.class);
+        openAcivity.putExtra(Constants.UNIT, unit);
         startActivity(openAcivity);
     }
 
     public void onButtonListenClicked() {
         Intent openAcivity = new Intent(Activities.this, ListenAndSelect.class);
+        openAcivity.putExtra(Constants.UNIT, unit);
         startActivity(openAcivity);
     }
 
 
     public void onViewClicked() {
         Intent openAcivity = new Intent(Activities.this, CrossWord.class);
+        openAcivity.putExtra(Constants.UNIT, unit);
         startActivity(openAcivity);
     }
 
 
     public void onViewClickedSnake() {
         Intent openAcivity = new Intent(Activities.this, SnakeStair.class);
+        openAcivity.putExtra(Constants.UNIT, unit);
         startActivity(openAcivity);
     }
 
     public void collectWords() {
         Intent openAcivity = new Intent(Activities.this, CollectWord.class);
+        openAcivity.putExtra(Constants.UNIT, unit);
         startActivity(openAcivity);
     }
 

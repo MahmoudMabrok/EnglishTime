@@ -11,6 +11,7 @@ import learning.mahmoudmabrok.englishtime.R
 import learning.mahmoudmabrok.englishtime.feature.datalayer.DataSet
 import learning.mahmoudmabrok.englishtime.feature.datalayer.LocalDB
 import learning.mahmoudmabrok.englishtime.feature.datalayer.models.Category
+import learning.mahmoudmabrok.englishtime.feature.utils.Constants
 import learning.mahmoudmabrok.englishtime.feature.utils.isSame
 import learning.mahmoudmabrok.englishtime.feature.utils.setValue
 
@@ -97,19 +98,18 @@ class CategorizeWords : AppCompatActivity() {
     private fun updateScore(i: Int) {
         score += i
         tvScoreForm.animateTo(score, 500)
-        tvScoreForm.updateValue(10, 1000)
         db.score = score
 
     }
 
     private fun setUpSentences() {
-        if (intent.hasExtra("NO")) {
-            categories = DataSet.getCategory(intent.getIntExtra("NO", 0))
+        if (intent.hasExtra(Constants.UNIT)) {
+            categories = DataSet.getCategory(intent.getIntExtra(Constants.UNIT, 0))
             laodDataOfAllWords()
         } else {
             categories = DataSet.getCategory(0)
             laodDataOfAllWords()
-            //finish()
+            // finish()
         }
 
     }

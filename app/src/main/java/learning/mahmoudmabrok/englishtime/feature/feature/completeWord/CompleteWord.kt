@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_complete_word.*
 import learning.mahmoudmabrok.englishtime.R
+import learning.mahmoudmabrok.englishtime.feature.datalayer.DataSet
+import learning.mahmoudmabrok.englishtime.feature.utils.Constants
 import learning.mahmoudmabrok.englishtime.feature.utils.dismissKeyboard
 import learning.mahmoudmabrok.englishtime.feature.utils.log
 import learning.mahmoudmabrok.englishtime.feature.utils.show
@@ -11,7 +13,7 @@ import kotlin.random.Random
 
 class CompleteWord : AppCompatActivity() {
 
-    val data = listOf("play", "score", "winner")
+    var data = listOf("play", "score", "winner")
     var current = 0
     var lengthToMissed = 1
 
@@ -28,8 +30,17 @@ class CompleteWord : AppCompatActivity() {
             this.dismissKeyboard()
         }
 
+        setupWords()
+
         loadData()
 
+    }
+
+    private fun setupWords() {
+        if (intent.hasExtra(Constants.UNIT)) {
+            val categories = DataSet.getCategory(intent.getIntExtra(Constants.UNIT, 0)).first()
+            data = categories.getWords()
+        }
     }
 
     private fun loadData() {
@@ -42,7 +53,6 @@ class CompleteWord : AppCompatActivity() {
         val isSame = data[current] == word
         if (isSame) {
             current += 1
-            lengthToMissed += 1
             this.show("Right")
             try {
                 loadData()
@@ -61,13 +71,12 @@ class CompleteWord : AppCompatActivity() {
      */
     private fun getSplitedData(): MutableList<Char> {
         val cur = data[current]
-        print("before missed $cur")
         val d = getRandomMissed(cur)
-        print("after missed $d")
         return d
     }
 
     private fun getRandomMissed(cur: String): MutableList<Char> {
+        lengthToMissed = Random.nextInt(3)
         val d = cur.toCharArray().toMutableList()
         var rnd: Int
         for (i in 0 until lengthToMissed) {
@@ -77,7 +86,5 @@ class CompleteWord : AppCompatActivity() {
         return d
     }
 
-    private fun play() {
-    }
 
 }

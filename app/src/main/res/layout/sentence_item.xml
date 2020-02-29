@@ -6,7 +6,7 @@
     android:layout_gravity="center"
     android:layout_marginStart="10dp"
     android:layout_marginEnd="10dp"
-    android:layout_marginBottom="@dimen/_16sdp"
+    android:layout_marginBottom="@dimen/_10sdp"
     android:background="@drawable/item_bg"
     android:gravity="center"
-    android:textSize="@dimen/tvSizeWord" />
+    android:textSize="@dimen/_12ssp" />

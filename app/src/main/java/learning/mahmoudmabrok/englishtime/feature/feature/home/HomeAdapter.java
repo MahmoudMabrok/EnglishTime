@@ -64,7 +64,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.Holder> {
                     public void onAnimationEnd(Animation animation) {
                         Intent openAcivity = new Intent(holder.itemView.getContext(), Activities.class);
                         openAcivity.putExtra(Constants.UNIT, i);
-                        openAcivity.putExtra(Constants.LESSION, 1);
                         holder.itemView.getContext().startActivity(openAcivity);
                     }
 
