@@ -9,6 +9,19 @@
     tools:context=".feature.feature.completeWord.CompleteWord">
 
 
+    <views.mahmoudmabrok.animatedtextview.AnimatedNumberedTextView
+        android:id="@+id/tvScoreForm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:gravity="center_horizontal"
+        android:textSize="@dimen/_20ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCompleteWord"
         android:layout_width="0dp"

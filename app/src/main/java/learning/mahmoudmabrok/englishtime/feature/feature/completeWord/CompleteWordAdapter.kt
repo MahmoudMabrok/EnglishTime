@@ -31,7 +31,7 @@ class CompleteWordAdapter(val data: MutableList<Char>, val count: Int) : Recycle
     fun setData(splitedData: MutableList<Char>) {
         data.clear()
         data.addAll(splitedData)
-        notifyItemRangeChanged(0, data.size)
+        notifyDataSetChanged()
     }
 
     inner class MyViewHolder(item: View) : RecyclerView.ViewHolder(item) {

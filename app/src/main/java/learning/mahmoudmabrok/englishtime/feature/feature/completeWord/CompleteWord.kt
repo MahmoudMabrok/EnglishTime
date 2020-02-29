@@ -5,19 +5,20 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_complete_word.*
 import learning.mahmoudmabrok.englishtime.R
 import learning.mahmoudmabrok.englishtime.feature.datalayer.DataSet
-import learning.mahmoudmabrok.englishtime.feature.utils.Constants
-import learning.mahmoudmabrok.englishtime.feature.utils.dismissKeyboard
-import learning.mahmoudmabrok.englishtime.feature.utils.log
-import learning.mahmoudmabrok.englishtime.feature.utils.show
+import learning.mahmoudmabrok.englishtime.feature.datalayer.LocalDB
+import learning.mahmoudmabrok.englishtime.feature.utils.*
 import kotlin.random.Random
 
 class CompleteWord : AppCompatActivity() {
 
+    private lateinit var db: LocalDB
     var data = listOf("play", "score", "winner")
     var current = 0
     var lengthToMissed = 1
 
     val adapter: CompleteWordAdapter = CompleteWordAdapter(getSplitedData(), lengthToMissed)
+
+    var score = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +34,17 @@ class CompleteWord : AppCompatActivity() {
         setupWords()
 
         loadData()
+
+
+        loadScore()
+
+    }
+
+    private fun loadScore() {
+        tvScoreForm.setMessage("Score:: ")
+        db = LocalDB.getINSTANCE(this)
+        score = db.score
+        tvScoreForm.setValue(score, 1500)
 
     }
 
@@ -52,6 +64,7 @@ class CompleteWord : AppCompatActivity() {
         val word = String(adapter.data.toCharArray())
         val isSame = data[current] == word
         if (isSame) {
+            updateScore(10)
             current += 1
             this.show("Right")
             try {
@@ -66,17 +79,23 @@ class CompleteWord : AppCompatActivity() {
 
     }
 
+    private fun updateScore(i: Int) {
+        score += i
+        db.score = score
+        tvScoreForm.updateValue(i, 1000)
+    }
+
     /**
      * form word to list of chars and make some of them missed
      */
     private fun getSplitedData(): MutableList<Char> {
-        val cur = data[current]
-        val d = getRandomMissed(cur)
-        return d
+        val currentWord = data[current]
+        return getRandomMissed(currentWord)
+
     }
 
     private fun getRandomMissed(cur: String): MutableList<Char> {
-        lengthToMissed = Random.nextInt(3)
+        lengthToMissed = Random.nextInt(2) + 1
         val d = cur.toCharArray().toMutableList()
         var rnd: Int
         for (i in 0 until lengthToMissed) {

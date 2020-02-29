@@ -81,15 +81,12 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.Holder> {
 
     @Override
     public int getItemCount() {
-        return 6;
+        return 3;
     }
 
     class Holder extends RecyclerView.ViewHolder {
         @BindView(R.id.tvUnitNO)
         TextView mTvUnitNO;
-
-        //todo use itemHolder for anim
-
 
         public Holder(@NonNull View itemView) {
             super(itemView);

@@ -109,7 +109,7 @@ class CategorizeWords : AppCompatActivity() {
         } else {
             categories = DataSet.getCategory(0)
             laodDataOfAllWords()
-            // finish()
+            finish()
         }
 
     }
