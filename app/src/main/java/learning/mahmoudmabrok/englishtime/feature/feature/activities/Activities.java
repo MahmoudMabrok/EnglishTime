@@ -24,7 +24,6 @@ import learning.mahmoudmabrok.englishtime.feature.feature.listenSelect.ListenAnd
 import learning.mahmoudmabrok.englishtime.feature.feature.puncuate.Puncate;
 import learning.mahmoudmabrok.englishtime.feature.feature.showVocabs.ShowVocabs;
 import learning.mahmoudmabrok.englishtime.feature.feature.snake.SnakeStair;
-import learning.mahmoudmabrok.englishtime.feature.feature.wordsTwoCards.DisplayWords;
 import learning.mahmoudmabrok.englishtime.feature.utils.Constants;
 
 public class Activities extends AppCompatActivity {
@@ -40,8 +39,8 @@ public class Activities extends AppCompatActivity {
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
-        int unit = intent.getIntExtra(Constants.UNIT, 1);
-        int lession = intent.getIntExtra(Constants.LESSION, 1);
+        int unit = intent.getIntExtra(Constants.UNIT, 0);
+        int lession = intent.getIntExtra(Constants.LESSION, 0);
 
 
         String[] names = new String[]{"Complete Miss", "Punctuate", "Grammar", "Is A or B", "Words"};
@@ -106,7 +105,7 @@ public class Activities extends AppCompatActivity {
     }
 
     private void openWords() {
-        Intent openAcivity = new Intent(Activities.this, DisplayWords.class);
+        Intent openAcivity = new Intent(Activities.this, CategorizeWords.class);
         startActivity(openAcivity);
     }
 
