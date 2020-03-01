@@ -47,7 +47,7 @@ class Puncate : AppCompatActivity() {
                 runOnUiThread {
                     finish()
                 }
-            }
+            }.start()
 
         }
 
