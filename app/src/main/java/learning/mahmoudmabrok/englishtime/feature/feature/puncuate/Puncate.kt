@@ -11,6 +11,7 @@ import learning.mahmoudmabrok.englishtime.feature.datalayer.models.PunctuateItem
 import learning.mahmoudmabrok.englishtime.feature.utils.Constants
 import learning.mahmoudmabrok.englishtime.feature.utils.TestText
 import learning.mahmoudmabrok.englishtime.feature.utils.setValue
+import learning.mahmoudmabrok.englishtime.feature.utils.show
 
 class Puncate : AppCompatActivity() {
 
@@ -34,7 +35,19 @@ class Puncate : AppCompatActivity() {
             val spnaed = TestText.getDiffSpannaled(correctSentnece, userText)
             edPuncate.setText(spnaed, TextView.BufferType.SPANNABLE)
 
-            updateScore(10)
+            val wrong = TestText.wrong
+            when (wrong) {
+                1 -> updateScore(20)
+                2 -> updateScore(10)
+                else -> this.show("Try Later")
+            }
+
+            Thread {
+                Thread.sleep(1000)
+                runOnUiThread {
+                    finish()
+                }
+            }
 
         }
 

@@ -75,12 +75,15 @@ class TestText {
 
     companion object {
 
+        var wrong = 0
+
         private val diffObj = diff_match_patch()
 
         fun getDiffSpannaled(original: String, toCompStr: String): Spannable {
             val testText = TestText()
             testText.gitDiff(original, toCompStr)
             val res = testText.resString
+            wrong = testText.insertionPoints?.size ?: 0
             return getSpannable(res, testText.getCorrectPoints(),
                     testText.getInsertionPoints()!!,
                     testText.getDeletionPoints())
