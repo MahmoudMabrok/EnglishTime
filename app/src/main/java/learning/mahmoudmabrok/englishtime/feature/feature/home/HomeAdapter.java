@@ -48,7 +48,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.Holder> {
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int i) {
 
-        holder.mTvUnitNO.setText(String.format(Locale.ENGLISH, "Unit %d", i + 1));
+        holder.mTvUnitNO.setText(String.format(Locale.ENGLISH, "Unit %d", i + 1 + 5));
         holder.mTvUnitNO.setOnClickListener(e -> {
             {
                 ScaleAnimation scaleAnimation = new ScaleAnimation(1.0F, 0.5F, 1.0F, 0.5F);
