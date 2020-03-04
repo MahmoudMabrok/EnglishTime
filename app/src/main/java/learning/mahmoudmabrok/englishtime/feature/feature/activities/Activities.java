@@ -31,7 +31,6 @@ public class Activities extends AppCompatActivity {
     @BindView(R.id.bmb)
     BoomMenuButton mBmb;
 
-
     int unit = 0;  
             
     @Override
@@ -44,13 +43,12 @@ public class Activities extends AppCompatActivity {
         unit = intent.getIntExtra(Constants.UNIT, 0);
 
 
-        String[] names = new String[]{"Complete Miss", "Punctuate", "Grammar", "Is A or B", "Words"};
+        String[] names = new String[]{"Complete Miss", "Punctuate", "Grammar", "Structures", "Collect Words"};
         for (int i = 0; i < mBmb.getPiecePlaceEnum().pieceNumber(); i++) {
             HamButton.Builder builder = new HamButton.Builder()
                     .normalText(names[i]);
             mBmb.addBuilder(builder);
         }
-
 
         mBmb.setOnBoomListener(new OnBoomListener() {
             @Override

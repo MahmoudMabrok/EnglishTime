@@ -8,10 +8,7 @@ import learning.mahmoudmabrok.englishtime.R
 import learning.mahmoudmabrok.englishtime.feature.datalayer.DataSet
 import learning.mahmoudmabrok.englishtime.feature.datalayer.LocalDB
 import learning.mahmoudmabrok.englishtime.feature.datalayer.models.PunctuateItem
-import learning.mahmoudmabrok.englishtime.feature.utils.Constants
-import learning.mahmoudmabrok.englishtime.feature.utils.TestText
-import learning.mahmoudmabrok.englishtime.feature.utils.setValue
-import learning.mahmoudmabrok.englishtime.feature.utils.show
+import learning.mahmoudmabrok.englishtime.feature.utils.*
 
 class Puncate : AppCompatActivity() {
 
@@ -22,46 +19,75 @@ class Puncate : AppCompatActivity() {
     val correctSentnece = "What is your name?"
 
     lateinit var puncateItem: PunctuateItem
+    lateinit var puncateList: List<PunctuateItem>
+    var current = 0
+
+    var toCkeck = true
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_puncate)
 
-        edPuncate.setText(sentnece)
+        laodData()
+
+        placeItem()
 
         btnCHeckPuncate.setOnClickListener {
-            val userText = edPuncate.text.toString()
-            val spnaed = TestText.getDiffSpannaled(correctSentnece, userText)
-            edPuncate.setText(spnaed, TextView.BufferType.SPANNABLE)
-
-            val wrong = TestText.wrong
-            when (wrong) {
-                1 -> updateScore(20)
-                2 -> updateScore(10)
-                else -> this.show("Try Later")
-            }
-
-            Thread {
-                Thread.sleep(1000)
-                runOnUiThread {
-                    finish()
+            if (!toCkeck) {
+                it.animItem(1000) {
+                    it.isEnabled = true
+                    current++
+                    placeItem()
                 }
-            }.start()
-
-        }
-
-
-        if (intent.hasExtra(Constants.UNIT)) {
-            puncateItem = DataSet.getPuncatuate(intent.getIntExtra(Constants.UNIT, 0))
-        } else {
-            finish()
+                toCkeck = true
+                btnCHeckPuncate.text = "Check"
+            } else {
+                checkAnswer()
+                toCkeck = false
+                btnCHeckPuncate.text = "Next"
+            }
         }
 
 
         tvScoreForm.setMessage("Score:: ")
 
         loadScore()
+    }
+
+    private fun checkAnswer() {
+        val userText = edPuncate.text.toString()
+        val spnaed = TestText.getDiffSpannaled(puncateItem.expected, userText)
+        edPuncate.setText(spnaed, TextView.BufferType.SPANNABLE)
+
+        val wrong = TestText.wrong
+        when (wrong) {
+            1 -> updateScore(20)
+            2 -> updateScore(10)
+            else -> this.show("Try Later")
+        }
+
+    }
+
+    private fun placeItem() {
+        try {
+            puncateItem = puncateList[current]
+            edPuncate.setText(puncateItem.actual)
+        } catch (e: Exception) {
+
+            finish()
+        }
+
+
+    }
+
+    private fun laodData() {
+        if (intent.hasExtra(Constants.UNIT)) {
+            puncateList = DataSet.getPuncatuate(intent.getIntExtra(Constants.UNIT, 0))
+        } else {
+            finish()
+        }
+
     }
 
     private fun loadScore() {

@@ -43,18 +43,34 @@ fun Context.dismissKeyboard() {
 }
 
 
-fun View.animItem(a: () -> Unit) {
+fun View.animItem(animeDuration: Long = 1000, a: () -> Unit) {
     val scalx = PropertyValuesHolder.ofFloat(View.SCALE_X, 0.5f, 1f)
     val scaly = PropertyValuesHolder.ofFloat(View.SCALE_Y, 0.5f, 1f)
     val alpha = PropertyValuesHolder.ofFloat(View.ALPHA, 0f, 1f)
     ObjectAnimator.ofPropertyValuesHolder(this, scalx, scaly, alpha).apply {
         interpolator = OvershootInterpolator()
-        duration = 1000
+        duration = animeDuration
     }.start()
             .apply {
-                postDelayed(a, 1000)
+                postDelayed(a, animeDuration)
             }
 }
+
+
+fun View.animItemFromFullToZeo(a: () -> Unit) {
+    val scalx = PropertyValuesHolder.ofFloat(View.SCALE_X, 1f, 0.1f)
+    val scaly = PropertyValuesHolder.ofFloat(View.SCALE_Y, 1f, 0.1f)
+    val alpha = PropertyValuesHolder.ofFloat(View.ALPHA, 1f, 0.1f)
+    ObjectAnimator.ofPropertyValuesHolder(this, scalx, scaly, alpha).apply {
+        interpolator = OvershootInterpolator()
+        duration = 600
+    }.start()
+            .apply {
+                postDelayed(a, 600)
+            }
+}
+
+
 
 fun View.animateItemWithAction(a: () -> Unit) {
     ObjectAnimator.ofFloat(this, View.ALPHA, 0f, 1.0f).apply {

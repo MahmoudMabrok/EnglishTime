@@ -6,7 +6,7 @@ object DataSet {
 
     private val isAdata: MutableList<IsAItem> = mutableListOf()
     private val categories: MutableList<List<Category>> = mutableListOf()
-    private val puncates: MutableList<PunctuateItem> = mutableListOf()
+    private val puncates: MutableList<List<PunctuateItem>> = mutableListOf()
     private val gammers: MutableList<List<GrammerLesson>?> = mutableListOf()
     private val structures: MutableList<List<Structure>?> = mutableListOf()
 
@@ -29,7 +29,7 @@ object DataSet {
         // need categories
         categories.add(listOf(
                 Category("Animals", "Tiger parrot eagle deer camel panda bear lion giraffe kangaroo"),
-                Category("Missc", "Emergency address officer opertator wild animal"),
+                Category("Missc", "Emergency address officer operator wild animal"),
                 Category("NA", "Concert MusicRoom Bass"))
         )
 
@@ -37,16 +37,34 @@ object DataSet {
         categories.add(listOf(
                 Category("Cities", "Rome NewYorkCity Cairo Paris Tokyo hongkong London Honolulu Seoul sanFrancisco"),
                 Category("Months of the years", "January February march April may June July august September October November December"),
-                Category("Places", "Department store museum theatre statueOfLiberty boarding theatre DisneyWorld universalStudios"),
+                Category("Places", "Department store museum theatre statueOfLiberty  DisneyWorld universalStudios"),
                 Category("NA", "Tiger parrot eagles"))
+
+                //boarding theatre,PLaces
         )
 
+        puncates.add(listOf(
+                PunctuateItem("She played  the cello softly.", "she played  the cello softly"),
+                PunctuateItem("Rana played the drums badly.", "rana played the drums badly"),
+                PunctuateItem("Can he ride the bike quickly?", "can he ride the bike quickly"),
+                PunctuateItem("Ali is ahappy boy.", "ali is ahappy boy")
+        ))
 
-        puncates.add(PunctuateItem("How are you?", "how are you"))
-        puncates.add(PunctuateItem("Ahmed went school with Ali.", "ahmed went school with ali"))
-        puncates.add(PunctuateItem("That was amazing!", "hhat was amazing"))
+
+        puncates.add(listOf(
+                PunctuateItem("What  are you doing,Karim?", "what  are you doing,karim"),
+                PunctuateItem("Can I help you?", "can I help you"),
+                PunctuateItem("I'm cleaning up the music room.", "i'm cleaning up the music room"),
+                PunctuateItem("Youssef was the soloist on the violin.", "youssef was the soloist on the violin")
+        ))
 
 
+        puncates.add(listOf(
+                PunctuateItem("These wild animals escaped from the zoo.", "these wild animals escaped from the zoo"),
+                PunctuateItem("An eagle is flying above the giraffe.", "an eagle is flying above the giraffe"),
+                PunctuateItem("A kangaroo is hopped behind Maria.", "a kangaroo is hopped behind maria"),
+                PunctuateItem("A gaint panda are near Mustafa's house.", "a gaint panda are near mustafas house.")
+        ))
 
 
         gammers.add(listOf(
@@ -90,7 +108,7 @@ object DataSet {
 
     fun getIsA(x: Int): IsAItem = isAdata[x]
     fun getCategory(x: Int): List<Category> = categories[x]
-    fun getPuncatuate(x: Int): PunctuateItem = puncates[x]
+    fun getPuncatuate(x: Int): List<PunctuateItem> = puncates[x]
     fun getGrammer(x: Int): List<GrammerLesson>? = gammers[x]
     fun getStructure(unitNum: Int): List<Structure>? = structures[unitNum]
 

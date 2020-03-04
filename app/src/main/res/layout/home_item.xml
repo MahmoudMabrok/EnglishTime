@@ -4,7 +4,6 @@
     android:id="@+id/itemHolder"
     android:layout_margin="@dimen/_6sdp"
     android:layout_height="wrap_content"
-    android:layout_weight="1"
     android:background="@color/colorPrimaryDark">
 
     <TextView
@@ -13,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_2sdp"
         android:layout_marginBottom="@dimen/_10sdp"
-        android:layout_weight="1"
+
         android:background="@color/colorPrimaryDark"
         android:gravity="center_horizontal"
         android:paddingTop="@dimen/_16sdp"

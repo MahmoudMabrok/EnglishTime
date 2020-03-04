@@ -1,7 +1,9 @@
 package learning.mahmoudmabrok.englishtime.feature.feature.completeWord
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.activity_complete_word.*
 import learning.mahmoudmabrok.englishtime.R
 import learning.mahmoudmabrok.englishtime.feature.datalayer.DataSet
@@ -11,8 +13,9 @@ import kotlin.random.Random
 
 class CompleteWord : AppCompatActivity() {
 
+    private var groupSize = 3
     private lateinit var db: LocalDB
-    var data = listOf("play", "score", "winner")
+    var data = listOf("play", "score", "winner", "play", "score", "winner")
     var current = 0
     var lengthToMissed = 1
 
@@ -24,7 +27,6 @@ class CompleteWord : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_complete_word)
 
-        rvCompleteWord.adapter = adapter
 
         btnCHeckCompleteWord.setOnClickListener {
             checkAnswer()
@@ -33,10 +35,17 @@ class CompleteWord : AppCompatActivity() {
 
         setupWords()
 
+        initRv()
+
         loadData()
 
         loadScore()
 
+    }
+
+    private fun initRv() {
+        rvCompleteWord.adapter = adapter
+        rvCompleteWord.layoutDirection = View.LAYOUT_DIRECTION_LTR
     }
 
     private fun loadScore() {
@@ -52,32 +61,56 @@ class CompleteWord : AppCompatActivity() {
             val categories = DataSet.getCategory(intent.getIntExtra(Constants.UNIT, 0)).toMutableList()
             categories.removeAt(categories.size - 1)
             data = categories.flatMap { it.getWords() }
-            if (data.size > 5) {
+            data = data.sorted()
+
+            val longW = data.last().length
+            groupSize = longW - 3
+
+
+            /*if (data.size > 5) {
                 data = data.subList(0, 6)
-            }
+            }*/
+        } else {
+            "before $data".log()
+            data.sortedBy { it.length }
+            "after $data".log()
+
+            data = data.sorted()
+            "after1 $data".log()
+
+
         }
     }
 
     private fun loadData() {
-        adapter.setData(getSplitedData())
-        "count ${adapter.count} ${getSplitedData().size}".log()
+        try {
+            val wordMissed = getSplitedData()
+            adapter.setData(wordMissed)
+            (rvCompleteWord.layoutManager as GridLayoutManager).spanCount = wordMissed.size
+        } catch (e: Exception) {
+            "error $e".log()
+            finish()
+        }
     }
 
+    /**
+     * Check answer if correct increase score else show correct one and go to next one
+     */
     private fun checkAnswer() {
         val word = String(adapter.data.toCharArray())
         val isSame = data[current] == word
         if (isSame) {
             updateScore(10)
-            current += 1
             this.show("Right")
-            try {
-                loadData()
-            } catch (e: Exception) {
-                this.show("Finish")
-                finish()
-            }
         } else {
             this.show("Wrong")
+            adapter.setData(data[current].toMutableList())
+        }
+        current += 1
+        btnCHeckCompleteWord.isEnabled = false
+        btnCHeckCompleteWord.animItem {
+            loadData()
+            btnCHeckCompleteWord.isEnabled = true
         }
 
     }
@@ -97,16 +130,18 @@ class CompleteWord : AppCompatActivity() {
 
     }
 
+    /**
+     * make random char be missed from word
+     */
     private fun getRandomMissed(cur: String): MutableList<Char> {
-        lengthToMissed = Random.nextInt(cur.length / 2) + 1
-        val d = cur.toCharArray().toMutableList()
+        lengthToMissed = current / groupSize + 1 // group words as 3 words with same number of missed char and increase with each group
+
+        val newWord = cur.toCharArray().toMutableList()
         var rnd: Int
         for (i in 0 until lengthToMissed) {
-            rnd = Random.nextInt(cur.length)
-            d[rnd] = ' '
+            rnd = Random.nextInt(cur.length)// last one sometimes crash
+            newWord[rnd] = ' '
         }
-        return d
+        return newWord
     }
-
-
 }
