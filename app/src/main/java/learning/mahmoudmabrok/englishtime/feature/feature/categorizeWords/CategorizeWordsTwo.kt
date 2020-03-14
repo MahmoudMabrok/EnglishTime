@@ -24,10 +24,7 @@ import learning.mahmoudmabrok.englishtime.R
 import learning.mahmoudmabrok.englishtime.feature.datalayer.DataSet
 import learning.mahmoudmabrok.englishtime.feature.datalayer.LocalDB
 import learning.mahmoudmabrok.englishtime.feature.datalayer.models.Category
-import learning.mahmoudmabrok.englishtime.feature.utils.Constants
-import learning.mahmoudmabrok.englishtime.feature.utils.dismissKeyboard
-import learning.mahmoudmabrok.englishtime.feature.utils.isSame
-import learning.mahmoudmabrok.englishtime.feature.utils.setValue
+import learning.mahmoudmabrok.englishtime.feature.utils.*
 import java.util.*
 
 
@@ -105,12 +102,32 @@ class CategorizeWordsTwo : AppCompatActivity() {
 
         // check if top is correct
         if (currentCategory.getWords().isSame(adapterTop.list)) {
+            updateWinner()
             // point to next item
             currentSentence += 1
             // load new challenge
             loadSentence()
+            this.show("Correct")
+        } else {
+            this.show("Wrong")
         }
+        currentPlayer = when (currentPlayer) {
+            1 -> 2
+            else -> 1
+        }
+        updatePlayerBoardUI()
 
+    }
+
+    /**
+     * check winner and update score
+     */
+    private fun updateWinner() {
+        if (currentPlayer == 1) {
+            score1 += 1
+        } else {
+            score2 += 1
+        }
 
     }
 
