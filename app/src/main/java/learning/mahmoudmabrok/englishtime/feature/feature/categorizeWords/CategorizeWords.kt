@@ -4,6 +4,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.VibrationEffect
 import android.os.Vibrator
+import android.speech.tts.TextToSpeech
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_form_sentence.*
@@ -14,6 +15,7 @@ import learning.mahmoudmabrok.englishtime.feature.datalayer.models.Category
 import learning.mahmoudmabrok.englishtime.feature.utils.Constants
 import learning.mahmoudmabrok.englishtime.feature.utils.isSame
 import learning.mahmoudmabrok.englishtime.feature.utils.setValue
+import java.util.*
 
 
 class CategorizeWords : AppCompatActivity() {
@@ -26,6 +28,7 @@ class CategorizeWords : AppCompatActivity() {
     var currentSentence = 0
 
     var score = 0
+    lateinit var textToSpeech: TextToSpeech
 
     private lateinit var categories: List<Category>
     private lateinit var currentCategory: Category
@@ -39,6 +42,14 @@ class CategorizeWords : AppCompatActivity() {
 
         tvScoreForm.setMessage("Score:: ")
 
+
+        textToSpeech = TextToSpeech(this, TextToSpeech.OnInitListener { status ->
+            if (status != TextToSpeech.ERROR) {
+                textToSpeech.setLanguage(Locale.ENGLISH)
+            }
+        })
+
+        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
     }
 
     override fun onResume() {
@@ -80,6 +91,7 @@ class CategorizeWords : AppCompatActivity() {
     }
 
     private fun handleCLickToBottomRV(pos: Int, item: String) {
+        speakWord(item)
         adapterBottom.removeSentence(pos)
         // add it to top rv
         adapterTop.addSentence(item)
@@ -92,6 +104,11 @@ class CategorizeWords : AppCompatActivity() {
             loadSentence()
         }
 
+
+    }
+
+    private fun speakWord(item: String) {
+        textToSpeech.speak(item, TextToSpeech.QUEUE_FLUSH, null)
 
     }
 
@@ -156,4 +173,16 @@ class CategorizeWords : AppCompatActivity() {
             (getSystemService(VIBRATOR_SERVICE) as Vibrator).vibrate(150)
         }
     }
+
+
+    override fun onStop() {
+        super.onStop()
+        try {
+            textToSpeech.stop()
+            textToSpeech.shutdown()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
 }

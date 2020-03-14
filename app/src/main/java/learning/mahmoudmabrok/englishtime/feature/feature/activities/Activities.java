@@ -17,11 +17,11 @@ import learning.mahmoudmabrok.englishtime.feature.feature.aorb.IsAOrB;
 import learning.mahmoudmabrok.englishtime.feature.feature.categorizeWords.CategorizeWords;
 import learning.mahmoudmabrok.englishtime.feature.feature.circleOdd.CircleOdd;
 import learning.mahmoudmabrok.englishtime.feature.feature.collectWordWithCross.CollectWord;
-import learning.mahmoudmabrok.englishtime.feature.feature.completeWord.CompleteWord;
 import learning.mahmoudmabrok.englishtime.feature.feature.crossword.CrossWord;
 import learning.mahmoudmabrok.englishtime.feature.feature.grammer.GrammerActivity;
 import learning.mahmoudmabrok.englishtime.feature.feature.listenSelect.ListenAndSelect;
 import learning.mahmoudmabrok.englishtime.feature.feature.puncuate.Puncate;
+import learning.mahmoudmabrok.englishtime.feature.feature.selectPath.SelectGameType;
 import learning.mahmoudmabrok.englishtime.feature.feature.showVocabs.ShowVocabs;
 import learning.mahmoudmabrok.englishtime.feature.feature.snake.SnakeStair;
 import learning.mahmoudmabrok.englishtime.feature.utils.Constants;
@@ -104,7 +104,8 @@ public class Activities extends AppCompatActivity {
     }
 
     private void openWords() {
-        Intent openAcivity = new Intent(Activities.this, CategorizeWords.class);
+        Intent openAcivity = new Intent(Activities.this, SelectGameType.class);
+        openAcivity.putExtra(Constants.TYPE, Constants.CATEGORIES);
         openAcivity.putExtra(Constants.UNIT, unit);
         startActivity(openAcivity);
     }
@@ -128,7 +129,8 @@ public class Activities extends AppCompatActivity {
     }
 
     private void completeWord() {
-        Intent openAcivity = new Intent(Activities.this, CompleteWord.class);
+        Intent openAcivity = new Intent(Activities.this, SelectGameType.class);
+        openAcivity.putExtra(Constants.TYPE, Constants.WORDS);
         openAcivity.putExtra(Constants.UNIT, unit);
         startActivity(openAcivity);
     }
