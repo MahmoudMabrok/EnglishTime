@@ -15,8 +15,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import learning.mahmoudmabrok.englishtime.R;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Holder> {
@@ -121,12 +119,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Holder
     }
 
     class Holder extends RecyclerView.ViewHolder {
-        @BindView(R.id.tvWordItem)
+
         TextView mTvWordItem;
 
         public Holder(@NonNull View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
+            mTvWordItem = itemView.findViewById(R.id.tvWordItem);
         }
     }
 

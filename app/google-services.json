@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "906304959456",
+    "firebase_url": "https://drahmed-a4342.firebaseio.com",
+    "project_id": "drahmed-a4342",
+    "storage_bucket": "drahmed-a4342.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:906304959456:android:6f9d9d5088fa2b5d13f185",
+        "android_client_info": {
+          "package_name": "learning.mahmoudmabrok.englishtime"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "906304959456-1bol9j1cp04ocpsev6venkdlkt4uen58.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoytdT01xAMCru1BQuj1LkeHuw-094nWA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "906304959456-1bol9j1cp04ocpsev6venkdlkt4uen58.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

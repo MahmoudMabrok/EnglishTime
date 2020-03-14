@@ -6,19 +6,29 @@ import android.os.VibrationEffect
 import android.os.Vibrator
 import android.speech.tts.TextToSpeech
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_form_sentence.*
+import kotlinx.android.synthetic.main.activity_categorize_words_two.*
+import kotlinx.android.synthetic.main.activity_complete_word_two.cardOne
+import kotlinx.android.synthetic.main.activity_complete_word_two.cardTwo
+import kotlinx.android.synthetic.main.activity_complete_word_two.playerName1
+import kotlinx.android.synthetic.main.activity_complete_word_two.playerName2
+import kotlinx.android.synthetic.main.activity_complete_word_two.playerScore1
+import kotlinx.android.synthetic.main.activity_complete_word_two.playerScore2
+import kotlinx.android.synthetic.main.activity_form_sentence.rvAllWords
+import kotlinx.android.synthetic.main.activity_form_sentence.rvCategory
+import kotlinx.android.synthetic.main.activity_form_sentence.tvCategoryName
+import kotlinx.android.synthetic.main.activity_form_sentence.tvScoreForm
+import kotlinx.android.synthetic.main.names.*
 import learning.mahmoudmabrok.englishtime.R
 import learning.mahmoudmabrok.englishtime.feature.datalayer.DataSet
 import learning.mahmoudmabrok.englishtime.feature.datalayer.LocalDB
 import learning.mahmoudmabrok.englishtime.feature.datalayer.models.Category
-import learning.mahmoudmabrok.englishtime.feature.utils.Constants
-import learning.mahmoudmabrok.englishtime.feature.utils.isSame
-import learning.mahmoudmabrok.englishtime.feature.utils.setValue
+import learning.mahmoudmabrok.englishtime.feature.utils.*
 import java.util.*
 
 
-class CategorizeWords : AppCompatActivity() {
+class CategorizeWordsTwo : AppCompatActivity() {
 
     private lateinit var db: LocalDB
     private val TAG: String = "CategorizeWords"
@@ -33,9 +43,19 @@ class CategorizeWords : AppCompatActivity() {
     private lateinit var categories: List<Category>
     private lateinit var currentCategory: Category
 
+
+    var score1 = 0
+    var score2 = 0
+
+    var name1 = ""
+    var name2 = ""
+
+    var currentPlayer = 0
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_categorize_words)
+        setContentView(R.layout.activity_categorize_words_two)
         initRv()
         setUpSentences()
         loadSentence()
@@ -45,12 +65,94 @@ class CategorizeWords : AppCompatActivity() {
 
         textToSpeech = TextToSpeech(this, TextToSpeech.OnInitListener { status ->
             if (status != TextToSpeech.ERROR) {
-                textToSpeech.setLanguage(Locale.ENGLISH)
+                textToSpeech.language = Locale.ENGLISH
             }
         })
 
         overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+
+
+        btnPlayTwo.setOnClickListener {
+            name1 = edPlayerOneName.text.toString()
+            name2 = edPlayerTwoName.text.toString()
+
+            namesCat.visibility = View.GONE
+
+            content.visibility = View.VISIBLE
+
+            updateNames()
+            updateScores()
+
+            currentPlayer = 1
+
+            updatePlayerBoardUI()
+
+            this.dismissKeyboard()
+
+        }
+
+        btnSunmitCat.setOnClickListener {
+            check()
+        }
+
+
     }
+
+    private fun check() {
+
+        // check if top is correct
+        if (currentCategory.getWords().isSame(adapterTop.list)) {
+            updateWinner()
+            // point to next item
+            currentSentence += 1
+            // load new challenge
+            loadSentence()
+            this.show("Correct")
+        } else {
+            this.show("Wrong")
+        }
+        currentPlayer = when (currentPlayer) {
+            1 -> 2
+            else -> 1
+        }
+        updatePlayerBoardUI()
+
+    }
+
+    /**
+     * check winner and update score
+     */
+    private fun updateWinner() {
+        if (currentPlayer == 1) {
+            score1 += 1
+        } else {
+            score2 += 1
+        }
+
+    }
+
+    private fun updatePlayerBoardUI() {
+        updateScores()
+        // current
+        if (currentPlayer == 1) {
+            cardOne.setBackgroundResource(R.drawable.collect_selected)
+            cardTwo.setBackgroundResource(R.drawable.collect_unselected)
+        } else {
+            cardTwo.setBackgroundResource(R.drawable.collect_selected)
+            cardOne.setBackgroundResource(R.drawable.collect_unselected)
+        }
+    }
+
+    private fun updateScores() {
+        playerScore1.text = score1.toString()
+        playerScore2.text = score2.toString()
+    }
+
+    private fun updateNames() {
+        playerName1.text = name1
+        playerName2.text = name2
+    }
+
 
     override fun onResume() {
         super.onResume()
@@ -95,16 +197,6 @@ class CategorizeWords : AppCompatActivity() {
         adapterBottom.removeSentence(pos)
         // add it to top rv
         adapterTop.addSentence(item)
-        // check if top is correct
-        if (currentCategory.getWords().isSame(adapterTop.list)) {
-            updateScore(10)
-            // point to next item
-            currentSentence += 1
-            // load new challenge
-            loadSentence()
-        }
-
-
     }
 
     private fun speakWord(item: String) {
@@ -112,12 +204,6 @@ class CategorizeWords : AppCompatActivity() {
 
     }
 
-    private fun updateScore(i: Int) {
-        score += i
-        tvScoreForm.animateTo(score, 500)
-        db.score = score
-
-    }
 
     private fun setUpSentences() {
         if (intent.hasExtra(Constants.UNIT)) {

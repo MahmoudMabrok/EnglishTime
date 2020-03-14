@@ -11,9 +11,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".feature.feature.test.Test"></activity>
+        <activity android:name=".feature.feature.selectPath.SelectGameType" />
         <activity
             android:name=".feature.feature.categorizeWords.CategorizeWords"
             android:exported="true" />
+        <activity
+            android:name=".feature.feature.categorizeWords.CategorizeWordsTwo"
+            android:exported="true" />
+
+
         <activity android:name=".feature.feature.aorb.IsAOrB" />
         <activity android:name=".feature.feature.wordsTwoCards.DisplayWords" />
         <activity
@@ -23,6 +30,12 @@
         <activity
             android:name=".feature.feature.completeWord.CompleteWord"
             android:exported="true" />
+
+        <activity
+            android:name=".feature.feature.completeWord.CompleteWordTwo"
+            android:exported="true" />
+
+
         <activity
             android:name=".feature.feature.collectWordWithCross.CollectWord"
             android:exported="true" />

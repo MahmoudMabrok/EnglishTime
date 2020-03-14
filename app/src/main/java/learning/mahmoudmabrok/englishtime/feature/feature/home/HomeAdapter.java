@@ -15,8 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import learning.mahmoudmabrok.englishtime.R;
 import learning.mahmoudmabrok.englishtime.feature.feature.activities.Activities;
 import learning.mahmoudmabrok.englishtime.feature.utils.Constants;
@@ -85,12 +83,11 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.Holder> {
     }
 
     class Holder extends RecyclerView.ViewHolder {
-        @BindView(R.id.tvUnitNO)
         TextView mTvUnitNO;
 
         public Holder(@NonNull View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
+            mTvUnitNO = itemView.findViewById(R.id.tvUnitNO);
         }
     }
 
