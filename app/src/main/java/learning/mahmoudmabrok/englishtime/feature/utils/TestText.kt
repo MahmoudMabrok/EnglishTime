@@ -83,7 +83,7 @@ class TestText {
             val testText = TestText()
             testText.gitDiff(original, toCompStr)
             val res = testText.resString
-            wrong = testText.insertionPoints?.size ?: 0
+            wrong = testText.deletionPoints?.size ?: 0
             return getSpannable(res, testText.getCorrectPoints(),
                     testText.getInsertionPoints()!!,
                     testText.getDeletionPoints())

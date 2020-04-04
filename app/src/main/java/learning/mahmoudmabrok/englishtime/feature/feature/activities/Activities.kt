@@ -14,7 +14,6 @@ import learning.mahmoudmabrok.englishtime.feature.feature.circleOdd.CircleOdd
 import learning.mahmoudmabrok.englishtime.feature.feature.collectWordWithCross.CollectWord
 import learning.mahmoudmabrok.englishtime.feature.feature.crossword.CrossWord
 import learning.mahmoudmabrok.englishtime.feature.feature.grammer.GrammerActivity
-import learning.mahmoudmabrok.englishtime.feature.feature.listenSelect.ListenAndSelect
 import learning.mahmoudmabrok.englishtime.feature.feature.puncuate.Puncate
 import learning.mahmoudmabrok.englishtime.feature.feature.selectPath.SelectGameType
 import learning.mahmoudmabrok.englishtime.feature.feature.showVocabs.ShowVocabs
@@ -132,9 +131,9 @@ class Activities : AppCompatActivity() {
     }
 
     fun onButtonListenClicked() {
-        val openAcivity = Intent(this@Activities, ListenAndSelect::class.java)
+       /* val openAcivity = Intent(this@Activities, ListenAndSelect::class.java)
         openAcivity.putExtra(Constants.UNIT, unit)
-        startActivity(openAcivity)
+        startActivity(openAcivity)*/
     }
 
 

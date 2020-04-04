@@ -13,6 +13,7 @@ import learning.mahmoudmabrok.englishtime.feature.datalayer.DataSet
 import learning.mahmoudmabrok.englishtime.feature.datalayer.LocalDB
 import learning.mahmoudmabrok.englishtime.feature.datalayer.models.Category
 import learning.mahmoudmabrok.englishtime.feature.utils.Constants
+import learning.mahmoudmabrok.englishtime.feature.utils.SoundHelper
 import learning.mahmoudmabrok.englishtime.feature.utils.isSame
 import learning.mahmoudmabrok.englishtime.feature.utils.setValue
 import java.util.*
@@ -50,23 +51,12 @@ class CategorizeWords : AppCompatActivity() {
         })
 
         overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
-    }
 
-    override fun onResume() {
-        super.onResume()
-        loadScore()
-    }
-
-    private fun loadScore() {
         db = LocalDB.getINSTANCE(this)
-        score = db.score
-        tvScoreForm.setValue(score, 1500)
+
+
     }
 
-    override fun onPause() {
-        super.onPause()
-        db.score = score
-    }
 
     private fun initRv() {
         // make rv to be filled from user
@@ -102,6 +92,7 @@ class CategorizeWords : AppCompatActivity() {
             currentSentence += 1
             // load new challenge
             loadSentence()
+            SoundHelper.playCorrect(this)
         }
 
 
@@ -115,8 +106,6 @@ class CategorizeWords : AppCompatActivity() {
     private fun updateScore(i: Int) {
         score += i
         tvScoreForm.animateTo(score, 500)
-        db.score = score
-
     }
 
     private fun setUpSentences() {
@@ -183,6 +172,12 @@ class CategorizeWords : AppCompatActivity() {
         } catch (e: Exception) {
             e.printStackTrace()
         }
+
+        var totalScore =  db.score
+        totalScore += score
+        db.score = totalScore
+
     }
+
 
 }

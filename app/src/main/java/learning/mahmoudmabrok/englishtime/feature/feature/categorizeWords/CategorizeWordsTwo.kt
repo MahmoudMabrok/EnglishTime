@@ -108,8 +108,10 @@ class CategorizeWordsTwo : AppCompatActivity() {
             // load new challenge
             loadSentence()
             this.show("Correct")
+            SoundHelper.playCorrect(this)
         } else {
             this.show("Wrong")
+            SoundHelper.playFail(this)
         }
         currentPlayer = when (currentPlayer) {
             1 -> 2
@@ -160,15 +162,15 @@ class CategorizeWordsTwo : AppCompatActivity() {
     }
 
     private fun loadScore() {
-        db = LocalDB.getINSTANCE(this)
+     /*   db = LocalDB.getINSTANCE(this)
         score = db.score
-        tvScoreForm.setValue(score, 1500)
+        tvScoreForm.setValue(score, 1500)*/
     }
 
-    override fun onPause() {
+   /* override fun onPause() {
         super.onPause()
         db.score = score
-    }
+    }*/
 
     private fun initRv() {
         // make rv to be filled from user

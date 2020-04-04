@@ -150,9 +150,11 @@ class CompleteWordTwo : AppCompatActivity() {
                 loadData()
                 btnCHeckCompleteWord.isEnabled = true
             }
+            SoundHelper.playCorrect(this)
 
         } else {
             this.show("Wrong")
+            SoundHelper.playFail(this)
         }
 
 
