@@ -66,9 +66,6 @@ class CompleteWord : AppCompatActivity() {
             groupSize = longW - 3
 
 
-            /*if (data.size > 5) {
-                data = data.subList(0, 6)
-            }*/
         } else {
             "before $data".log()
             data.sortedBy { it.length }

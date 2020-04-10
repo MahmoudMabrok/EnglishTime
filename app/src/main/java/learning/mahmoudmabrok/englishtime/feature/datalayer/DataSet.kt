@@ -107,6 +107,7 @@ object DataSet {
     }
 
     fun getIsA(x: Int): IsAItem = isAdata[x]
+
     fun getCategory(x: Int): List<Category> = categories[x]
     fun getPuncatuate(x: Int): List<PunctuateItem> = puncates[x]
     fun getGrammer(x: Int): List<GrammerLesson>? = gammers[x]
