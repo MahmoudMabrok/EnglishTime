@@ -39,7 +39,7 @@ class CompleteWord : AppCompatActivity() {
 
         loadData()
 
-        loadScore()
+        db = LocalDB.getINSTANCE(this)
 
     }
 
@@ -50,7 +50,6 @@ class CompleteWord : AppCompatActivity() {
 
     private fun loadScore() {
         tvScoreForm.setMessage("Score:: ")
-        db = LocalDB.getINSTANCE(this)
         score = db.score
         tvScoreForm.setValue(score, 1500)
 
@@ -102,7 +101,9 @@ class CompleteWord : AppCompatActivity() {
         if (isSame) {
             updateScore(10)
             this.show("Right")
+            SoundHelper.playCorrect(this)
         } else {
+            SoundHelper.playFail(this)
             this.show("Wrong")
             adapter.setData(data[current].toMutableList())
         }
@@ -117,7 +118,6 @@ class CompleteWord : AppCompatActivity() {
 
     private fun updateScore(i: Int) {
         score += i
-        db.score = score
         tvScoreForm.updateValue(i, 1000)
     }
 
@@ -143,5 +143,15 @@ class CompleteWord : AppCompatActivity() {
             newWord[rnd] = ' '
         }
         return newWord
+    }
+
+    override fun onStop() {
+        super.onStop()
+        var totalScore =  db.score
+        "total $totalScore".log()
+        totalScore += score
+        db.score = totalScore
+
+
     }
 }

@@ -19,7 +19,7 @@ data class Category(
 }
 
 
-data class PunctuateItem(val expected: String, val actual: String)
+data class PunctuateItem(val expected: String, val actual: String, val numWrong:Int = 2 )
 
 data class GrammerItem(val start: String, val end: String)
 

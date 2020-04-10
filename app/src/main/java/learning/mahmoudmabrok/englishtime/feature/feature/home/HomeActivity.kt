@@ -6,6 +6,7 @@ import butterknife.ButterKnife
 import kotlinx.android.synthetic.main.activity_home.*
 import learning.mahmoudmabrok.englishtime.R
 import learning.mahmoudmabrok.englishtime.feature.datalayer.LocalDB
+import learning.mahmoudmabrok.englishtime.feature.utils.log
 
 class HomeActivity : AppCompatActivity() {
 
@@ -29,6 +30,7 @@ class HomeActivity : AppCompatActivity() {
     private fun loadScore() {
         val localDB = LocalDB.getINSTANCE(this)
         val score = localDB.score
+        "score Home $score".log()
         tvvvvv!!.animateTo(score, 3000)
     }
 

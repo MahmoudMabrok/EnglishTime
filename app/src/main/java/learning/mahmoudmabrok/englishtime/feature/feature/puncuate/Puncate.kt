@@ -1,5 +1,6 @@
 package learning.mahmoudmabrok.englishtime.feature.feature.puncuate
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -24,10 +25,14 @@ class Puncate : AppCompatActivity() {
 
     var toCkeck = true
 
+    lateinit var mp: MediaPlayer
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_puncate)
+
+        mp = MediaPlayer()
 
         laodData()
 
@@ -42,17 +47,22 @@ class Puncate : AppCompatActivity() {
                 }
                 toCkeck = true
                 btnCHeckPuncate.text = "Check"
+                edPuncate.isEnabled = true
             } else {
                 checkAnswer()
                 toCkeck = false
                 btnCHeckPuncate.text = "Next"
+
             }
         }
 
 
         tvScoreForm.setMessage("Score:: ")
 
-        loadScore()
+
+        db = LocalDB.getINSTANCE(this)
+
+
     }
 
     private fun checkAnswer() {
@@ -61,11 +71,21 @@ class Puncate : AppCompatActivity() {
         edPuncate.setText(spnaed, TextView.BufferType.SPANNABLE)
 
         val wrong = TestText.wrong
-        when (wrong) {
-            1 -> updateScore(20)
-            2 -> updateScore(10)
-            else -> this.show("Try Later")
+
+        val expWrongs = puncateItem.numWrong
+        val scoreMax = 10 * expWrongs
+        var userScore = scoreMax - wrong * 10
+
+        "wrong $wrong exp $expWrongs userscore $userScore".log()
+        if (userScore > 0 ){
+            updateScore(userScore)
+            SoundHelper.playCorrect(this)
+        }else{
+            SoundHelper.playFail(this)
+            this.show("Try Later")
         }
+
+        edPuncate.isEnabled = false
 
     }
 
@@ -78,7 +98,6 @@ class Puncate : AppCompatActivity() {
             finish()
         }
 
-
     }
 
     private fun laodData() {
@@ -90,18 +109,21 @@ class Puncate : AppCompatActivity() {
 
     }
 
-    private fun loadScore() {
-        db = LocalDB.getINSTANCE(this)
-        score = db.score
-        tvScoreForm.setValue(score, 1500)
-    }
-
 
     private fun updateScore(i: Int) {
         score += i
         tvScoreForm.animateTo(score, 500)
-        db.score = score
+    }
 
+    override fun onStop() {
+        super.onStop()
+        var totalScore = db.score
+        "total Pun $totalScore ".log()
+        totalScore += score
+        db.score = totalScore
+
+        mp.stop()
+        mp.release()
     }
 
 }

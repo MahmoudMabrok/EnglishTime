@@ -52,7 +52,7 @@ object DataSet {
 
 
         puncates.add(listOf(
-                PunctuateItem("What  are you doing,Karim?", "what  are you doing,karim"),
+                PunctuateItem("What  are you doing,Karim?", "what  are you doing,karim",3),
                 PunctuateItem("Can I help you?", "can I help you"),
                 PunctuateItem("I'm cleaning up the music room.", "i'm cleaning up the music room"),
                 PunctuateItem("Youssef was the soloist on the violin.", "youssef was the soloist on the violin")
@@ -63,7 +63,7 @@ object DataSet {
                 PunctuateItem("These wild animals escaped from the zoo.", "these wild animals escaped from the zoo"),
                 PunctuateItem("An eagle is flying above the giraffe.", "an eagle is flying above the giraffe"),
                 PunctuateItem("A kangaroo is hopped behind Maria.", "a kangaroo is hopped behind maria"),
-                PunctuateItem("A gaint panda are near Mustafa's house.", "a gaint panda are near mustafas house.")
+                PunctuateItem("A gaint panda are near Mustafa's house.", "a gaint panda are near mustafas house",4)
         ))
 
 
