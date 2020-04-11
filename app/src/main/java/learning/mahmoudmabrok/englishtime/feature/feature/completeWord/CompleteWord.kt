@@ -13,6 +13,9 @@ import kotlin.random.Random
 
 class CompleteWord : AppCompatActivity() {
 
+    var INDEX = 2
+    var unitNum = 0
+
     private var groupSize = 3
     private lateinit var db: LocalDB
     var data = listOf("play", "score", "winner", "play", "score", "winner")
@@ -41,6 +44,9 @@ class CompleteWord : AppCompatActivity() {
 
         db = LocalDB.getINSTANCE(this)
 
+        tvScoreForm.setMessage("Score:: ")
+        tvScoreForm.setValue(score, 100)
+
     }
 
     private fun initRv() {
@@ -48,23 +54,17 @@ class CompleteWord : AppCompatActivity() {
         rvCompleteWord.layoutDirection = View.LAYOUT_DIRECTION_LTR
     }
 
-    private fun loadScore() {
-        tvScoreForm.setMessage("Score:: ")
-        score = db.score
-        tvScoreForm.setValue(score, 1500)
-
-    }
 
     private fun setupWords() {
         if (intent.hasExtra(Constants.UNIT)) {
-            val categories = DataSet.getCategory(intent.getIntExtra(Constants.UNIT, 0)).toMutableList()
+            unitNum = intent.getIntExtra(Constants.UNIT, 0)
+            val categories = DataSet.getCategory(unitNum).toMutableList()
             categories.removeAt(categories.size - 1)
             data = categories.flatMap { it.getWords() }
             data = data.sorted()
 
             val longW = data.last().length
             groupSize = longW - 3
-
 
         } else {
             "before $data".log()
@@ -96,7 +96,7 @@ class CompleteWord : AppCompatActivity() {
         val word = String(adapter.data.toCharArray())
         val isSame = data[current] == word
         if (isSame) {
-            updateScore(10)
+            updateScore(Constants.SCORE_UNIT)
             this.show("Right")
             SoundHelper.playCorrect(this)
         } else {
@@ -144,6 +144,14 @@ class CompleteWord : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
+
+        val exist = db.visited("$unitNum$INDEX")
+        if (exist) {
+            return
+        } else {
+            db.saveVisited("$unitNum$INDEX")
+        }
+
         var totalScore =  db.score
         "total $totalScore".log()
         totalScore += score

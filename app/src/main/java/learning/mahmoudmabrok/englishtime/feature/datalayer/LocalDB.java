@@ -32,4 +32,13 @@ public class LocalDB {
     }
 
 
+    public Boolean visited(String s) {
+        return preferences.getBoolean(s, false);
+    }
+
+    public void saveVisited(String s) {
+        preferences.edit().putBoolean(s, true).apply();
+    }
+
+
 }

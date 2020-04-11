@@ -15,11 +15,14 @@ import learning.mahmoudmabrok.englishtime.feature.datalayer.models.Category
 import learning.mahmoudmabrok.englishtime.feature.utils.Constants
 import learning.mahmoudmabrok.englishtime.feature.utils.SoundHelper
 import learning.mahmoudmabrok.englishtime.feature.utils.isSame
-import learning.mahmoudmabrok.englishtime.feature.utils.setValue
 import java.util.*
 
 
 class CategorizeWords : AppCompatActivity() {
+
+
+    val INDEX = "1"
+    var unitNum = 0
 
     private lateinit var db: LocalDB
     private val TAG: String = "CategorizeWords"
@@ -27,8 +30,9 @@ class CategorizeWords : AppCompatActivity() {
     private val adapterBottom: CategoryAdapter = CategoryAdapter()
 
     var currentSentence = 0
-
     var score = 0
+
+
     lateinit var textToSpeech: TextToSpeech
 
     private lateinit var categories: List<Category>
@@ -41,19 +45,17 @@ class CategorizeWords : AppCompatActivity() {
         setUpSentences()
         loadSentence()
 
-        tvScoreForm.setMessage("Score:: ")
-
+        tvScoreForm.setMessage(getString(R.string.scrore_message))
 
         textToSpeech = TextToSpeech(this, TextToSpeech.OnInitListener { status ->
             if (status != TextToSpeech.ERROR) {
-                textToSpeech.setLanguage(Locale.ENGLISH)
+                textToSpeech.language = Locale.ENGLISH
             }
         })
 
         overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
 
         db = LocalDB.getINSTANCE(this)
-
 
     }
 
@@ -110,7 +112,8 @@ class CategorizeWords : AppCompatActivity() {
 
     private fun setUpSentences() {
         if (intent.hasExtra(Constants.UNIT)) {
-            categories = DataSet.getCategory(intent.getIntExtra(Constants.UNIT, 0))
+            unitNum = intent.getIntExtra(Constants.UNIT, 0)
+            categories = DataSet.getCategory(unitNum)
             laodDataOfAllWords()
         } else {
             categories = DataSet.getCategory(0)
@@ -173,6 +176,12 @@ class CategorizeWords : AppCompatActivity() {
             e.printStackTrace()
         }
 
+        val exist = db.visited("$unitNum$INDEX")
+        if (exist) {
+            return
+        } else {
+            db.saveVisited("$unitNum$INDEX")
+        }
         var totalScore =  db.score
         totalScore += score
         db.score = totalScore
