@@ -2,7 +2,6 @@ package learning.mahmoudmabrok.englishtime.feature.utils
 
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.util.Log
@@ -10,6 +9,7 @@ import android.view.View
 import android.view.animation.OvershootInterpolator
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import views.mahmoudmabrok.animatedtextview.AnimatedNumberedTextView
 
 
@@ -82,7 +82,7 @@ fun View.animateItemWithAction(a: () -> Unit) {
 }
 
 
-fun Activity.goto(dst: Class<Activity>) {
+fun AppCompatActivity.goto(dst: Class<AppCompatActivity>) {
     val intent = Intent(this, dst)
     startActivity(intent)
 }

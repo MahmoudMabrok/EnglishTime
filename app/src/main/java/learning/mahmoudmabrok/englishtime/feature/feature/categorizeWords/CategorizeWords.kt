@@ -89,7 +89,7 @@ class CategorizeWords : AppCompatActivity() {
         adapterTop.addSentence(item)
         // check if top is correct
         if (currentCategory.getWords().isSame(adapterTop.list)) {
-            updateScore(10)
+            updateScore(2 * Constants.SCORE_UNIT)
             // point to next item
             currentSentence += 1
             // load new challenge
