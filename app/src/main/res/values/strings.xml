@@ -22,4 +22,5 @@
     <string name="pst_represent_past_events_performed_by_adding_d_ed_and_there_are_irregular_verbs">PST: represent past events, performed by adding d-ed and there are irregular verbs</string>
     <string name="select_words_that_belong_to_belongs_category">Select Words that belong to belongs category</string>
     <string name="play_c">PLay ^_^</string>
+    <string name="scrore_message">Score:: </string>
 </resources>

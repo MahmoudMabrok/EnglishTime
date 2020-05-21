@@ -13,6 +13,9 @@ import learning.mahmoudmabrok.englishtime.feature.utils.*
 
 class Puncate : AppCompatActivity() {
 
+    val INDEX = "3"
+    var unitNum = 0
+
 
     private var score: Int = 0
     private lateinit var db: LocalDB
@@ -58,8 +61,7 @@ class Puncate : AppCompatActivity() {
 
 
         tvScoreForm.setMessage("Score:: ")
-
-
+        tvScoreForm.animateTo(0, 100)
         db = LocalDB.getINSTANCE(this)
 
 
@@ -73,8 +75,8 @@ class Puncate : AppCompatActivity() {
         val wrong = TestText.wrong
 
         val expWrongs = puncateItem.numWrong
-        val scoreMax = 10 * expWrongs
-        var userScore = scoreMax - wrong * 10
+        val scoreMax = Constants.SCORE_UNIT * expWrongs
+        val userScore = scoreMax - wrong * 10
 
         "wrong $wrong exp $expWrongs userscore $userScore".log()
         if (userScore > 0 ){
@@ -94,7 +96,6 @@ class Puncate : AppCompatActivity() {
             puncateItem = puncateList[current]
             edPuncate.setText(puncateItem.actual)
         } catch (e: Exception) {
-
             finish()
         }
 
@@ -102,7 +103,8 @@ class Puncate : AppCompatActivity() {
 
     private fun laodData() {
         if (intent.hasExtra(Constants.UNIT)) {
-            puncateList = DataSet.getPuncatuate(intent.getIntExtra(Constants.UNIT, 0))
+            unitNum = intent.getIntExtra(Constants.UNIT, 0)
+            puncateList = DataSet.getPuncatuate(unitNum)
         } else {
             finish()
         }
@@ -117,13 +119,24 @@ class Puncate : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
+
+        mp.stop()
+        mp.release()
+
+
+        val exist = db.visited("$unitNum$INDEX")
+        if (exist) {
+            return
+        } else {
+            db.saveVisited("$unitNum$INDEX")
+        }
+
         var totalScore = db.score
         "total Pun $totalScore ".log()
         totalScore += score
         db.score = totalScore
 
-        mp.stop()
-        mp.release()
+
     }
 
 }
