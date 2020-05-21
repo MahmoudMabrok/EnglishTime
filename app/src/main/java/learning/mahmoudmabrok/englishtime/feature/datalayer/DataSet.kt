@@ -21,22 +21,22 @@ object DataSet {
 
 
         categories.add(listOf(
-                Category("Musical Instruments", "Concert MusicRoom Bass Flute Drums Cello Xylophone Recorder Trumpet Cymbals"),
-                Category("Seasons of year", "spring fall autumn summer winter"),
+                Category("Musical Instruments", "Concert MusicRoom Bass Flute Drums Cello Xylophone Recorder Trumpet Cymbals"),//10
+                Category("Seasons of year", "spring autumn summer winter"), // 4
                 Category("NA", "Tiger parrot eagle"))
         )
 
         // need categories
         categories.add(listOf(
-                Category("Animals", "Tiger parrot eagle deer camel panda bear lion giraffe kangaroo"),
-                Category("Missc", "Emergency address officer operator wild animal"),
+                Category("Animals", "Tiger parrot eagle deer camel panda bear lion giraffe kangaroo"), //10
+                Category("Missc", "Emergency address officer operator wild animal"), // 6
                 Category("NA", "Concert MusicRoom Bass"))
         )
 
 
         categories.add(listOf(
-                Category("Cities", "Rome NewYorkCity Cairo Paris Tokyo hongkong London Honolulu Seoul sanFrancisco"),
-                Category("Months of the years", "January February march April may June July august September October November December"),
+                Category("Cities", "Rome NewYorkCity Cairo Paris Tokyo HongKong London Honolulu Seoul SanFrancisco"), // 10
+                Category("Months of the years", "January February march April may June July august September October November December"),// 12
                 Category("Places", "Department store museum theatre statueOfLiberty  DisneyWorld universalStudios"),
                 Category("NA", "Tiger parrot eagles"))
 
@@ -44,25 +44,25 @@ object DataSet {
         )
 
         puncates.add(listOf(
-                PunctuateItem("She played  the cello softly.", "she played  the cello softly"),
-                PunctuateItem("Rana played the drums badly.", "rana played the drums badly"),
-                PunctuateItem("Can he ride the bike quickly?", "can he ride the bike quickly"),
-                PunctuateItem("Ali is ahappy boy.", "ali is ahappy boy")
+                PunctuateItem("She played  the cello softly.", "she played  the cello softly"), // 2
+                PunctuateItem("Rana played the drums badly.", "rana played the drums badly"),// 2
+                PunctuateItem("Can he ride the bike quickly?", "can he ride the bike quickly"),// 2
+                PunctuateItem("Ali is ahappy boy.", "ali is ahappy boy")// 2
         ))
 
 
         puncates.add(listOf(
                 PunctuateItem("What  are you doing,Karim?", "what  are you doing,karim",3),
-                PunctuateItem("Can I help you?", "can I help you"),
-                PunctuateItem("I'm cleaning up the music room.", "i'm cleaning up the music room"),
-                PunctuateItem("Youssef was the soloist on the violin.", "youssef was the soloist on the violin")
+                PunctuateItem("Can I help you?", "can I help you"),// 2
+                PunctuateItem("I'm cleaning up the music room.", "i'm cleaning up the music room"),// 2
+                PunctuateItem("Youssef was the soloist on the violin.", "youssef was the soloist on the violin")// 2
         ))
 
 
         puncates.add(listOf(
-                PunctuateItem("These wild animals escaped from the zoo.", "these wild animals escaped from the zoo"),
-                PunctuateItem("An eagle is flying above the giraffe.", "an eagle is flying above the giraffe"),
-                PunctuateItem("A kangaroo is hopped behind Maria.", "a kangaroo is hopped behind maria"),
+                PunctuateItem("These wild animals escaped from the zoo.", "these wild animals escaped from the zoo"),// 2
+                PunctuateItem("An eagle is flying above the giraffe.", "an eagle is flying above the giraffe"),// 2
+                PunctuateItem("A kangaroo is hopped behind Maria.", "a kangaroo is hopped behind maria"),// 2
                 PunctuateItem("A gaint panda are near Mustafa's house.", "a gaint panda are near mustafas house",4)
         ))
 
