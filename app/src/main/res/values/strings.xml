@@ -23,4 +23,7 @@
     <string name="select_words_that_belong_to_belongs_category">Select Words that belong to belongs category</string>
     <string name="play_c">PLay ^_^</string>
     <string name="scrore_message">Score:: </string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

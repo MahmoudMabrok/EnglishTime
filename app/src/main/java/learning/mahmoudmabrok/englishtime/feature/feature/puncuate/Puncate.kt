@@ -4,7 +4,10 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.activity_complete_word.*
 import kotlinx.android.synthetic.main.activity_puncate.*
+import kotlinx.android.synthetic.main.activity_puncate.home
+import kotlinx.android.synthetic.main.activity_puncate.tvScoreForm
 import learning.mahmoudmabrok.englishtime.R
 import learning.mahmoudmabrok.englishtime.feature.datalayer.DataSet
 import learning.mahmoudmabrok.englishtime.feature.datalayer.LocalDB
@@ -106,7 +109,7 @@ class Puncate : AppCompatActivity() {
             unitNum = intent.getIntExtra(Constants.UNIT, 0)
             puncateList = DataSet.getPuncatuate(unitNum)
         } else {
-            finish()
+            FinshGame.showFinish(this, home.id, score)
         }
 
     }

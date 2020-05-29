@@ -5,6 +5,8 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.activity_complete_word.*
+import kotlinx.android.synthetic.main.activity_complete_word.home
+import kotlinx.android.synthetic.main.activity_home.*
 import learning.mahmoudmabrok.englishtime.R
 import learning.mahmoudmabrok.englishtime.feature.datalayer.DataSet
 import learning.mahmoudmabrok.englishtime.feature.datalayer.LocalDB
@@ -47,6 +49,7 @@ class CompleteWord : AppCompatActivity() {
         tvScoreForm.setMessage("Score:: ")
         tvScoreForm.setValue(score, 100)
 
+
     }
 
     private fun initRv() {
@@ -73,8 +76,6 @@ class CompleteWord : AppCompatActivity() {
 
             data = data.sorted()
             "after1 $data".log()
-
-
         }
     }
 
@@ -84,9 +85,13 @@ class CompleteWord : AppCompatActivity() {
             adapter.setData(wordMissed)
             (rvCompleteWord.layoutManager as GridLayoutManager).spanCount = wordMissed.size
         } catch (e: Exception) {
+            finishGame()
             "error $e".log()
-            finish()
         }
+    }
+
+    private fun finishGame() {
+        FinshGame.showFinish(this, home.id, score)
     }
 
     /**

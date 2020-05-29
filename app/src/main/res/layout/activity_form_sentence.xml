@@ -1,54 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layoutDirection="ltr"
-    android:padding="@dimen/_10sdp"
-    tools:context=".feature.feature.formSentace.CategorizeWords">
+    android:layoutDirection="ltr">
 
     <views.mahmoudmabrok.animatedtextview.AnimatedNumberedTextView
         android:id="@+id/tvScoreForm"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="13dp"
         android:gravity="center_horizontal"
-        android:textSize="@dimen/_20ssp" />
+        android:textSize="@dimen/_20ssp"
+        app:layout_constraintBottom_toTopOf="@+id/textView5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView5"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_16sdp"
+        android:layout_marginStart="26dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="20dp"
         android:gravity="center"
         android:text="@string/form_english_sentence_fro_this_arabic_question"
-        android:textSize="@dimen/tvSizehelp" />
+        android:textSize="@dimen/tvSizehelp"
+        app:layout_constraintBottom_toTopOf="@+id/tvCategoryName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvScoreForm" />
 
     <TextView
         android:id="@+id/tvCategoryName"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_16sdp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="22dp"
         android:gravity="center_horizontal"
-        android:textSize="@dimen/tvSizehelp" />
+        android:textSize="@dimen/tvSizehelp"
+        app:layout_constraintBottom_toTopOf="@+id/rvCategory"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCategory"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="@dimen/marginItem"
-        android:layout_weight="1"
-        android:padding="@dimen/_10sdp" />
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="13dp"
+        android:padding="@dimen/_10sdp"
+        app:layout_constraintBottom_toTopOf="@+id/rvAllWords"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/rvAllWords"
+        app:layout_constraintTop_toBottomOf="@+id/tvCategoryName" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvAllWords"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="@dimen/marginItem"
-        android:layout_weight="1"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="13dp"
         android:background="@drawable/rv_back"
-        android:padding="@dimen/_10sdp" />
+        android:padding="@dimen/_10sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tvCategoryName"
+        app:layout_constraintTop_toBottomOf="@+id/rvCategory" />
 
 
-</LinearLayout>
+    <FrameLayout
+        android:id="@+id/home"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

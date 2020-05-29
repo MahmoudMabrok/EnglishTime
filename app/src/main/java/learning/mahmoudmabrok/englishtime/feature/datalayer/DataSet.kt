@@ -37,7 +37,7 @@ object DataSet {
         categories.add(listOf(
                 Category("Cities", "Rome NewYorkCity Cairo Paris Tokyo HongKong London Honolulu Seoul SanFrancisco"), // 10
                 Category("Months of the years", "January February march April may June July august September October November December"),// 12
-                Category("Places", "Department store museum theatre statueOfLiberty  DisneyWorld universalStudios"),
+                Category("Places", "Department store museum theatre statueOfLiberty  DisneyWorld universalStudios"),// 7
                 Category("NA", "Tiger parrot eagles"))
 
                 //boarding theatre,PLaces

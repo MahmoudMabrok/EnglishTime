@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
+import kotlinx.android.synthetic.main.activity_complete_word.*
 import kotlinx.android.synthetic.main.activity_complete_word.btnCHeckCompleteWord
 import kotlinx.android.synthetic.main.activity_complete_word.rvCompleteWord
 import kotlinx.android.synthetic.main.activity_complete_word_two.*
+import kotlinx.android.synthetic.main.activity_complete_word_two.home
 import kotlinx.android.synthetic.main.names.*
 import learning.mahmoudmabrok.englishtime.R
 import learning.mahmoudmabrok.englishtime.feature.datalayer.DataSet
@@ -127,7 +129,7 @@ class CompleteWordTwo : AppCompatActivity() {
             (rvCompleteWord.layoutManager as GridLayoutManager).spanCount = wordMissed.size
         } catch (e: Exception) {
             "error $e".log()
-            finish()
+            FinshGame.showFinish(this, home.id, score)
         }
     }
 

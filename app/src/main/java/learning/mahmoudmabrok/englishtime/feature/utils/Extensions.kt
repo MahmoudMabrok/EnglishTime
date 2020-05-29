@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.view.View
+import android.view.ViewTreeObserver
 import android.view.animation.OvershootInterpolator
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
@@ -96,4 +97,24 @@ fun List<String>.isSame(list: List<String>): Boolean {
     return this.filter { list.contains(it) }.size == this.size
 }
 
+
+inline fun View.waitForLayout(crossinline yourAction: () -> Unit) {
+    "waitForLayout ".log("aaa")
+    val vto = viewTreeObserver
+    vto.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+        override fun onGlobalLayout() {
+            when {
+                vto.isAlive -> {
+                    "waitForLayout aaaa ".log("aaa")
+                    vto.removeOnGlobalLayoutListener(this)
+                    yourAction()
+                }
+                else -> {
+                    "waitForLayout aaaa!! ".log("aaa")
+                    viewTreeObserver.removeOnGlobalLayoutListener(this)
+                }
+            }
+        }
+    })
+}
 
