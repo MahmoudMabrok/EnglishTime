@@ -2,6 +2,7 @@ package learning.mahmoudmabrok.englishtime.feature.feature.puncuate
 
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_complete_word.*
@@ -99,7 +100,8 @@ class Puncate : AppCompatActivity() {
             puncateItem = puncateList[current]
             edPuncate.setText(puncateItem.actual)
         } catch (e: Exception) {
-            finish()
+            btnCHeckPuncate.visibility = View.GONE
+            FinshGame.showFinish(this, home.id, score)
         }
 
     }
@@ -109,7 +111,7 @@ class Puncate : AppCompatActivity() {
             unitNum = intent.getIntExtra(Constants.UNIT, 0)
             puncateList = DataSet.getPuncatuate(unitNum)
         } else {
-            FinshGame.showFinish(this, home.id, score)
+            finish()
         }
 
     }
@@ -122,10 +124,8 @@ class Puncate : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
-
         mp.stop()
         mp.release()
-
 
         val exist = db.visited("$unitNum$INDEX")
         if (exist) {

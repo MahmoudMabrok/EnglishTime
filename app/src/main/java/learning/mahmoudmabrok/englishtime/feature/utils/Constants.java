@@ -9,7 +9,7 @@ public interface Constants {
     String CATEGORIES = "cat";
     String WORDS = "words";
 
-    int SCORE_UNIT = 10;
+    int SCORE_UNIT = 1;
 
 
 }

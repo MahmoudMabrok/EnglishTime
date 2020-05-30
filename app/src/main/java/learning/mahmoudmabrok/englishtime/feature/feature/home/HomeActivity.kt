@@ -12,7 +12,6 @@ import learning.mahmoudmabrok.englishtime.feature.utils.waitForLayout
 
 class HomeActivity : AppCompatActivity() {
 
-
     private var adapter: HomeAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +43,6 @@ class HomeActivity : AppCompatActivity() {
     }
 
     companion object {
-
         private val TAG = "HomeActivity"
     }
 }
