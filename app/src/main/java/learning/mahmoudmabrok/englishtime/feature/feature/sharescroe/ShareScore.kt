@@ -2,14 +2,16 @@ package learning.mahmoudmabrok.englishtime.feature.feature.sharescroe
 
 
 import android.content.Intent
+import android.graphics.Bitmap.CompressFormat
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_share_score.*
 import learning.mahmoudmabrok.englishtime.R
 import learning.mahmoudmabrok.englishtime.feature.datalayer.LocalDB
 import learning.mahmoudmabrok.englishtime.feature.utils.log
+import java.io.File
+import java.io.FileOutputStream
 
 
 class ShareScore : AppCompatActivity() {
@@ -35,16 +37,27 @@ class ShareScore : AppCompatActivity() {
 
             layoutH.isDrawingCacheEnabled = true
             val bitmap = layoutH.drawingCache
+
+            try {
+                val file = File(getCacheDir(), name.toString() + ".png")
+                val fOut = FileOutputStream(file)
+                "onCreate aa".log("")
+                bitmap.compress(CompressFormat.PNG, 100, fOut)
+                fOut.flush()
+                fOut.close()
+                file.setReadable(true, false)
+                val intent = Intent(Intent.ACTION_SEND)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file))
+                intent.type = "image/png"
+                startActivity(intent)
+                "onCreate aaaa".log("")
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+
             layoutH.isDrawingCacheEnabled = false
-
-            val pathofBmp: String = MediaStore.Images.Media.insertImage(contentResolver, bitmap, "title", null)
-            "onCreate  $pathofBmp".log("aaa")
-            val bmpUri: Uri = Uri.parse(pathofBmp)
-            val emailIntent1 = Intent(Intent.ACTION_SEND)
-            emailIntent1.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            emailIntent1.putExtra(Intent.EXTRA_STREAM, bmpUri)
-            emailIntent1.type = "image/png"
-
         }
+
     }
 }
