@@ -79,7 +79,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.Holder> {
 
     @Override
     public int getItemCount() {
-        return 3;
+        return 5;
     }
 
     class Holder extends RecyclerView.ViewHolder {

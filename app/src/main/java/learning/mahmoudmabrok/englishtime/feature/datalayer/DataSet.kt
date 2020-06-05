@@ -20,20 +20,22 @@ object DataSet {
         isAdata.add(IsAItem(listOf("Verb", "Noun"), listOf("Ahmed", "is", "Mohamed", "play"), listOf(1, 0, 1, 0)))
 
 
+        // 6
         categories.add(listOf(
                 Category("Musical Instruments", "Concert MusicRoom Bass Flute Drums Cello Xylophone Recorder Trumpet Cymbals"),//10
                 Category("Seasons of year", "spring autumn summer winter"), // 4
                 Category("NA", "Tiger parrot eagle"))
         )
 
-        // need categories
+        // 7
         categories.add(listOf(
                 Category("Animals", "Tiger parrot eagle deer camel panda bear lion giraffe kangaroo"), //10
-                Category("Missc", "Emergency address officer operator wild animal"), // 6
+                Category("Misc", "Emergency address officer operator wild animal"), // 6
                 Category("NA", "Concert MusicRoom Bass"))
         )
 
 
+        // 8
         categories.add(listOf(
                 Category("Cities", "Rome NewYorkCity Cairo Paris Tokyo HongKong London Honolulu Seoul SanFrancisco"), // 10
                 Category("Months of the years", "January February march April may June July august September October November December"),// 12
@@ -42,6 +44,23 @@ object DataSet {
 
                 //boarding theatre,PLaces
         )
+
+        // 9
+        categories.add(listOf(
+                Category("Board", "letter chair sorry hard easy hundred why how"), // 8
+                Category("On the board", " letme easyfor passout"), // 3
+                Category("NA", " Cairo Paris Tokyo"))
+        )
+
+        // 10
+        categories.add(listOf(
+                Category("P1", "captain interview female pilot copilot airline aboard flight overseasflight"), // 9
+                Category("P2", " newspapers million mostexciting available tour information thousand"), // 7
+                Category("NA", "Tiger parrot Concert may"))
+        )
+
+
+
 
         puncates.add(listOf(
                 PunctuateItem("She played  the cello softly.", "she played  the cello softly"), // 2
@@ -65,6 +84,29 @@ object DataSet {
                 PunctuateItem("A kangaroo is hopped behind Maria.", "a kangaroo is hopped behind maria"),// 2
                 PunctuateItem("A gaint panda are near Mustafa's house.", "a gaint panda are near mustafas house",4)
         ))
+
+
+
+        // 9
+        puncates.add(listOf(
+                PunctuateItem("There is no statically significant difference between the expert mental and groups means.",
+                        "there is no statically significant difference between the expert mental and groups means"),// 2
+
+                PunctuateItem("The bear in the zoo was a big one.", "the bear in the zoo was a big one") // 2
+
+        ))
+
+
+        // 10
+        puncates.add(listOf(
+                PunctuateItem("How much coffee do you drink?", "how much coffee do you drink"),// 2
+                PunctuateItem("They were there for one week.", "they were there for one week") // 2
+
+        ))
+
+
+
+
 
 
         gammers.add(listOf(
@@ -92,6 +134,7 @@ object DataSet {
 
         gammers.add(null)
 
+
         structures.add(listOf(
                 Structure("preposition", "At school# a lot of# in the first year# on the violin"),
                 Structure("Verbs and nouns", "Give a performance# have a party# perform music# perform a play"))
@@ -102,6 +145,8 @@ object DataSet {
         ))
 
         structures.add(null)
+
+        
 
 
     }
