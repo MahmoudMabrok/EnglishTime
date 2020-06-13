@@ -26,8 +26,18 @@ data class GrammerItem(val start: String, val end: String)
 
 data class GrammerLesson(val name: String,
                          val description: String,
-                         val examples: String) {
-
+                         val examples: String,
+                         val oneWay: Boolean = false) {
+    fun toGrammerItems(): List<GrammerItem> {
+        return if (oneWay) {
+            examples.split("#").map { GrammerItem(it, "") }
+        } else {
+            examples.split(" ").map {
+                val list = it.split("#")
+                GrammerItem(list[0], list[1])
+            }
+        }
+    }
 }
 
 data class Structure(val name: String, val examples: String) {

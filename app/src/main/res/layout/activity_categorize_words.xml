@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layoutDirection="ltr"
     android:orientation="vertical"
-    android:padding="@dimen/_10sdp"
+    android:padding="@dimen/_5sdp"
     tools:context=".feature.feature.current.categorizeWords.CategorizeWords">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,9 +16,8 @@
 
         <views.mahmoudmabrok.animatedtextview.AnimatedNumberedTextView
             android:id="@+id/tvScoreForm"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="13dp"
             android:gravity="center_horizontal"
             android:textSize="@dimen/_20ssp"
             app:layout_constraintBottom_toTopOf="@+id/textView7"
@@ -30,10 +29,10 @@
 
         <TextView
             android:id="@+id/textView7"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="13dp"
-            android:layout_marginLeft="13dp"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="7dp"
             android:gravity="center"
             android:text="@string/select_words_that_belong_to_belongs_category"
@@ -59,10 +58,11 @@
             android:id="@+id/rvCategory"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:padding="@dimen/_10sdp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toTopOf="@+id/rvAllWords"
-            app:layout_constraintEnd_toEndOf="@+id/tvCategoryName"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tvCategoryName"
             app:layout_constraintTop_toBottomOf="@+id/tvCategoryName"
             app:spanCount="2" />
@@ -75,7 +75,7 @@
             android:padding="@dimen/_10sdp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/rvCategory"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/rvCategory"
             app:layout_constraintTop_toBottomOf="@+id/rvCategory"
             app:spanCount="3" />

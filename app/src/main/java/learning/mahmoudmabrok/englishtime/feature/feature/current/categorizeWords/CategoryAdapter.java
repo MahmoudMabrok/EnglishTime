@@ -50,8 +50,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Holder
 
     public void removeSentence(int pos) {
         list.remove(pos);
-        notifyItemRemoved(pos);
-        notifyItemRangeChanged(pos, list.size());
+     /*   notifyItemRemoved(pos);
+        notifyItemRangeChanged(pos, list.size());*/
+        notifyDataSetChanged();
     }
 
     public void setSentenceList(List<String> newList) {

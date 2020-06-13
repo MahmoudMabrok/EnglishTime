@@ -1,6 +1,11 @@
 package learning.mahmoudmabrok.englishtime.feature.datalayer
 
-import learning.mahmoudmabrok.englishtime.feature.datalayer.models.*
+import learning.mahmoudmabrok.englishtime.feature.datalayer.models.Category
+import learning.mahmoudmabrok.englishtime.feature.datalayer.models.GrammerLesson
+import learning.mahmoudmabrok.englishtime.feature.datalayer.models.IsAItem
+import learning.mahmoudmabrok.englishtime.feature.datalayer.models.PunctuateItem
+import learning.mahmoudmabrok.englishtime.feature.datalayer.models.Structure
+import learning.mahmoudmabrok.englishtime.feature.datalayer.models.Word
 
 object DataSet {
 
@@ -35,26 +40,34 @@ object DataSet {
         )
 
 
-        // 8
-        categories.add(listOf(
-                Category("Cities", "Rome NewYorkCity Cairo Paris Tokyo HongKong London Honolulu Seoul SanFrancisco"), // 10
-                Category("Months of the years", "January February march April may June July august September October November December"),// 12
-                Category("Places", "Department store museum theatre statueOfLiberty  DisneyWorld universalStudios"),// 7
-                Category("NA", "Tiger parrot eagles"))
-        )
+        /*    // 8
+            categories.add(listOf(
+                    Category("Cities", "Rome NewYorkCity Cairo Paris Tokyo HongKong London Honolulu Seoul SanFrancisco"), // 10
+                    Category("Months of the years", "January February march April may June July august September October November December"),// 12
+                    Category("Places", "Department store museum theatre statueOfLiberty  DisneyWorld universalStudios"),// 7
+                    Category("NA", "Tiger parrot eagles"))
+            )*/
 
-        // 9
+        // 8
         categories.add(listOf(
                 Category("Board", "letter chair sorry hard easy hundred why how"), // 8
                 Category("On the board", " letme easyfor passout"), // 3
                 Category("NA", " Cairo Paris Tokyo"))
         )
 
+        // 9
+        categories.add(listOf(
+                Category("Unit 9 ", "Captain interview female pilot copilot airline aboardflight overseas flight onethird newspapers million available tour information thousand " +
+                        "People daily hotel room basketball ticket boat walkingtours " +
+                        "Boattours bustourrs"),
+                Category("NA", "Tiger parrot Concert may"))
+        )
+
         // 10
         categories.add(listOf(
-                Category("P1", "captain interview female pilot copilot airline aboard flight overseasflight"), // 9
-                Category("P2", "newspapers million mostexciting available tour information thousand"), // 7
-                Category("NA", "Tiger parrot Concert may"))
+                Category("Unit 10 ", "programme Africa gorilla comeover news besides fun funny afternoon football film match gamebell borrow today's special positive mood beef " +
+                        "website findout begin satellite Egyptian invent videogames percent internet TV broadcasting remotecontrol electriccomputer history million black white first"),
+                Category("NA", "Tiger parrot Concert may Department store museum theatre"))
         )
 
 
@@ -69,7 +82,7 @@ object DataSet {
 
 
         puncates.add(listOf(
-                PunctuateItem("What  are you doing,Karim?", "what  are you doing,karim",3),
+                PunctuateItem("What  are you doing,Karim?", "what  are you doing,karim", 3),
                 PunctuateItem("Can I help you?", "can I help you"),// 2
                 PunctuateItem("I'm cleaning up the music room.", "i'm cleaning up the music room"),// 2
                 PunctuateItem("Youssef was the soloist on the violin.", "youssef was the soloist on the violin")// 2
@@ -80,9 +93,8 @@ object DataSet {
                 PunctuateItem("These wild animals escaped from the zoo.", "these wild animals escaped from the zoo"),// 2
                 PunctuateItem("An eagle is flying above the giraffe.", "an eagle is flying above the giraffe"),// 2
                 PunctuateItem("A kangaroo is hopped behind Maria.", "a kangaroo is hopped behind maria"),// 2
-                PunctuateItem("A gaint panda are near Mustafa's house.", "a gaint panda are near mustafas house",4)
+                PunctuateItem("A gaint panda are near Mustafa's house.", "a gaint panda are near mustafas house", 4)
         ))
-
 
 
         // 9
@@ -105,11 +117,9 @@ object DataSet {
 
 
 
-
-
         gammers.add(listOf(
                 GrammerLesson("Adverb:", "الحال يصف الفعل وياتى بعده ",
-                        "Good#well badl#badly quiet#quietly loud#loudly quick#quicly slow#slowly happy#happily sad#sadly soft#softly"
+                        "Good#well bad#badly quiet#quietly loud#loudly quick#quicly slow#slowly happy#happily sad#sadly soft#softly"
                 ),
 
                 GrammerLesson("Present simple", "\u202Bمتكرر\u202C \u202Bفعل\u202C \u202Bاو\u202C \u202Bعادة\u202C \u202Bاو\u202C \u202Bحقيقه\u202C \u202Bعن\u202C \u202Bللتعبير\u202C \u202Bيستخدم\u202C",
@@ -133,6 +143,31 @@ object DataSet {
         gammers.add(null)
 
 
+        // 9
+        gammers.add(
+                listOf(
+                        GrammerLesson("in", "In تأتى معها سنه", "My birthday in May.#", oneWay = true),
+                        GrammerLesson("at", "Atتأتي مع الساعة", "At two o'clock.#", oneWay = true),
+                        GrammerLesson("on", "Atتأتي مع يوم", "On I meet him on Monday#", oneWay = true),
+                        GrammerLesson("السؤال  بمعنى  ما المدة ومتى في الماضي", "When +did+sub+ inf? ",
+                                "When did Omar go to Hong Kong?#", oneWay = true),
+                        GrammerLesson("structure", "فاعل+was#were+for++مدة زمنية", "I was there for one week#", oneWay = true)
+
+
+                )
+        )
+
+
+        // 10
+        gammers.add(
+                listOf(
+                        GrammerLesson("قاعده if الحاله الاولى", "قاعده if الحاله الاولى  تعبر عن احتما ل حدوث شى فى المستقبل\n" +
+                                "If+مضارع  بسيط +مستقبل بسيط", "If  he runs , he will win the race #If I study well', I will  get  high marks", oneWay = true)
+                )
+        )
+
+
+
         structures.add(listOf(
                 Structure("preposition", "At school# a lot of# in the first year# on the violin"),
                 Structure("Verbs and nouns", "Give a performance# have a party# perform music# perform a play"))
@@ -143,6 +178,27 @@ object DataSet {
         ))
 
         structures.add(null)
+
+
+        // 9
+        structures.add(listOf(
+                Structure("Expressions", "Would you like ='d like#Go ahead#by yourself#thanks for your time#my pleasure"),
+                Structure("Verbs", "Interview interviewed# ask asked#visit visited#thank thanked #fly flew#have had"),
+                Structure("Places", "Rome#new York city#Cairo#Paris#Tokyo#hang Kong#London# Honolulu"),
+                Structure("Months of the year", "January# February# march# April #may# June# July# august# September# October#November#December ")
+        )
+        )
+
+        // 10
+
+        structures.add(listOf(
+                Structure("Adjectives", "real# good # cool# bad# hungry# nervous# tired#embarrassed# happy#sad# disappointed#cold hot#proud"),
+                Structure("Exxpresssions", "what was on?# On TV # too bad#i missed it #me, neither# time for class #a school night"),
+                Structure("Verbs + Nouns", "Skip lunch# go to bed late#  get a good mark#make a mistake# takeoff my jacket#  win aprize #turn off the  fan  # forget my homework# lose my favorite pencil# fall my chair# go on sale#found out#launch")
+        ))
+
+
+
 
 
     }

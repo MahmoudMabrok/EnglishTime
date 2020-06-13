@@ -70,6 +70,8 @@
         android:layout_marginBottom="13dp"
         android:background="@drawable/rv_back"
         android:padding="@dimen/_10sdp"
+        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+        app:spanCount="3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tvCategoryName"

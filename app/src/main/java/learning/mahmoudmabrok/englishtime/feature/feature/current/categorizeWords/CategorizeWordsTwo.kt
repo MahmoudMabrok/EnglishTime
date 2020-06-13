@@ -7,6 +7,7 @@ import android.os.Vibrator
 import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_categorize_words_two.*
 import kotlinx.android.synthetic.main.activity_complete_word_two.cardOne
@@ -98,6 +99,8 @@ class CategorizeWordsTwo : AppCompatActivity() {
 
     }
 
+    private var last = -1
+
     private fun check() {
 
         // check if top is correct
@@ -109,10 +112,29 @@ class CategorizeWordsTwo : AppCompatActivity() {
             loadSentence()
             this.show("Correct")
             SoundHelper.playCorrect(this)
+            last = -1
         } else {
             this.show("Wrong")
             SoundHelper.playFail(this)
+            if (last == currentSentence) {
+                this.show("Both of Uou failed to get it")
+
+
+                val dialoge = Dialoges.showCorrectWords(this, currentCategory.name, currentCategory.getWords().joinToString(separator = ",", prefix = "{ ", postfix = " }") { it })
+                dialoge?.let {
+                    it.show()
+                    it.setOnDismissListener {
+                        currentSentence += 1
+                        loadSentence()
+                    }
+                }
+
+            } else {
+                last = currentSentence
+            }
+
         }
+
         currentPlayer = when (currentPlayer) {
             1 -> 2
             else -> 1

@@ -1,16 +1,12 @@
 package learning.mahmoudmabrok.englishtime.feature.feature.current.categorizeWords
 
-import android.os.Build
 import android.os.Bundle
-import android.os.VibrationEffect
-import android.os.Vibrator
 import android.speech.tts.TextToSpeech
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_categorize_words.*
-import kotlinx.android.synthetic.main.activity_complete_word.*
 import kotlinx.android.synthetic.main.activity_form_sentence.*
-import kotlinx.android.synthetic.main.activity_form_sentence.home
 import kotlinx.android.synthetic.main.activity_form_sentence.rvAllWords
 import kotlinx.android.synthetic.main.activity_form_sentence.rvCategory
 import kotlinx.android.synthetic.main.activity_form_sentence.tvCategoryName
@@ -20,6 +16,7 @@ import learning.mahmoudmabrok.englishtime.feature.datalayer.DataSet
 import learning.mahmoudmabrok.englishtime.feature.datalayer.LocalDB
 import learning.mahmoudmabrok.englishtime.feature.datalayer.models.Category
 import learning.mahmoudmabrok.englishtime.feature.utils.Constants
+import learning.mahmoudmabrok.englishtime.feature.utils.Dialoges
 import learning.mahmoudmabrok.englishtime.feature.utils.FinshGame
 import learning.mahmoudmabrok.englishtime.feature.utils.SoundHelper
 import learning.mahmoudmabrok.englishtime.feature.utils.isSame
@@ -58,6 +55,7 @@ class CategorizeWords : AppCompatActivity() {
         setUpSentences()
         loadSentence()
 
+        tvScoreForm.animateTo(score, 500)
         tvScoreForm.setMessage(getString(R.string.scrore_message))
 
         textToSpeech = TextToSpeech(this, TextToSpeech.OnInitListener { status ->
@@ -67,8 +65,6 @@ class CategorizeWords : AppCompatActivity() {
         })
 
         overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
-
-
 
         btnCheck.setOnClickListener {
             checkAnsers()
@@ -81,10 +77,31 @@ class CategorizeWords : AppCompatActivity() {
         if (currentCategory.getWords().isSame(adapterTop.list)) {
             SoundHelper.playCorrect(this)
             updateScore(2 * Constants.SCORE_UNIT)
+
+            // point to next item
+            currentSentence += 1
+            // load new challenge
+            loadSentence()
+
         } else {
             SoundHelper.playFail(this)
+            //todo  re-think
+            // remove all words from list
+
             // show dialog with correct words
+            val dialoge = Dialoges.showCorrectWords(this, currentCategory.name, currentCategory.getWords().joinToString(separator = ",", prefix = "{ ", postfix = " }") { it })
+            dialoge?.let {
+                it.show()
+                it.setOnDismissListener {
+                    gotoNext()
+                }
+            }
+
         }
+
+    }
+
+    private fun gotoNext() {
 
         // point to next item
         currentSentence += 1
@@ -123,7 +140,6 @@ class CategorizeWords : AppCompatActivity() {
 
     private fun speakWord(item: String) {
         textToSpeech.speak(item, TextToSpeech.QUEUE_FLUSH, null)
-
     }
 
     private fun updateScore(i: Int) {
@@ -180,9 +196,10 @@ class CategorizeWords : AppCompatActivity() {
 
         } catch (e: Exception) {
             Log.v(TAG, e.localizedMessage)
-            if (!exist)
+            if (!exist) {
+                btnCheck.visibility = View.INVISIBLE
                 finishGame()
-            else {
+            } else {
                 db.saveVisited("$unitNum$INDEX")
                 finish()
             }
@@ -204,7 +221,7 @@ class CategorizeWords : AppCompatActivity() {
             db.saveVisited("$unitNum$INDEX")
         }
 
-        var totalScore =  db.score
+        var totalScore = db.score
         totalScore += score
         db.score = totalScore
 

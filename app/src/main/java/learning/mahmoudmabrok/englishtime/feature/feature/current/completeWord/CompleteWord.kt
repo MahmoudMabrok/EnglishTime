@@ -75,6 +75,7 @@ class CompleteWord : AppCompatActivity() {
             val categories = DataSet.getCategory(unitNum).toMutableList()
             // remove last one as it "NA"
             categories.removeAt(categories.size - 1)
+
             data = categories.flatMap { it.getWords() }.subList(0, 3)
 
             "setupWords true , $exist ".log(mTag)

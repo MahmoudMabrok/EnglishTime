@@ -39,7 +39,6 @@ class GrammerActivity : AppCompatActivity() {
                 }.start()
             } else {
                 grammers = unit
-
                 loadLesson()
                 handleCOnvertCLick()
             }
@@ -50,7 +49,7 @@ class GrammerActivity : AppCompatActivity() {
 
     private fun loadLesson() {
         currentLessoen = grammers[currentGrammer]
-        listItems = currentLessoen.getItems()
+        listItems = currentLessoen.toGrammerItems()
         tvGrammerName.text = currentLessoen.name
         tvGrammerDescription.text = currentLessoen.description
 
