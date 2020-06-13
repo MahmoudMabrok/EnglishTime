@@ -1,4 +1,4 @@
-package learning.mahmoudmabrok.englishtime.feature.feature.completeWord
+package learning.mahmoudmabrok.englishtime.feature.feature.current.completeWord
 
 import android.text.Editable
 import android.text.TextWatcher

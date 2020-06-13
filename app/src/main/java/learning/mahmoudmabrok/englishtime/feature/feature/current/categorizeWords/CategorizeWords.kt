@@ -1,4 +1,4 @@
-package learning.mahmoudmabrok.englishtime.feature.feature.categorizeWords
+package learning.mahmoudmabrok.englishtime.feature.feature.current.categorizeWords
 
 import android.os.Build
 import android.os.Bundle
@@ -7,12 +7,20 @@ import android.os.Vibrator
 import android.speech.tts.TextToSpeech
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.activity_categorize_words.*
+import kotlinx.android.synthetic.main.activity_complete_word.*
 import kotlinx.android.synthetic.main.activity_form_sentence.*
+import kotlinx.android.synthetic.main.activity_form_sentence.home
+import kotlinx.android.synthetic.main.activity_form_sentence.rvAllWords
+import kotlinx.android.synthetic.main.activity_form_sentence.rvCategory
+import kotlinx.android.synthetic.main.activity_form_sentence.tvCategoryName
+import kotlinx.android.synthetic.main.activity_form_sentence.tvScoreForm
 import learning.mahmoudmabrok.englishtime.R
 import learning.mahmoudmabrok.englishtime.feature.datalayer.DataSet
 import learning.mahmoudmabrok.englishtime.feature.datalayer.LocalDB
 import learning.mahmoudmabrok.englishtime.feature.datalayer.models.Category
 import learning.mahmoudmabrok.englishtime.feature.utils.Constants
+import learning.mahmoudmabrok.englishtime.feature.utils.FinshGame
 import learning.mahmoudmabrok.englishtime.feature.utils.SoundHelper
 import learning.mahmoudmabrok.englishtime.feature.utils.isSame
 import java.util.*
@@ -32,6 +40,8 @@ class CategorizeWords : AppCompatActivity() {
     var currentSentence = 0
     var score = 0
 
+    var exist = false
+
 
     lateinit var textToSpeech: TextToSpeech
 
@@ -41,6 +51,9 @@ class CategorizeWords : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_categorize_words)
+        db = LocalDB.getINSTANCE(this)
+
+
         initRv()
         setUpSentences()
         loadSentence()
@@ -55,8 +68,28 @@ class CategorizeWords : AppCompatActivity() {
 
         overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
 
-        db = LocalDB.getINSTANCE(this)
 
+
+        btnCheck.setOnClickListener {
+            checkAnsers()
+        }
+
+    }
+
+    private fun checkAnsers() {
+        // check if top is correct
+        if (currentCategory.getWords().isSame(adapterTop.list)) {
+            SoundHelper.playCorrect(this)
+            updateScore(2 * Constants.SCORE_UNIT)
+        } else {
+            SoundHelper.playFail(this)
+            // show dialog with correct words
+        }
+
+        // point to next item
+        currentSentence += 1
+        // load new challenge
+        loadSentence()
     }
 
 
@@ -64,7 +97,6 @@ class CategorizeWords : AppCompatActivity() {
         // make rv to be filled from user
         rvCategory.setHasFixedSize(true)
         rvCategory.adapter = adapterTop
-
 
         // make given rv
         rvAllWords.setHasFixedSize(true)
@@ -87,17 +119,6 @@ class CategorizeWords : AppCompatActivity() {
         adapterBottom.removeSentence(pos)
         // add it to top rv
         adapterTop.addSentence(item)
-        // check if top is correct
-        if (currentCategory.getWords().isSame(adapterTop.list)) {
-            updateScore(2 * Constants.SCORE_UNIT)
-            // point to next item
-            currentSentence += 1
-            // load new challenge
-            loadSentence()
-            SoundHelper.playCorrect(this)
-        }
-
-
     }
 
     private fun speakWord(item: String) {
@@ -113,6 +134,7 @@ class CategorizeWords : AppCompatActivity() {
     private fun setUpSentences() {
         if (intent.hasExtra(Constants.UNIT)) {
             unitNum = intent.getIntExtra(Constants.UNIT, 0)
+            exist = db.visited("$unitNum$INDEX")
             categories = DataSet.getCategory(unitNum)
             laodDataOfAllWords()
         } else {
@@ -121,6 +143,10 @@ class CategorizeWords : AppCompatActivity() {
             finish()
         }
 
+    }
+
+    private fun finishGame() {
+        FinshGame.showFinish(this, home.id, score)
     }
 
     /**
@@ -154,18 +180,14 @@ class CategorizeWords : AppCompatActivity() {
 
         } catch (e: Exception) {
             Log.v(TAG, e.localizedMessage)
-            finish()
+            if (!exist)
+                finishGame()
+            else {
+                db.saveVisited("$unitNum$INDEX")
+                finish()
+            }
         }
     }
-
-    private fun vibrate() {
-        if (Build.VERSION.SDK_INT >= 26) {
-            (getSystemService(VIBRATOR_SERVICE) as Vibrator).vibrate(VibrationEffect.createOneShot(150, VibrationEffect.DEFAULT_AMPLITUDE))
-        } else {
-            (getSystemService(VIBRATOR_SERVICE) as Vibrator).vibrate(150)
-        }
-    }
-
 
     override fun onStop() {
         super.onStop()
@@ -175,13 +197,13 @@ class CategorizeWords : AppCompatActivity() {
         } catch (e: Exception) {
             e.printStackTrace()
         }
-
-        val exist = db.visited("$unitNum$INDEX")
+        exist = db.visited("$unitNum$INDEX")
         if (exist) {
             return
         } else {
             db.saveVisited("$unitNum$INDEX")
         }
+
         var totalScore =  db.score
         totalScore += score
         db.score = totalScore

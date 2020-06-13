@@ -18,22 +18,23 @@
         <activity android:name=".feature.feature.test.Test" />
         <activity android:name=".feature.feature.selectPath.SelectGameType" />
         <activity
-            android:name=".feature.feature.categorizeWords.CategorizeWords"
+            android:name="learning.mahmoudmabrok.englishtime.feature.feature.current.categorizeWords.CategorizeWords"
             android:exported="true" />
         <activity
-            android:name=".feature.feature.categorizeWords.CategorizeWordsTwo"
+            android:name="learning.mahmoudmabrok.englishtime.feature.feature.current.categorizeWords.CategorizeWordsTwo"
             android:exported="true" />
-        <activity android:name=".feature.feature.aorb.IsAOrB" />
+        <activity android:name="learning.mahmoudmabrok.englishtime.feature.feature.current.aorb.IsAOrB" />
         <activity android:name=".feature.feature.wordsTwoCards.DisplayWords" />
         <activity
-            android:name=".feature.feature.grammer.GrammerActivity"
+            android:name="learning.mahmoudmabrok.englishtime.feature.feature.current.grammer.GrammerActivity"
             android:exported="true" />
-        <activity android:name=".feature.feature.puncuate.Puncate" />
+        <activity android:name="learning.mahmoudmabrok.englishtime.feature.feature.current.puncuate.Puncate" />
         <activity
-            android:name=".feature.feature.completeWord.CompleteWord"
+            android:name="learning.mahmoudmabrok.englishtime.feature.feature.current.completeWord.CompleteWord"
+            android:windowSoftInputMode="stateAlwaysVisible"
             android:exported="true" />
         <activity
-            android:name=".feature.feature.completeWord.CompleteWordTwo"
+            android:name="learning.mahmoudmabrok.englishtime.feature.feature.current.completeWord.CompleteWordTwo"
             android:exported="true" />
         <activity
             android:name=".feature.feature.collectWordWithCross.CollectWord"

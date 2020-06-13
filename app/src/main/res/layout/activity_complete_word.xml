@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layoutDirection="ltr"
-    tools:context=".feature.feature.completeWord.CompleteWord">
+    tools:context=".feature.feature.current.completeWord.CompleteWord">
 
 
     <views.mahmoudmabrok.animatedtextview.AnimatedNumberedTextView
@@ -44,11 +44,11 @@
 
     <Button
         android:id="@+id/btnCHeckCompleteWord"
-        style="@style/Widget.AppCompat.Button.Colored"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="check"
+        android:text="@string/check"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

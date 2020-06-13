@@ -1,19 +1,26 @@
-package learning.mahmoudmabrok.englishtime.feature.feature.completeWord
+package learning.mahmoudmabrok.englishtime.feature.feature.current.completeWord
 
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.activity_complete_word.*
-import kotlinx.android.synthetic.main.activity_complete_word.home
-import kotlinx.android.synthetic.main.activity_home.*
 import learning.mahmoudmabrok.englishtime.R
 import learning.mahmoudmabrok.englishtime.feature.datalayer.DataSet
 import learning.mahmoudmabrok.englishtime.feature.datalayer.LocalDB
-import learning.mahmoudmabrok.englishtime.feature.utils.*
+import learning.mahmoudmabrok.englishtime.feature.utils.Constants
+import learning.mahmoudmabrok.englishtime.feature.utils.FinshGame
+import learning.mahmoudmabrok.englishtime.feature.utils.SoundHelper
+import learning.mahmoudmabrok.englishtime.feature.utils.animItem
+import learning.mahmoudmabrok.englishtime.feature.utils.dismissKeyboard
+import learning.mahmoudmabrok.englishtime.feature.utils.log
+import learning.mahmoudmabrok.englishtime.feature.utils.setValue
+import learning.mahmoudmabrok.englishtime.feature.utils.show
 import kotlin.random.Random
 
 class CompleteWord : AppCompatActivity() {
+    private var exist: Boolean = false
+    val mTag = javaClass.simpleName
 
     var INDEX = 2
     var unitNum = 0
@@ -24,13 +31,16 @@ class CompleteWord : AppCompatActivity() {
     var current = 0
     var lengthToMissed = 1
 
-    val adapter: CompleteWordAdapter = CompleteWordAdapter(getSplitedData(), lengthToMissed)
+    lateinit var adapter: CompleteWordAdapter
 
     var score = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_complete_word)
+
+
+        db = LocalDB.getINSTANCE(this)
 
 
         btnCHeckCompleteWord.setOnClickListener {
@@ -44,7 +54,6 @@ class CompleteWord : AppCompatActivity() {
 
         loadData()
 
-        db = LocalDB.getINSTANCE(this)
 
         tvScoreForm.setMessage("Score:: ")
         tvScoreForm.setValue(score, 100)
@@ -59,23 +68,25 @@ class CompleteWord : AppCompatActivity() {
 
 
     private fun setupWords() {
+        "setupWords call ".log(mTag)
         if (intent.hasExtra(Constants.UNIT)) {
             unitNum = intent.getIntExtra(Constants.UNIT, 0)
+            exist = db.visited("$unitNum$INDEX")
             val categories = DataSet.getCategory(unitNum).toMutableList()
+            // remove last one as it "NA"
             categories.removeAt(categories.size - 1)
-            data = categories.flatMap { it.getWords() }
-            data = data.sorted()
+            data = categories.flatMap { it.getWords() }.subList(0, 3)
 
-            val longW = data.last().length
-            groupSize = longW - 3
+            "setupWords true , $exist ".log(mTag)
 
+            adapter = CompleteWordAdapter(getSplitedData(), lengthToMissed)
         } else {
-            "before $data".log()
+            "before $data".log(mTag)
             data.sortedBy { it.length }
-            "after $data".log()
+            "after $data".log(mTag)
 
             data = data.sorted()
-            "after1 $data".log()
+            "after1 $data".log(mTag)
         }
     }
 
@@ -85,8 +96,14 @@ class CompleteWord : AppCompatActivity() {
             adapter.setData(wordMissed)
             (rvCompleteWord.layoutManager as GridLayoutManager).spanCount = wordMissed.size
         } catch (e: Exception) {
-            finishGame()
-            "error $e".log()
+            btnCHeckCompleteWord.visibility = View.INVISIBLE
+            "error $e".log(mTag)
+            if (!exist)
+                finishGame()
+            else {
+                db.saveVisited("$unitNum$INDEX")
+                finish()
+            }
         }
     }
 
@@ -136,12 +153,14 @@ class CompleteWord : AppCompatActivity() {
      * make random char be missed from word
      */
     private fun getRandomMissed(cur: String): MutableList<Char> {
-        lengthToMissed = current / groupSize + 1 // group words as 3 words with same number of missed char and increase with each group
+        // with each 3 remove 1 char
+        lengthToMissed = cur.length / 3
 
         val newWord = cur.toCharArray().toMutableList()
         var rnd: Int
         for (i in 0 until lengthToMissed) {
-            rnd = Random.nextInt(cur.length)// last one sometimes crash
+            // last one sometimes crash
+            rnd = Random.nextInt(cur.length)
             newWord[rnd] = ' '
         }
         return newWord
@@ -150,18 +169,17 @@ class CompleteWord : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
 
-        val exist = db.visited("$unitNum$INDEX")
         if (exist) {
             return
         } else {
             db.saveVisited("$unitNum$INDEX")
+            "onStop ".log(mTag)
         }
 
-        var totalScore =  db.score
-        "total $totalScore".log()
+        var totalScore = db.score
+        "total $totalScore".log(mTag)
         totalScore += score
         db.score = totalScore
-
 
     }
 }

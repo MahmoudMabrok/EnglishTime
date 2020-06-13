@@ -2,6 +2,7 @@ package learning.mahmoudmabrok.englishtime.feature.utils
 
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.util.Log
@@ -34,12 +35,16 @@ fun String.log(tag: String = "TestApp") {
     Log.i(tag, this)
 }
 
-fun Context.dismissKeyboard() {
+fun Activity.dismissKeyboard() {
     val imm by lazy { this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager }
-    val windowHeightMethod = InputMethodManager::class.java.getMethod("getInputMethodWindowVisibleHeight")
-    val height = windowHeightMethod.invoke(imm) as Int
-    if (height > 0) {
-        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
+    imm.hideSoftInputFromWindow(this.currentFocus?.windowToken, 0)
+    try {
+        /* val windowHeightMethod = InputMethodManager::class.java.getMethod("getInputMethodWindowVisibleHeight")
+         val height = windowHeightMethod.invoke(imm) as Int
+         if (height > 0) {
+             imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
+         }*/
+    } catch (e: Exception) {
     }
 }
 

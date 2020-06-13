@@ -41,8 +41,6 @@ object DataSet {
                 Category("Months of the years", "January February march April may June July august September October November December"),// 12
                 Category("Places", "Department store museum theatre statueOfLiberty  DisneyWorld universalStudios"),// 7
                 Category("NA", "Tiger parrot eagles"))
-
-                //boarding theatre,PLaces
         )
 
         // 9
@@ -55,7 +53,7 @@ object DataSet {
         // 10
         categories.add(listOf(
                 Category("P1", "captain interview female pilot copilot airline aboard flight overseasflight"), // 9
-                Category("P2", " newspapers million mostexciting available tour information thousand"), // 7
+                Category("P2", "newspapers million mostexciting available tour information thousand"), // 7
                 Category("NA", "Tiger parrot Concert may"))
         )
 
@@ -145,8 +143,6 @@ object DataSet {
         ))
 
         structures.add(null)
-
-        
 
 
     }

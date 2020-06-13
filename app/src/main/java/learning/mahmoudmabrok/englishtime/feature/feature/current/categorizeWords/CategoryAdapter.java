@@ -1,4 +1,4 @@
-package learning.mahmoudmabrok.englishtime.feature.feature.categorizeWords;
+package learning.mahmoudmabrok.englishtime.feature.feature.current.categorizeWords;
 
 import android.graphics.Color;
 import android.view.LayoutInflater;

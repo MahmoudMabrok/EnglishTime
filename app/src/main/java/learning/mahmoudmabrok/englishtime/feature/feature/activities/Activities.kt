@@ -8,13 +8,13 @@ import com.nightonke.boommenu.BoomButtons.HamButton
 import com.nightonke.boommenu.OnBoomListener
 import kotlinx.android.synthetic.main.activity_main.*
 import learning.mahmoudmabrok.englishtime.R
-import learning.mahmoudmabrok.englishtime.feature.feature.aorb.IsAOrB
-import learning.mahmoudmabrok.englishtime.feature.feature.categorizeWords.CategorizeWords
+import learning.mahmoudmabrok.englishtime.feature.feature.current.aorb.IsAOrB
+import learning.mahmoudmabrok.englishtime.feature.feature.current.categorizeWords.CategorizeWords
 import learning.mahmoudmabrok.englishtime.feature.feature.circleOdd.CircleOdd
 import learning.mahmoudmabrok.englishtime.feature.feature.collectWordWithCross.CollectWord
 import learning.mahmoudmabrok.englishtime.feature.feature.crossword.CrossWord
-import learning.mahmoudmabrok.englishtime.feature.feature.grammer.GrammerActivity
-import learning.mahmoudmabrok.englishtime.feature.feature.puncuate.Puncate
+import learning.mahmoudmabrok.englishtime.feature.feature.current.grammer.GrammerActivity
+import learning.mahmoudmabrok.englishtime.feature.feature.current.puncuate.Puncate
 import learning.mahmoudmabrok.englishtime.feature.feature.selectPath.SelectGameType
 import learning.mahmoudmabrok.englishtime.feature.feature.showVocabs.ShowVocabs
 import learning.mahmoudmabrok.englishtime.feature.feature.snake.SnakeStair
