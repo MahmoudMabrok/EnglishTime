@@ -1,5 +1,7 @@
 package learning.mahmoudmabrok.englishtime.feature.datalayer.models
 
+import java.util.*
+
 data class IsAItem(val types: List<String>, val values: List<String>, val answers: List<Int>)
 
 data class Word(val word: String, val mean: String) {
@@ -14,7 +16,7 @@ data class Category(
         val name: String,
         val words: String) {
     fun getWords(): List<String> {
-        return words.split(" ").apply { this.forEach { it.toLowerCase() } }
+        return words.split(" ").apply { this.forEach { it.toLowerCase(Locale.getDefault()) } }
     }
 }
 

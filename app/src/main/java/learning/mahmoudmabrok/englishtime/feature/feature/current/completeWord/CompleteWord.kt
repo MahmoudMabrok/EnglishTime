@@ -8,6 +8,7 @@ import kotlinx.android.synthetic.main.activity_complete_word.*
 import learning.mahmoudmabrok.englishtime.R
 import learning.mahmoudmabrok.englishtime.feature.datalayer.DataSet
 import learning.mahmoudmabrok.englishtime.feature.datalayer.LocalDB
+import learning.mahmoudmabrok.englishtime.feature.parents.BasicActivity
 import learning.mahmoudmabrok.englishtime.feature.utils.Constants
 import learning.mahmoudmabrok.englishtime.feature.utils.FinshGame
 import learning.mahmoudmabrok.englishtime.feature.utils.SoundHelper
@@ -18,7 +19,7 @@ import learning.mahmoudmabrok.englishtime.feature.utils.setValue
 import learning.mahmoudmabrok.englishtime.feature.utils.show
 import kotlin.random.Random
 
-class CompleteWord : AppCompatActivity() {
+class CompleteWord : BasicActivity() {
     private var exist: Boolean = false
     val mTag = javaClass.simpleName
 
@@ -27,7 +28,7 @@ class CompleteWord : AppCompatActivity() {
 
     private var groupSize = 3
     private lateinit var db: LocalDB
-    var data = listOf("play", "score", "winner", "play", "score", "winner")
+    var data = emptyList<String>()
     var current = 0
     var lengthToMissed = 1
 
@@ -38,7 +39,6 @@ class CompleteWord : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_complete_word)
-
 
         db = LocalDB.getINSTANCE(this)
 
@@ -59,6 +59,12 @@ class CompleteWord : AppCompatActivity() {
         tvScoreForm.setValue(score, 100)
 
 
+
+        imPlaySound.setOnClickListener {
+            playSound(data[current])
+        }
+
+
     }
 
     private fun initRv() {
@@ -72,22 +78,18 @@ class CompleteWord : AppCompatActivity() {
         if (intent.hasExtra(Constants.UNIT)) {
             unitNum = intent.getIntExtra(Constants.UNIT, 0)
             exist = db.visited("$unitNum$INDEX")
+            "setupWords unit num $unitNum".log(mTag)
             val categories = DataSet.getCategory(unitNum).toMutableList()
             // remove last one as it "NA"
             categories.removeAt(categories.size - 1)
 
-            data = categories.flatMap { it.getWords() }.subList(0, 3)
+            data = categories.flatMap { it.getWords() }
 
             "setupWords true , $exist ".log(mTag)
 
             adapter = CompleteWordAdapter(getSplitedData(), lengthToMissed)
         } else {
-            "before $data".log(mTag)
-            data.sortedBy { it.length }
-            "after $data".log(mTag)
-
-            data = data.sorted()
-            "after1 $data".log(mTag)
+            finish()
         }
     }
 
@@ -184,3 +186,4 @@ class CompleteWord : AppCompatActivity() {
 
     }
 }
+

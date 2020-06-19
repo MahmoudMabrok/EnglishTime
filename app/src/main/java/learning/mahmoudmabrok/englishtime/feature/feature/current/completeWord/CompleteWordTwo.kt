@@ -107,7 +107,7 @@ class CompleteWordTwo : AppCompatActivity() {
             data = categories.flatMap { it.getWords() }
             data = data.sorted()
 
-            data = categories.flatMap { it.getWords() }.subList(0, 3)
+//            data = categories.flatMap { it.getWords() }.subList(0, 3)
 
 
             val longW = data.last().length

@@ -55,6 +55,7 @@
         app:layout_constraintTop_toBottomOf="@+id/rvCompleteWord" />
 
     <TextView
+        android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
@@ -67,8 +68,19 @@
 
     <FrameLayout
         android:id="@+id/home"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <ImageView
+        android:id="@+id/imPlaySound"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView8"
+        app:layout_constraintEnd_toEndOf="@+id/textView8"
+        app:layout_constraintStart_toStartOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@+id/tvScoreForm"
+        app:srcCompat="@drawable/ic_sound" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -190,7 +190,6 @@ object DataSet {
         )
 
         // 10
-
         structures.add(listOf(
                 Structure("Adjectives", "real# good # cool# bad# hungry# nervous# tired#embarrassed# happy#sad# disappointed#cold hot#proud"),
                 Structure("Exxpresssions", "what was on?# On TV # too bad#i missed it #me, neither# time for class #a school night"),
