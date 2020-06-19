@@ -33,7 +33,7 @@
         <activity android:name="learning.mahmoudmabrok.englishtime.feature.feature.current.puncuate.Puncate" />
         <activity
             android:name="learning.mahmoudmabrok.englishtime.feature.feature.current.completeWord.CompleteWord"
-            android:windowSoftInputMode="stateAlwaysVisible"
+            android:windowSoftInputMode="adjustPan"
             android:exported="true" />
         <activity
             android:name="learning.mahmoudmabrok.englishtime.feature.feature.current.completeWord.CompleteWordTwo"

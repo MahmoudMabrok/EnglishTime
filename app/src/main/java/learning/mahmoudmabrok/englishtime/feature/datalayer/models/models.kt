@@ -16,7 +16,7 @@ data class Category(
         val name: String,
         val words: String) {
     fun getWords(): List<String> {
-        return words.split(" ").apply { this.forEach { it.toLowerCase(Locale.getDefault()) } }
+        return words.toLowerCase().split(" ")
     }
 }
 

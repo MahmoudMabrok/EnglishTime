@@ -7,7 +7,49 @@ import org.junit.Assert.*
 class CharacterUtilTest {
 
     @Test
-    fun splitWord() {
+    fun `splitWord() with  list and ask to remove more length `() {
+        // arrange
+        val input = "aa"
+        val numToRemove = 3
+        val expected = input.length
+
+        // act
+        val wordAfter = CharacterUtil.splitWord(word = input, num = numToRemove)
+        val result = wordAfter.size
+
+        //assert
+        assertEquals(expected, result)
+
+    }
+
+    @Test
+    fun `splitWord() with  list remove 2 out of  5  `() {
+        // arrange
+        val input = "ahmed"
+        val numToRemove = 2
+        val expected = 2
+
+        // act
+        val wordAfter = CharacterUtil.splitWord(word = input, num = numToRemove)
+        val result = CharacterUtil.getNumOfMissed(wordAfter)
+
+        //assert
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun `splitWord() with  list remove 4 out of  5  `() {
+        // arrange
+        val input = "ahmed"
+        val numToRemove = 4
+        val expected = 4
+
+        // act
+        val wordAfter = CharacterUtil.splitWord(word = input, num = numToRemove)
+        val result = CharacterUtil.getNumOfMissed(wordAfter)
+
+        //assert
+        assertEquals(expected, result)
     }
 
     @Test

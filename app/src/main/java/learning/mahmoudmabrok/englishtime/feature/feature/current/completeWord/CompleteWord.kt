@@ -21,7 +21,6 @@ import kotlin.random.Random
 
 class CompleteWord : BasicActivity() {
     private var exist: Boolean = false
-    val mTag = javaClass.simpleName
 
     var INDEX = 2
     var unitNum = 0
@@ -59,11 +58,11 @@ class CompleteWord : BasicActivity() {
         tvScoreForm.setValue(score, 100)
 
 
-
         imPlaySound.setOnClickListener {
             playSound(data[current])
         }
 
+        setupSound()
 
     }
 
