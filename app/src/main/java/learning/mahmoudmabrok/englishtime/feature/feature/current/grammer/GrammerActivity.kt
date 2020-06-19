@@ -48,7 +48,7 @@ class GrammerActivity : BasicActivity() {
                 Thread {
                     Thread.sleep(500)
                     runOnUiThread {
-                        finish()
+                        goToNext()
                     }
                 }.start()
             } else {
@@ -87,7 +87,7 @@ class GrammerActivity : BasicActivity() {
                         Thread {
                             Thread.sleep(1200)
                             runOnUiThread {
-                                finish()
+                                goToNext()
                             }
                         }.start()
                     }
@@ -102,7 +102,6 @@ class GrammerActivity : BasicActivity() {
         // clear end
         tvGrammerEnd.text = ""
     }
-
 
 }
 

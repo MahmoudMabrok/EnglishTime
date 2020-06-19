@@ -7,8 +7,10 @@ import learning.mahmoudmabrok.englishtime.R
 import learning.mahmoudmabrok.englishtime.feature.datalayer.DataSet
 import learning.mahmoudmabrok.englishtime.feature.datalayer.models.Structure
 import learning.mahmoudmabrok.englishtime.feature.feature.collectWordWithCross.CollectWord
+import learning.mahmoudmabrok.englishtime.feature.feature.current.categorizeWords.CategorizeWords
 import learning.mahmoudmabrok.englishtime.feature.parents.BasicActivity
 import learning.mahmoudmabrok.englishtime.feature.utils.Constants
+import learning.mahmoudmabrok.englishtime.feature.utils.FinshGame
 import learning.mahmoudmabrok.englishtime.feature.utils.openActivity
 import learning.mahmoudmabrok.englishtime.feature.utils.show
 
@@ -26,7 +28,7 @@ class IsAOrB : BasicActivity() {
      * this will be called after finish
      */
     override fun goToNext() {
-        openActivity(CollectWord::class.java) {
+        openActivity(CategorizeWords::class.java) {
             putInt(Constants.UNIT, unitNum)
         }
     }
@@ -44,7 +46,7 @@ class IsAOrB : BasicActivity() {
             Thread {
                 Thread.sleep(500)
                 runOnUiThread {
-                    finish()
+                    goToNext()
                 }
             }.start()
         } else {
@@ -78,12 +80,7 @@ class IsAOrB : BasicActivity() {
             listItems = structures[currentGrammer].getItems()
             loadNextItem()
         } else {
-            Thread {
-                Thread.sleep(500)
-                runOnUiThread {
-                    finish()
-                }
-            }.start()
+            FinshGame.showFinish(this, R.id.home, 0)
         }
     }
 

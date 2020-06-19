@@ -7,6 +7,7 @@ import android.speech.tts.TextToSpeech
 import android.speech.tts.TextToSpeech.OnInitListener
 import androidx.appcompat.app.AppCompatActivity
 import learning.mahmoudmabrok.englishtime.feature.utils.Constants
+import learning.mahmoudmabrok.englishtime.feature.utils.SoundHelper
 import learning.mahmoudmabrok.englishtime.feature.utils.log
 import java.util.*
 
@@ -44,5 +45,10 @@ abstract class BasicActivity : AppCompatActivity() {
 
     fun getBundle() = Bundle().apply {
         putInt(Constants.UNIT, unitNum)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        SoundHelper.stop()
     }
 }
