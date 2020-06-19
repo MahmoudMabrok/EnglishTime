@@ -6,13 +6,14 @@ import kotlinx.android.synthetic.main.activity_is_aor_b_alt.*
 import learning.mahmoudmabrok.englishtime.R
 import learning.mahmoudmabrok.englishtime.feature.datalayer.DataSet
 import learning.mahmoudmabrok.englishtime.feature.datalayer.models.Structure
+import learning.mahmoudmabrok.englishtime.feature.feature.collectWordWithCross.CollectWord
+import learning.mahmoudmabrok.englishtime.feature.parents.BasicActivity
 import learning.mahmoudmabrok.englishtime.feature.utils.Constants
+import learning.mahmoudmabrok.englishtime.feature.utils.openActivity
 import learning.mahmoudmabrok.englishtime.feature.utils.show
 
 
-class IsAOrB : AppCompatActivity() {
-
-    var unitNum = 0
+class IsAOrB : BasicActivity() {
 
     var currentGrammer = 0
     var currentGrammerItem = 0
@@ -21,6 +22,14 @@ class IsAOrB : AppCompatActivity() {
     lateinit var currentLessoen: String
     lateinit var listItems: List<String>
 
+    /**
+     * this will be called after finish
+     */
+    override fun goToNext() {
+        openActivity(CollectWord::class.java) {
+            putInt(Constants.UNIT, unitNum)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

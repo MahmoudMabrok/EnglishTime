@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import com.plattysoft.leonids.ParticleSystem
 import kotlinx.android.synthetic.main.fragment_finish_game.*
 import learning.mahmoudmabrok.englishtime.R
+import learning.mahmoudmabrok.englishtime.feature.parents.BasicActivity
 
 
 class FinishGameFragment : Fragment() {
@@ -24,13 +25,13 @@ class FinishGameFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Handler().postDelayed({ an() }, 600)
+        Handler().postDelayed({ an() }, 1200)
 
         btnFinish.setOnClickListener {
-
+            (activity as? BasicActivity)?.goToNext()
         }
 
-        Handler().postDelayed({ requireActivity().finish() }, 4600)
+        //   Handler().postDelayed({   (activity as? BasicActivity)?.goToNext() }, 4600)
     }
 
     private fun an() {

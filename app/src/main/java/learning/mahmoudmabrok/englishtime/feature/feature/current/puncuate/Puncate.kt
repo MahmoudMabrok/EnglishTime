@@ -1,5 +1,6 @@
 package learning.mahmoudmabrok.englishtime.feature.feature.current.puncuate
 
+import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.View
@@ -13,13 +14,14 @@ import learning.mahmoudmabrok.englishtime.R
 import learning.mahmoudmabrok.englishtime.feature.datalayer.DataSet
 import learning.mahmoudmabrok.englishtime.feature.datalayer.LocalDB
 import learning.mahmoudmabrok.englishtime.feature.datalayer.models.PunctuateItem
+import learning.mahmoudmabrok.englishtime.feature.feature.current.completeWord.CompleteWord
+import learning.mahmoudmabrok.englishtime.feature.feature.current.grammer.GrammerActivity
+import learning.mahmoudmabrok.englishtime.feature.parents.BasicActivity
 import learning.mahmoudmabrok.englishtime.feature.utils.*
 
-class Puncate : AppCompatActivity() {
+class Puncate : BasicActivity() {
 
     val INDEX = "3"
-    var unitNum = 0
-
 
     private var score: Int = 0
     private lateinit var db: LocalDB
@@ -34,6 +36,15 @@ class Puncate : AppCompatActivity() {
 
     lateinit var mp: MediaPlayer
 
+
+    /**
+     * this will be called after finish
+     */
+    override fun goToNext() {
+        openActivity(GrammerActivity::class.java) {
+            putInt(Constants.UNIT, unitNum)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -124,8 +135,12 @@ class Puncate : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
-        mp.stop()
-        mp.release()
+
+        try {
+            mp.stop()
+            mp.release()
+        } catch (e: Exception) {
+        }
 
         val exist = db.visited("$unitNum$INDEX")
         if (exist) {
@@ -138,8 +153,6 @@ class Puncate : AppCompatActivity() {
         "total Pun $totalScore ".log()
         totalScore += score
         db.score = totalScore
-
-
     }
 
 }

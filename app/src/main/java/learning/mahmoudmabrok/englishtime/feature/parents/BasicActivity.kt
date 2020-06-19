@@ -1,10 +1,12 @@
 package learning.mahmoudmabrok.englishtime.feature.parents
 
+import android.content.Context
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.speech.tts.TextToSpeech
 import android.speech.tts.TextToSpeech.OnInitListener
 import androidx.appcompat.app.AppCompatActivity
+import learning.mahmoudmabrok.englishtime.feature.utils.Constants
 import learning.mahmoudmabrok.englishtime.feature.utils.log
 import java.util.*
 
@@ -12,6 +14,8 @@ abstract class BasicActivity : AppCompatActivity() {
     private var textToSpeech: TextToSpeech? = null
 
     val mTag = javaClass.simpleName
+
+    var unitNum = 0
 
 
     fun setupSound() {
@@ -35,4 +39,10 @@ abstract class BasicActivity : AppCompatActivity() {
         textToSpeech?.shutdown()
     }
 
+    abstract fun goToNext()
+
+
+    fun getBundle() = Bundle().apply {
+        putInt(Constants.UNIT, unitNum)
+    }
 }

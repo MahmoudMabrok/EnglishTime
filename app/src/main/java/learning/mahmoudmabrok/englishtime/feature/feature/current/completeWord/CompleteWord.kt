@@ -1,5 +1,6 @@
 package learning.mahmoudmabrok.englishtime.feature.feature.current.completeWord
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -8,13 +9,16 @@ import kotlinx.android.synthetic.main.activity_complete_word.*
 import learning.mahmoudmabrok.englishtime.R
 import learning.mahmoudmabrok.englishtime.feature.datalayer.DataSet
 import learning.mahmoudmabrok.englishtime.feature.datalayer.LocalDB
+import learning.mahmoudmabrok.englishtime.feature.feature.current.puncuate.Puncate
 import learning.mahmoudmabrok.englishtime.feature.parents.BasicActivity
 import learning.mahmoudmabrok.englishtime.feature.utils.Constants
 import learning.mahmoudmabrok.englishtime.feature.utils.FinshGame
 import learning.mahmoudmabrok.englishtime.feature.utils.SoundHelper
+import learning.mahmoudmabrok.englishtime.feature.utils.Utils
 import learning.mahmoudmabrok.englishtime.feature.utils.animItem
 import learning.mahmoudmabrok.englishtime.feature.utils.dismissKeyboard
 import learning.mahmoudmabrok.englishtime.feature.utils.log
+import learning.mahmoudmabrok.englishtime.feature.utils.openActivity
 import learning.mahmoudmabrok.englishtime.feature.utils.setValue
 import learning.mahmoudmabrok.englishtime.feature.utils.show
 import kotlin.random.Random
@@ -23,7 +27,7 @@ class CompleteWord : BasicActivity() {
     private var exist: Boolean = false
 
     var INDEX = 2
-    var unitNum = 0
+
 
     private var groupSize = 3
     private lateinit var db: LocalDB
@@ -66,6 +70,15 @@ class CompleteWord : BasicActivity() {
 
     }
 
+    /**
+     * this will be called after finish
+     */
+    override fun goToNext() {
+        openActivity(Puncate::class.java) {
+            putInt(Constants.UNIT, unitNum)
+        }
+    }
+
     private fun initRv() {
         rvCompleteWord.adapter = adapter
         rvCompleteWord.layoutDirection = View.LAYOUT_DIRECTION_LTR
@@ -82,7 +95,7 @@ class CompleteWord : BasicActivity() {
             // remove last one as it "NA"
             categories.removeAt(categories.size - 1)
 
-            data = categories.flatMap { it.getWords() }
+            data = categories.flatMap { it.getWords() }.subList(0, 2)
 
             "setupWords true , $exist ".log(mTag)
 
@@ -101,11 +114,9 @@ class CompleteWord : BasicActivity() {
             btnCHeckCompleteWord.visibility = View.INVISIBLE
             "error $e".log(mTag)
             if (!exist)
-                finishGame()
-            else {
                 db.saveVisited("$unitNum$INDEX")
-                finish()
-            }
+
+            finishGame()
         }
     }
 
@@ -117,7 +128,7 @@ class CompleteWord : BasicActivity() {
      * Check answer if correct increase score else show correct one and go to next one
      */
     private fun checkAnswer() {
-        val word = String(adapter.data.toCharArray())
+        val word = String(adapter.data.toCharArray()).toLowerCase()
         val isSame = data[current] == word
         if (isSame) {
             updateScore(Constants.SCORE_UNIT)
@@ -183,6 +194,15 @@ class CompleteWord : BasicActivity() {
         totalScore += score
         db.score = totalScore
 
+    }
+
+    companion object {
+
+        fun getIntent(activity: AppCompatActivity, num: Int): Intent {
+            return Intent(activity, CompleteWord::class.java).apply {
+                putExtra(Constants.UNIT, num)
+            }
+        }
     }
 }
 
