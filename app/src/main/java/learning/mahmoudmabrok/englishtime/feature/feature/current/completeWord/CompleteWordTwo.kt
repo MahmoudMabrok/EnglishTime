@@ -24,7 +24,7 @@ class CompleteWordTwo : AppCompatActivity() {
     var current = 0
     var lengthToMissed = 1
 
-    val adapter: CompleteWordAdapter = CompleteWordAdapter(getSplitedData(), lengthToMissed)
+    val adapter: CompleteWordAdapter = CompleteWordAdapter(getSplitedData())
 
     var score = 0
 

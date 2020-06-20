@@ -59,6 +59,22 @@ class CompleteWord : BasicActivity() {
         finish()
     }
 
+    /**
+     * reset game
+     */
+    override fun retryGame() {
+        gameTotalScore = 0
+        btnCHeckCompleteWord.visibility = View.VISIBLE
+        supportFragmentManager.popBackStack()
+        // start from 0 again
+        current = 0
+        score = 0
+        tvScoreForm.animateTo(score, 1000)
+        // fill data into adapter
+        loadData()
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_complete_word)
@@ -100,7 +116,7 @@ class CompleteWord : BasicActivity() {
             categories.removeAt(categories.size - 1)
             //todo   remove
             data = categories.flatMap { it.getWords() }.subList(0, 2).sortedBy { it.length }
-            adapter = CompleteWordAdapter(getSplitedData(), lengthToMissed)
+            adapter = CompleteWordAdapter(getSplitedData())
         } else {
             finish()
         }
@@ -109,6 +125,7 @@ class CompleteWord : BasicActivity() {
     private fun loadData() {
         try {
             val wordMissed = getSplitedData()
+            gameTotalScore += lengthToMissed
             adapter.setData(wordMissed)
             (rvCompleteWord.layoutManager as GridLayoutManager).spanCount = wordMissed.size
         } catch (e: Exception) {
@@ -119,7 +136,7 @@ class CompleteWord : BasicActivity() {
     }
 
     private fun finishGame() {
-        FinshGame.showFinish(this, home.id, score, score + 5)
+        FinshGame.showFinish(this, home.id, score, gameTotalScore)
     }
 
     /**
@@ -129,7 +146,7 @@ class CompleteWord : BasicActivity() {
         val word = String(adapter.data.toCharArray()).toLowerCase()
         val isSame = data[current] == word
         if (isSame) {
-            updateScore(Constants.SCORE_UNIT)
+            updateScore(lengthToMissed * Constants.SCORE_UNIT)
             this.show("Right")
             SoundHelper.playCorrect(this)
         } else {
@@ -158,20 +175,7 @@ class CompleteWord : BasicActivity() {
         return CharacterUtil.splitWord(lengthToMissed, data[current])
     }
 
-    /**
-     * reset game
-     */
-    override fun retryGame() {
-        btnCHeckCompleteWord.visibility = View.VISIBLE
-        supportFragmentManager.popBackStack()
-        // start from 0 again
-        current = 0
-        score = 0
-        tvScoreForm.animateTo(score, 1000)
-        // fill data into adapter
-        loadData()
 
-    }
 
 }
 

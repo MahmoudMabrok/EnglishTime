@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.fragment_finish_game.*
 import learning.mahmoudmabrok.englishtime.R
 import learning.mahmoudmabrok.englishtime.feature.parents.BasicActivity
 import learning.mahmoudmabrok.englishtime.feature.utils.Constants
+import learning.mahmoudmabrok.englishtime.feature.utils.Utils
 import learning.mahmoudmabrok.englishtime.feature.utils.log
 
 
@@ -20,8 +21,8 @@ class FinishGameFragment : Fragment() {
 
     val mTag = javaClass.simpleName
 
-    lateinit var sys1: ParticleSystem
-    lateinit var sys2: ParticleSystem
+    var sys1: ParticleSystem? = null
+    var sys2: ParticleSystem? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -42,13 +43,25 @@ class FinishGameFragment : Fragment() {
 
         val score = arguments?.getInt(Constants.SCORE_KEY) ?: 0
         val total = arguments?.getInt(Constants.SCORE_Total) ?: 0
+
+        val percentage = Utils.getPercentage(score, total)
         "onViewCreated $score $total".log(mTag)
 
+        fillPercentage(percentage)
+    }
+
+    private fun fillPercentage(percentage: Int) {
+        circle_progress_view.setProgressWithAnimation(percentage.toFloat(), 1200)
+        if (percentage >= 50) {
+            tvMessage.text = getString(R.string.good)
+        } else {
+            tvMessage.text = getString(R.string.bad)
+        }
     }
 
     private fun releaseEmits() {
-        sys1.stopEmitting()
-        sys2.stopEmitting()
+        sys1?.stopEmitting()
+        sys2?.stopEmitting()
     }
 
     private fun an() {

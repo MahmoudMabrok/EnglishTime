@@ -21,6 +21,10 @@ object Utils {
         }
     }
 
+    fun getPercentage(score: Int, total: Int): Int {
+        return ((score.toDouble()) / total.toDouble()).times(100).toInt()
+    }
+
 }
 
 fun <T> Context.openActivity(it: Class<T>, extras: Bundle.() -> Unit = {}) {

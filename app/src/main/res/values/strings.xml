@@ -27,6 +27,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="good_job_n_keep_moving">Good Job\n Keep Moving</string>
     <string name="you_have_finished_this_challenge">You have finished this challenge</string>
+    <string name="good">Very Good, You did a good work, Keep Moving </string>
+    <string name="bad">You did a good work, you can try again to get a better results</string>
     <string name="final_name">This certificate said that %s has got %d out of %d in English App Practice</string>
     <string name="check">check</string>
 </resources>
