@@ -1,30 +1,27 @@
 package learning.mahmoudmabrok.englishtime.feature.feature.current.puncuate
 
-import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_complete_word.*
 import kotlinx.android.synthetic.main.activity_puncate.*
-import kotlinx.android.synthetic.main.activity_puncate.home
-import kotlinx.android.synthetic.main.activity_puncate.tvScoreForm
 import learning.mahmoudmabrok.englishtime.R
 import learning.mahmoudmabrok.englishtime.feature.datalayer.DataSet
-import learning.mahmoudmabrok.englishtime.feature.datalayer.LocalDB
 import learning.mahmoudmabrok.englishtime.feature.datalayer.models.PunctuateItem
-import learning.mahmoudmabrok.englishtime.feature.utils.*
+import learning.mahmoudmabrok.englishtime.feature.feature.current.grammer.GrammerActivity
+import learning.mahmoudmabrok.englishtime.feature.parents.BasicActivity
+import learning.mahmoudmabrok.englishtime.feature.utils.Constants
+import learning.mahmoudmabrok.englishtime.feature.utils.FinshGame
+import learning.mahmoudmabrok.englishtime.feature.utils.SoundHelper
+import learning.mahmoudmabrok.englishtime.feature.utils.TestText
+import learning.mahmoudmabrok.englishtime.feature.utils.animItem
+import learning.mahmoudmabrok.englishtime.feature.utils.log
+import learning.mahmoudmabrok.englishtime.feature.utils.openActivity
+import learning.mahmoudmabrok.englishtime.feature.utils.show
 
-class Puncate : AppCompatActivity() {
-
-    val INDEX = "3"
-    var unitNum = 0
+class Puncate : BasicActivity() {
 
 
     private var score: Int = 0
-    private lateinit var db: LocalDB
-    val sentnece = "what is your name"
-    val correctSentnece = "What is your name?"
 
     lateinit var puncateItem: PunctuateItem
     lateinit var puncateList: List<PunctuateItem>
@@ -32,19 +29,37 @@ class Puncate : AppCompatActivity() {
 
     var toCkeck = true
 
-    lateinit var mp: MediaPlayer
+    /**
+     * this will be called after finish
+     */
+    override fun goToNext() {
+        openActivity(GrammerActivity::class.java) {
+            putInt(Constants.UNIT, unitNum)
+            putInt(Constants.SCORE_KEY, score + prevScore)
+        }
+        // so no back
+        finish()
+    }
+
+    override fun retryGame() {
+        supportFragmentManager.popBackStack()
+        gameTotalScore = 0
+        current = 0
+        score = 0
+        toCkeck = true
+        tvScoreForm.animateTo(0, 100)
+        btnCHeckPuncate.visibility = View.VISIBLE
+
+        startGame()
+
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_puncate)
 
-        mp = MediaPlayer()
-
-        laodData()
-
-        placeItem()
-
+        startGame()
         btnCHeckPuncate.setOnClickListener {
             if (!toCkeck) {
                 it.animItem(1000) {
@@ -63,12 +78,14 @@ class Puncate : AppCompatActivity() {
             }
         }
 
-
         tvScoreForm.setMessage("Score:: ")
         tvScoreForm.animateTo(0, 100)
-        db = LocalDB.getINSTANCE(this)
 
+    }
 
+    private fun startGame() {
+        laodData()
+        placeItem()
     }
 
     private fun checkAnswer() {
@@ -80,17 +97,16 @@ class Puncate : AppCompatActivity() {
 
         val expWrongs = puncateItem.numWrong
         val scoreMax = Constants.SCORE_UNIT * expWrongs
-        val userScore = scoreMax - wrong * 10
+        val userScore = scoreMax - wrong * Constants.SCORE_UNIT
 
         "wrong $wrong exp $expWrongs userscore $userScore".log()
-        if (userScore > 0 ){
+        if (userScore > 0) {
             updateScore(userScore)
             SoundHelper.playCorrect(this)
-        }else{
+        } else {
             SoundHelper.playFail(this)
             this.show("Try Later")
         }
-
         edPuncate.isEnabled = false
 
     }
@@ -99,9 +115,10 @@ class Puncate : AppCompatActivity() {
         try {
             puncateItem = puncateList[current]
             edPuncate.setText(puncateItem.actual)
+            gameTotalScore += (puncateItem.numWrong * Constants.SCORE_UNIT)
         } catch (e: Exception) {
             btnCHeckPuncate.visibility = View.GONE
-            FinshGame.showFinish(this, home.id, score)
+            FinshGame.showFinish(this, home.id, score, gameTotalScore)
         }
 
     }
@@ -122,24 +139,5 @@ class Puncate : AppCompatActivity() {
         tvScoreForm.animateTo(score, 500)
     }
 
-    override fun onStop() {
-        super.onStop()
-        mp.stop()
-        mp.release()
-
-        val exist = db.visited("$unitNum$INDEX")
-        if (exist) {
-            return
-        } else {
-            db.saveVisited("$unitNum$INDEX")
-        }
-
-        var totalScore = db.score
-        "total Pun $totalScore ".log()
-        totalScore += score
-        db.score = totalScore
-
-
-    }
 
 }

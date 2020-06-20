@@ -8,28 +8,39 @@ object SoundHelper {
 
     var mp = MediaPlayer()
 
-    fun playCorrect(ctx:Context){
-
-        with(mp){
-            stop()
-            release()
+    fun playCorrect(ctx: Context) {
+        try {
+            with(mp) {
+                stop()
+                release()
+            }
+        } catch (e: Exception) {
         }
-
         mp = MediaPlayer.create(ctx, R.raw.success)
         mp.start()
-
-
     }
 
-    fun playFail(ctx:Context){
+    fun playFail(ctx: Context) {
 
-        with(mp){
-            stop()
-            release()
+        try {
+            with(mp) {
+                stop()
+                release()
+            }
+        } catch (e: Exception) {
         }
 
         mp = MediaPlayer.create(ctx, R.raw.fail)
         mp.start()
+
+    }
+
+    fun stop() {
+        try {
+            mp.stop()
+            mp.release()
+        } catch (e: Exception) {
+        }
 
     }
 

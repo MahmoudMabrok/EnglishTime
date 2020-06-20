@@ -68,7 +68,8 @@
 
     <FrameLayout
         android:id="@+id/home"
-        android:visibility="gone"
+        android:elevation="5dp"
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
@@ -80,7 +81,7 @@
         app:layout_constraintEnd_toEndOf="@+id/textView8"
         app:layout_constraintStart_toStartOf="@+id/textView8"
         app:layout_constraintTop_toBottomOf="@+id/tvScoreForm"
-        app:srcCompat="@drawable/ic_sound" />
+        android:src="@drawable/ic_sound" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,8 +9,28 @@
     android:clickable="true"
     android:focusable="true">
 
+
+    <com.eralp.circleprogressview.CircleProgressView
+        android:id="@+id/circle_progress_view"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_150sdp"
+        android:layout_gravity="center"
+        app:cpv_background_circle_color="#5b253048"
+        app:cpv_background_circle_width="20dp"
+        app:cpv_circle_color="#27375c"
+        app:cpv_circle_width="6dp"
+        app:cpv_text_color="#27375c"
+        app:cpv_text_prefix="%"
+        app:cpv_text_size="40"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.8" />
+
+
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/tvMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:lineSpacingExtra="18sp"
@@ -22,7 +42,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.68" />
 
     <Button
         android:id="@+id/btnFinish"
@@ -36,10 +57,28 @@
         android:text="Continue"
         android:textAllCaps="false"
         android:textSize="18sp"
-        android:visibility="invisible"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnRetry"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnRetry"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="32dp"
+        android:background="#FFFFFF"
+        android:text="Retry"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@id/btnFinish" />
+
 
     <TextView
         android:id="@+id/topLeft"
@@ -66,9 +105,10 @@
         android:layout_height="64dp"
         android:layout_marginBottom="24dp"
         android:src="@drawable/ic_check"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
-        app:layout_constraintEnd_toEndOf="@+id/textView4"
-        app:layout_constraintStart_toStartOf="@+id/textView4" />
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/tvMessage"
+        app:layout_constraintEnd_toEndOf="@+id/tvMessage"
+        app:layout_constraintStart_toStartOf="@+id/tvMessage" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

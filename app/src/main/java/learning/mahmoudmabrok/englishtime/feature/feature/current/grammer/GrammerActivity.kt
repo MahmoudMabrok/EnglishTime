@@ -7,12 +7,17 @@ import learning.mahmoudmabrok.englishtime.R
 import learning.mahmoudmabrok.englishtime.feature.datalayer.DataSet
 import learning.mahmoudmabrok.englishtime.feature.datalayer.models.GrammerItem
 import learning.mahmoudmabrok.englishtime.feature.datalayer.models.GrammerLesson
+import learning.mahmoudmabrok.englishtime.feature.datalayer.models.Structure
+import learning.mahmoudmabrok.englishtime.feature.feature.current.aorb.IsAOrB
+import learning.mahmoudmabrok.englishtime.feature.feature.current.puncuate.Puncate
+import learning.mahmoudmabrok.englishtime.feature.parents.BasicActivity
 import learning.mahmoudmabrok.englishtime.feature.utils.Constants
 import learning.mahmoudmabrok.englishtime.feature.utils.animItem
+import learning.mahmoudmabrok.englishtime.feature.utils.openActivity
 import learning.mahmoudmabrok.englishtime.feature.utils.show
 
 
-class GrammerActivity : AppCompatActivity() {
+class GrammerActivity : BasicActivity() {
 
 
     var currentGrammer = 0
@@ -21,6 +26,21 @@ class GrammerActivity : AppCompatActivity() {
     lateinit var grammers: List<GrammerLesson>
     lateinit var currentLessoen: GrammerLesson
     lateinit var listItems: List<GrammerItem>
+
+
+    /**
+     * this will be called after finish
+     */
+    override fun goToNext() {
+        openActivity(IsAOrB::class.java) {
+            putInt(Constants.UNIT, unitNum)
+            putInt(Constants.SCORE_KEY, 0 + prevScore)
+        }
+        // so no back
+        finish()
+    }
+
+    override fun retryGame() {}
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,7 +54,7 @@ class GrammerActivity : AppCompatActivity() {
                 Thread {
                     Thread.sleep(500)
                     runOnUiThread {
-                        finish()
+                        goToNext()
                     }
                 }.start()
             } else {
@@ -73,7 +93,7 @@ class GrammerActivity : AppCompatActivity() {
                         Thread {
                             Thread.sleep(1200)
                             runOnUiThread {
-                                finish()
+                                goToNext()
                             }
                         }.start()
                     }
@@ -88,7 +108,6 @@ class GrammerActivity : AppCompatActivity() {
         // clear end
         tvGrammerEnd.text = ""
     }
-
 
 }
 

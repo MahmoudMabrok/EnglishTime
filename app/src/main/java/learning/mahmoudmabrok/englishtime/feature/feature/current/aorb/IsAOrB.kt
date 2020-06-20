@@ -6,13 +6,16 @@ import kotlinx.android.synthetic.main.activity_is_aor_b_alt.*
 import learning.mahmoudmabrok.englishtime.R
 import learning.mahmoudmabrok.englishtime.feature.datalayer.DataSet
 import learning.mahmoudmabrok.englishtime.feature.datalayer.models.Structure
+import learning.mahmoudmabrok.englishtime.feature.feature.collectWordWithCross.CollectWord
+import learning.mahmoudmabrok.englishtime.feature.feature.current.categorizeWords.CategorizeWords
+import learning.mahmoudmabrok.englishtime.feature.parents.BasicActivity
 import learning.mahmoudmabrok.englishtime.feature.utils.Constants
+import learning.mahmoudmabrok.englishtime.feature.utils.FinshGame
+import learning.mahmoudmabrok.englishtime.feature.utils.openActivity
 import learning.mahmoudmabrok.englishtime.feature.utils.show
 
 
-class IsAOrB : AppCompatActivity() {
-
-    var unitNum = 0
+class IsAOrB : BasicActivity() {
 
     var currentGrammer = 0
     var currentGrammerItem = 0
@@ -21,12 +24,27 @@ class IsAOrB : AppCompatActivity() {
     lateinit var currentLessoen: String
     lateinit var listItems: List<String>
 
+    /**
+     * this will be called after finish
+     */
+    override fun goToNext() {
+        openActivity(CategorizeWords::class.java) {
+            putInt(Constants.UNIT, unitNum)
+            putInt(Constants.SCORE_KEY, 0 + prevScore)
+        }
+        // so no back
+        finish()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_is_aor_b_alt)
 
         unitNum = intent.getIntExtra(Constants.UNIT, 0)
+        startGame()
+    }
+
+    private fun startGame() {
 
         val data = DataSet.getStructure(unitNum)
 
@@ -35,12 +53,11 @@ class IsAOrB : AppCompatActivity() {
             Thread {
                 Thread.sleep(500)
                 runOnUiThread {
-                    finish()
+                    goToNext()
                 }
             }.start()
         } else {
             structures = data
-
             loadLesson()
 
             btnNext.setOnClickListener {
@@ -60,7 +77,6 @@ class IsAOrB : AppCompatActivity() {
         play()
 
         configeButtons()*/
-
     }
 
     private fun loadLesson() {
@@ -69,14 +85,12 @@ class IsAOrB : AppCompatActivity() {
             listItems = structures[currentGrammer].getItems()
             loadNextItem()
         } else {
-            Thread {
-                Thread.sleep(500)
-                runOnUiThread {
-                    finish()
-                }
-            }.start()
+            FinshGame.showFinish(this, R.id.home, 0, 2)
         }
     }
+
+    override fun retryGame() {}
+
 
     private fun loadNextItem() {
         if (currentGrammerItem < listItems.size)

@@ -28,5 +28,27 @@ class CategoryTest {
         assertEquals(expected, result)
     }
 
+    @Test
+    fun `list() split it and get list and lower case  `() {
+        val input = listOf("aaa", "be", "cwwweq")
+        val expected = listOf("be", "aaa", "cwwweq")
+
+        val result = input.sortedBy { it.length }
+
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun `list() split it and get list and lower case ddd `() {
+        val input = listOf("aaa", "be", "", "cwwweq", "a")
+        val expected = listOf("", "a", "be", "aaa", "cwwweq")
+
+        val result = input.sortedBy { it.length }
+
+        assertEquals(expected, result)
+    }
+
+
+
 
 }

@@ -24,7 +24,7 @@ class CompleteWordTwo : AppCompatActivity() {
     var current = 0
     var lengthToMissed = 1
 
-    val adapter: CompleteWordAdapter = CompleteWordAdapter(getSplitedData(), lengthToMissed)
+    val adapter: CompleteWordAdapter = CompleteWordAdapter(getSplitedData())
 
     var score = 0
 
@@ -132,7 +132,7 @@ class CompleteWordTwo : AppCompatActivity() {
             (rvCompleteWord.layoutManager as GridLayoutManager).spanCount = wordMissed.size
         } catch (e: Exception) {
             "error $e".log()
-            FinshGame.showFinish(this, home.id, score)
+            FinshGame.showFinish(this, home.id, score, score + 2)
         }
     }
 
