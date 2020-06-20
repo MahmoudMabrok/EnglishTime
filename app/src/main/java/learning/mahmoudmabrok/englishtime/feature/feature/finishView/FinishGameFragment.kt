@@ -7,15 +7,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateInterpolator
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.plattysoft.leonids.ParticleSystem
 import kotlinx.android.synthetic.main.fragment_finish_game.*
 import learning.mahmoudmabrok.englishtime.R
 import learning.mahmoudmabrok.englishtime.feature.parents.BasicActivity
+import learning.mahmoudmabrok.englishtime.feature.utils.Constants
+import learning.mahmoudmabrok.englishtime.feature.utils.log
 
 
 class FinishGameFragment : Fragment() {
 
+    val mTag = javaClass.simpleName
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -31,7 +35,13 @@ class FinishGameFragment : Fragment() {
             (activity as? BasicActivity)?.goToNext()
         }
 
-        //   Handler().postDelayed({   (activity as? BasicActivity)?.goToNext() }, 4600)
+        btnRetry.setOnClickListener {
+            (activity as? BasicActivity)?.retryGame()
+        }
+
+        val arg = arguments?.getInt(Constants.SCORE_KEY)
+        "onViewCreated $arg".log(mTag)
+
     }
 
     private fun an() {

@@ -17,7 +17,15 @@ abstract class BasicActivity : AppCompatActivity() {
     val mTag = javaClass.simpleName
 
     var unitNum = 0
+    /**
+     * score from prev
+     */
+    var prevScore = 0
 
+    /**
+     *
+     */
+    var gameTotalScore = 0
 
     fun setupSound() {
         "setupSound start".log(mTag)
@@ -33,6 +41,14 @@ abstract class BasicActivity : AppCompatActivity() {
         "playSound  word $word".log(mTag)
         textToSpeech?.speak(word, TextToSpeech.QUEUE_FLUSH, null)
     }
+
+    override fun onResume() {
+        super.onResume()
+        "onResume ".log(mTag)
+        prevScore = intent.getIntExtra(Constants.SCORE_KEY, 0)
+    }
+
+    abstract fun retryGame()
 
     override fun onDestroy() {
         super.onDestroy()

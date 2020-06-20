@@ -30,7 +30,10 @@ class IsAOrB : BasicActivity() {
     override fun goToNext() {
         openActivity(CategorizeWords::class.java) {
             putInt(Constants.UNIT, unitNum)
+            putInt(Constants.SCORE_KEY, 0 + prevScore)
         }
+        // so no back
+        finish()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +41,10 @@ class IsAOrB : BasicActivity() {
         setContentView(R.layout.activity_is_aor_b_alt)
 
         unitNum = intent.getIntExtra(Constants.UNIT, 0)
+        startGame()
+    }
+
+    private fun startGame() {
 
         val data = DataSet.getStructure(unitNum)
 
@@ -51,7 +58,6 @@ class IsAOrB : BasicActivity() {
             }.start()
         } else {
             structures = data
-
             loadLesson()
 
             btnNext.setOnClickListener {
@@ -71,7 +77,6 @@ class IsAOrB : BasicActivity() {
         play()
 
         configeButtons()*/
-
     }
 
     private fun loadLesson() {
@@ -83,6 +88,9 @@ class IsAOrB : BasicActivity() {
             FinshGame.showFinish(this, R.id.home, 0)
         }
     }
+
+    override fun retryGame() {}
+
 
     private fun loadNextItem() {
         if (currentGrammerItem < listItems.size)

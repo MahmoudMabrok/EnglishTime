@@ -14,7 +14,6 @@ import learning.mahmoudmabrok.englishtime.feature.parents.BasicActivity
 import learning.mahmoudmabrok.englishtime.feature.utils.Constants
 import learning.mahmoudmabrok.englishtime.feature.utils.FinshGame
 import learning.mahmoudmabrok.englishtime.feature.utils.SoundHelper
-import learning.mahmoudmabrok.englishtime.feature.utils.Utils
 import learning.mahmoudmabrok.englishtime.feature.utils.animItem
 import learning.mahmoudmabrok.englishtime.feature.utils.dismissKeyboard
 import learning.mahmoudmabrok.englishtime.feature.utils.log
@@ -28,23 +27,42 @@ class CompleteWord : BasicActivity() {
 
     var INDEX = 2
 
-
     private var groupSize = 3
     private lateinit var db: LocalDB
+
     var data = emptyList<String>()
+    /**
+     * current item
+     */
     var current = 0
+    /**
+     * length of character that are missed
+     */
     var lengthToMissed = 1
 
     lateinit var adapter: CompleteWordAdapter
-
+    /**
+     * local score (score of current game)
+     */
     var score = 0
+
+    /**
+     * this will be called after finish
+     */
+    override fun goToNext() {
+        openActivity(Puncate::class.java) {
+            putInt(Constants.UNIT, unitNum)
+            putInt(Constants.SCORE_KEY, score + prevScore)
+        }
+        // so no back
+        finish()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_complete_word)
 
         db = LocalDB.getINSTANCE(this)
-
 
         btnCHeckCompleteWord.setOnClickListener {
             checkAnswer()
@@ -57,26 +75,14 @@ class CompleteWord : BasicActivity() {
 
         loadData()
 
-
         tvScoreForm.setMessage("Score:: ")
         tvScoreForm.setValue(score, 100)
-
 
         imPlaySound.setOnClickListener {
             playSound(data[current])
         }
 
         setupSound()
-
-    }
-
-    /**
-     * this will be called after finish
-     */
-    override fun goToNext() {
-        openActivity(Puncate::class.java) {
-            putInt(Constants.UNIT, unitNum)
-        }
     }
 
     private fun initRv() {
@@ -84,21 +90,15 @@ class CompleteWord : BasicActivity() {
         rvCompleteWord.layoutDirection = View.LAYOUT_DIRECTION_LTR
     }
 
-
     private fun setupWords() {
         "setupWords call ".log(mTag)
         if (intent.hasExtra(Constants.UNIT)) {
             unitNum = intent.getIntExtra(Constants.UNIT, 0)
-            exist = db.visited("$unitNum$INDEX")
-            "setupWords unit num $unitNum".log(mTag)
             val categories = DataSet.getCategory(unitNum).toMutableList()
             // remove last one as it "NA"
             categories.removeAt(categories.size - 1)
-
-            data = categories.flatMap { it.getWords() }.subList(0, 2)
-
-            "setupWords true , $exist ".log(mTag)
-
+            //todo   remove
+            data = categories.flatMap { it.getWords() }.subList(0, 2).sortedBy { it.length }
             adapter = CompleteWordAdapter(getSplitedData(), lengthToMissed)
         } else {
             finish()
@@ -113,9 +113,6 @@ class CompleteWord : BasicActivity() {
         } catch (e: Exception) {
             btnCHeckCompleteWord.visibility = View.INVISIBLE
             "error $e".log(mTag)
-            if (!exist)
-                db.saveVisited("$unitNum$INDEX")
-
             finishGame()
         }
     }
@@ -179,30 +176,16 @@ class CompleteWord : BasicActivity() {
         return newWord
     }
 
-    override fun onStop() {
-        super.onStop()
 
-        if (exist) {
-            return
-        } else {
-            db.saveVisited("$unitNum$INDEX")
-            "onStop ".log(mTag)
-        }
-
-        var totalScore = db.score
-        "total $totalScore".log(mTag)
-        totalScore += score
-        db.score = totalScore
-
+    override fun retryGame() {
+        supportFragmentManager.popBackStack()
+        // start from 0 again
+        current = 0
+        score = 0
+        tvScoreForm.animateTo(score, 1000)
+        // fill data into adapter
+        loadData()
     }
 
-    companion object {
-
-        fun getIntent(activity: AppCompatActivity, num: Int): Intent {
-            return Intent(activity, CompleteWord::class.java).apply {
-                putExtra(Constants.UNIT, num)
-            }
-        }
-    }
 }
 

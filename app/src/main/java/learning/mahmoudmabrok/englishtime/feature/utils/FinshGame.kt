@@ -20,6 +20,7 @@ class FinshGame {
 
             ctx.supportFragmentManager.beginTransaction()
                     .replace(cont, fragment)
+                    .addToBackStack(null)
                     .commit()
         }
     }

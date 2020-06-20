@@ -1,40 +1,33 @@
 package learning.mahmoudmabrok.englishtime.feature.feature.current.puncuate
 
-import android.content.Intent
-import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_complete_word.*
 import kotlinx.android.synthetic.main.activity_puncate.*
-import kotlinx.android.synthetic.main.activity_puncate.home
-import kotlinx.android.synthetic.main.activity_puncate.tvScoreForm
 import learning.mahmoudmabrok.englishtime.R
 import learning.mahmoudmabrok.englishtime.feature.datalayer.DataSet
-import learning.mahmoudmabrok.englishtime.feature.datalayer.LocalDB
 import learning.mahmoudmabrok.englishtime.feature.datalayer.models.PunctuateItem
-import learning.mahmoudmabrok.englishtime.feature.feature.current.completeWord.CompleteWord
 import learning.mahmoudmabrok.englishtime.feature.feature.current.grammer.GrammerActivity
 import learning.mahmoudmabrok.englishtime.feature.parents.BasicActivity
-import learning.mahmoudmabrok.englishtime.feature.utils.*
+import learning.mahmoudmabrok.englishtime.feature.utils.Constants
+import learning.mahmoudmabrok.englishtime.feature.utils.FinshGame
+import learning.mahmoudmabrok.englishtime.feature.utils.SoundHelper
+import learning.mahmoudmabrok.englishtime.feature.utils.TestText
+import learning.mahmoudmabrok.englishtime.feature.utils.animItem
+import learning.mahmoudmabrok.englishtime.feature.utils.log
+import learning.mahmoudmabrok.englishtime.feature.utils.openActivity
+import learning.mahmoudmabrok.englishtime.feature.utils.show
 
 class Puncate : BasicActivity() {
 
-    val INDEX = "3"
 
     private var score: Int = 0
-    private lateinit var db: LocalDB
-    val sentnece = "what is your name"
-    val correctSentnece = "What is your name?"
 
     lateinit var puncateItem: PunctuateItem
     lateinit var puncateList: List<PunctuateItem>
     var current = 0
 
     var toCkeck = true
-
-    lateinit var mp: MediaPlayer
 
 
     /**
@@ -43,14 +36,18 @@ class Puncate : BasicActivity() {
     override fun goToNext() {
         openActivity(GrammerActivity::class.java) {
             putInt(Constants.UNIT, unitNum)
+            putInt(Constants.SCORE_KEY, score + prevScore)
         }
+        // so no back
+        finish()
     }
+
+    override fun retryGame() {}
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_puncate)
-
-        mp = MediaPlayer()
 
         laodData()
 
@@ -74,11 +71,8 @@ class Puncate : BasicActivity() {
             }
         }
 
-
         tvScoreForm.setMessage("Score:: ")
         tvScoreForm.animateTo(0, 100)
-        db = LocalDB.getINSTANCE(this)
-
 
     }
 
@@ -94,10 +88,10 @@ class Puncate : BasicActivity() {
         val userScore = scoreMax - wrong * 10
 
         "wrong $wrong exp $expWrongs userscore $userScore".log()
-        if (userScore > 0 ){
+        if (userScore > 0) {
             updateScore(userScore)
             SoundHelper.playCorrect(this)
-        }else{
+        } else {
             SoundHelper.playFail(this)
             this.show("Try Later")
         }
@@ -133,26 +127,5 @@ class Puncate : BasicActivity() {
         tvScoreForm.animateTo(score, 500)
     }
 
-    override fun onStop() {
-        super.onStop()
-
-        try {
-            mp.stop()
-            mp.release()
-        } catch (e: Exception) {
-        }
-
-        val exist = db.visited("$unitNum$INDEX")
-        if (exist) {
-            return
-        } else {
-            db.saveVisited("$unitNum$INDEX")
-        }
-
-        var totalScore = db.score
-        "total Pun $totalScore ".log()
-        totalScore += score
-        db.score = totalScore
-    }
 
 }

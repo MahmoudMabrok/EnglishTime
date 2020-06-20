@@ -15,7 +15,6 @@ import learning.mahmoudmabrok.englishtime.R
  */
 class CompleteWordAdapter(val data: MutableList<Char>, val count: Int) : RecyclerView.Adapter<CompleteWordAdapter.MyViewHolder>() {
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.complete_word_item, parent, false)
         return MyViewHolder(view)

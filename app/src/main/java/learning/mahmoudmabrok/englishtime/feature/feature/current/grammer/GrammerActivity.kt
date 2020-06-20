@@ -34,8 +34,14 @@ class GrammerActivity : BasicActivity() {
     override fun goToNext() {
         openActivity(IsAOrB::class.java) {
             putInt(Constants.UNIT, unitNum)
+            putInt(Constants.SCORE_KEY, 0 + prevScore)
         }
+        // so no back
+        finish()
     }
+
+    override fun retryGame() {}
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

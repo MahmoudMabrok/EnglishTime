@@ -8,6 +8,7 @@
     <application
         android:allowBackup="false"
         tools:replace="allowBackup"
+        android:name=".feature.MyApp"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
