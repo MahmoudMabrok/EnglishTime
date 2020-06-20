@@ -85,7 +85,7 @@ class IsAOrB : BasicActivity() {
             listItems = structures[currentGrammer].getItems()
             loadNextItem()
         } else {
-            FinshGame.showFinish(this, R.id.home, 0)
+            FinshGame.showFinish(this, R.id.home, 0, 2)
         }
     }
 

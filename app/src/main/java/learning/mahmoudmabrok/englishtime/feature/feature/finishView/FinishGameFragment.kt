@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateInterpolator
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.plattysoft.leonids.ParticleSystem
 import kotlinx.android.synthetic.main.fragment_finish_game.*
@@ -21,6 +20,9 @@ class FinishGameFragment : Fragment() {
 
     val mTag = javaClass.simpleName
 
+    lateinit var sys1: ParticleSystem
+    lateinit var sys2: ParticleSystem
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_finish_game, container, false)
@@ -29,33 +31,42 @@ class FinishGameFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Handler().postDelayed({ an() }, 1200)
-
         btnFinish.setOnClickListener {
             (activity as? BasicActivity)?.goToNext()
         }
 
         btnRetry.setOnClickListener {
             (activity as? BasicActivity)?.retryGame()
+            releaseEmits()
         }
 
-        val arg = arguments?.getInt(Constants.SCORE_KEY)
-        "onViewCreated $arg".log(mTag)
+        val score = arguments?.getInt(Constants.SCORE_KEY) ?: 0
+        val total = arguments?.getInt(Constants.SCORE_Total) ?: 0
+        "onViewCreated $score $total".log(mTag)
 
     }
 
-    private fun an() {
-        ParticleSystem(requireActivity(), 30, R.drawable.favicon1, 3000)
-                .setAcceleration(0.00013f, 90)
-                .setSpeedByComponentsRange(0f, 0f, 0.05f, 0.1f)
-                .setFadeOut(200, AccelerateInterpolator())
-                .emitWithGravity(topLeft, Gravity.BOTTOM, 30)
+    private fun releaseEmits() {
+        sys1.stopEmitting()
+        sys2.stopEmitting()
+    }
 
-        ParticleSystem(requireActivity(), 30, R.drawable.favicon2, 3000)
+    private fun an() {
+        sys1 = ParticleSystem(requireActivity(), 30, R.drawable.favicon1, 1000)
                 .setAcceleration(0.00013f, 90)
                 .setSpeedByComponentsRange(0f, 0f, 0.05f, 0.1f)
-                .setFadeOut(200, AccelerateInterpolator())
-                .emitWithGravity(topLeft, Gravity.BOTTOM, 30)
+                .setFadeOut(200, AccelerateInterpolator()).also {
+                    it.emitWithGravity(topLeft, Gravity.BOTTOM, 30)
+                }
+
+        sys2 = ParticleSystem(requireActivity(), 30, R.drawable.favicon2, 1000)
+                .setAcceleration(0.00013f, 90)
+                .setSpeedByComponentsRange(0f, 0f, 0.05f, 0.1f)
+                .setFadeOut(200, AccelerateInterpolator()).also {
+                    it.emitWithGravity(topLeft, Gravity.BOTTOM, 30)
+                }
+
+        Handler().postDelayed({ releaseEmits() }, 1000)
 
     }
 

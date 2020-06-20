@@ -44,8 +44,8 @@ abstract class BasicActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        "onResume ".log(mTag)
         prevScore = intent.getIntExtra(Constants.SCORE_KEY, 0)
+        "onResume score:$prevScore".log(mTag)
     }
 
     abstract fun retryGame()

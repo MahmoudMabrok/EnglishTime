@@ -162,7 +162,7 @@ class CategorizeWords : AppCompatActivity() {
     }
 
     private fun finishGame() {
-        FinshGame.showFinish(this, home.id, score)
+        FinshGame.showFinish(this, home.id, score, score + 2)
     }
 
     /**

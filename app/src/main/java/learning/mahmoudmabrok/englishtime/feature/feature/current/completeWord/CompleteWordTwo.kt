@@ -132,7 +132,7 @@ class CompleteWordTwo : AppCompatActivity() {
             (rvCompleteWord.layoutManager as GridLayoutManager).spanCount = wordMissed.size
         } catch (e: Exception) {
             "error $e".log()
-            FinshGame.showFinish(this, home.id, score)
+            FinshGame.showFinish(this, home.id, score, score + 2)
         }
     }
 

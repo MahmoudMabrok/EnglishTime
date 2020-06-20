@@ -42,17 +42,23 @@ class Puncate : BasicActivity() {
         finish()
     }
 
-    override fun retryGame() {}
+    override fun retryGame() {
+        current = 0
+        score = 0
+        toCkeck = true
+        tvScoreForm.animateTo(0, 100)
+        btnCHeckPuncate.visibility = View.VISIBLE
+
+        startGame()
+
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_puncate)
 
-        laodData()
-
-        placeItem()
-
+        startGame()
         btnCHeckPuncate.setOnClickListener {
             if (!toCkeck) {
                 it.animItem(1000) {
@@ -74,6 +80,11 @@ class Puncate : BasicActivity() {
         tvScoreForm.setMessage("Score:: ")
         tvScoreForm.animateTo(0, 100)
 
+    }
+
+    private fun startGame() {
+        laodData()
+        placeItem()
     }
 
     private fun checkAnswer() {
@@ -106,7 +117,7 @@ class Puncate : BasicActivity() {
             edPuncate.setText(puncateItem.actual)
         } catch (e: Exception) {
             btnCHeckPuncate.visibility = View.GONE
-            FinshGame.showFinish(this, home.id, score)
+            FinshGame.showFinish(this, home.id, score, score + 7)
         }
 
     }

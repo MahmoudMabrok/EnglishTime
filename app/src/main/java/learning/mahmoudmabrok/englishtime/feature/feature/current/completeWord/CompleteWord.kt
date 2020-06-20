@@ -11,6 +11,7 @@ import learning.mahmoudmabrok.englishtime.feature.datalayer.DataSet
 import learning.mahmoudmabrok.englishtime.feature.datalayer.LocalDB
 import learning.mahmoudmabrok.englishtime.feature.feature.current.puncuate.Puncate
 import learning.mahmoudmabrok.englishtime.feature.parents.BasicActivity
+import learning.mahmoudmabrok.englishtime.feature.utils.CharacterUtil
 import learning.mahmoudmabrok.englishtime.feature.utils.Constants
 import learning.mahmoudmabrok.englishtime.feature.utils.FinshGame
 import learning.mahmoudmabrok.englishtime.feature.utils.SoundHelper
@@ -118,7 +119,7 @@ class CompleteWord : BasicActivity() {
     }
 
     private fun finishGame() {
-        FinshGame.showFinish(this, home.id, score)
+        FinshGame.showFinish(this, home.id, score, score + 5)
     }
 
     /**
@@ -154,30 +155,14 @@ class CompleteWord : BasicActivity() {
      * form word to list of chars and make some of them missed
      */
     private fun getSplitedData(): MutableList<Char> {
-        val currentWord = data[current]
-        return getRandomMissed(currentWord)
-
+        return CharacterUtil.splitWord(lengthToMissed, data[current])
     }
 
     /**
-     * make random char be missed from word
+     * reset game
      */
-    private fun getRandomMissed(cur: String): MutableList<Char> {
-        // with each 3 remove 1 char
-        lengthToMissed = cur.length / 3
-
-        val newWord = cur.toCharArray().toMutableList()
-        var rnd: Int
-        for (i in 0 until lengthToMissed) {
-            // last one sometimes crash
-            rnd = Random.nextInt(cur.length)
-            newWord[rnd] = ' '
-        }
-        return newWord
-    }
-
-
     override fun retryGame() {
+        btnCHeckCompleteWord.visibility = View.VISIBLE
         supportFragmentManager.popBackStack()
         // start from 0 again
         current = 0
@@ -185,6 +170,7 @@ class CompleteWord : BasicActivity() {
         tvScoreForm.animateTo(score, 1000)
         // fill data into adapter
         loadData()
+
     }
 
 }
