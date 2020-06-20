@@ -29,7 +29,6 @@ class Puncate : BasicActivity() {
 
     var toCkeck = true
 
-
     /**
      * this will be called after finish
      */
@@ -43,6 +42,8 @@ class Puncate : BasicActivity() {
     }
 
     override fun retryGame() {
+        supportFragmentManager.popBackStack()
+        gameTotalScore = 0
         current = 0
         score = 0
         toCkeck = true
@@ -96,7 +97,7 @@ class Puncate : BasicActivity() {
 
         val expWrongs = puncateItem.numWrong
         val scoreMax = Constants.SCORE_UNIT * expWrongs
-        val userScore = scoreMax - wrong * 10
+        val userScore = scoreMax - wrong * Constants.SCORE_UNIT
 
         "wrong $wrong exp $expWrongs userscore $userScore".log()
         if (userScore > 0) {
@@ -106,7 +107,6 @@ class Puncate : BasicActivity() {
             SoundHelper.playFail(this)
             this.show("Try Later")
         }
-
         edPuncate.isEnabled = false
 
     }
@@ -115,9 +115,10 @@ class Puncate : BasicActivity() {
         try {
             puncateItem = puncateList[current]
             edPuncate.setText(puncateItem.actual)
+            gameTotalScore += (puncateItem.numWrong * Constants.SCORE_UNIT)
         } catch (e: Exception) {
             btnCHeckPuncate.visibility = View.GONE
-            FinshGame.showFinish(this, home.id, score, score + 7)
+            FinshGame.showFinish(this, home.id, score, gameTotalScore)
         }
 
     }
