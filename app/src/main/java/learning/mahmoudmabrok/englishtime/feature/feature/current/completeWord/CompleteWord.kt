@@ -147,11 +147,11 @@ class CompleteWord : BasicActivity() {
         val isSame = data[current] == word
         if (isSame) {
             updateScore(lengthToMissed * Constants.SCORE_UNIT)
-            this.show("Right")
+//            this.show("Right")
             SoundHelper.playCorrect(this)
         } else {
             SoundHelper.playFail(this)
-            this.show("Wrong")
+//            this.show("Wrong")
             adapter.setData(data[current].toMutableList())
         }
         current += 1

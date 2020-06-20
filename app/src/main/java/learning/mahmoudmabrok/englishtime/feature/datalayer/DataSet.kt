@@ -167,16 +167,18 @@ object DataSet {
         )
 
 
-
+        // 6
         structures.add(listOf(
                 Structure("preposition", "At school# a lot of# in the first year# on the violin"),
                 Structure("Verbs and nouns", "Give a performance# have a party# perform music# perform a play"))
         )
 
+        // 7
         structures.add(listOf(
                 Structure("Verbs and nouns", "Climb tree# eat a fish# take a nap# use sun screen# put on makeup# wash the car# read anew paper# feed the birds# chop vegetables# watch TV# climb tree# take out the rubbish")
         ))
 
+        // 8
         structures.add(null)
 
 

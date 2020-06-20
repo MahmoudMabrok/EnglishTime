@@ -1,12 +1,11 @@
 package learning.mahmoudmabrok.englishtime.feature.feature.current.aorb
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.View
 import kotlinx.android.synthetic.main.activity_is_aor_b_alt.*
 import learning.mahmoudmabrok.englishtime.R
 import learning.mahmoudmabrok.englishtime.feature.datalayer.DataSet
 import learning.mahmoudmabrok.englishtime.feature.datalayer.models.Structure
-import learning.mahmoudmabrok.englishtime.feature.feature.collectWordWithCross.CollectWord
 import learning.mahmoudmabrok.englishtime.feature.feature.current.categorizeWords.CategorizeWords
 import learning.mahmoudmabrok.englishtime.feature.parents.BasicActivity
 import learning.mahmoudmabrok.englishtime.feature.utils.Constants
@@ -17,8 +16,9 @@ import learning.mahmoudmabrok.englishtime.feature.utils.show
 
 class IsAOrB : BasicActivity() {
 
-    var currentGrammer = 0
-    var currentGrammerItem = 0
+    var currentStructure = 0
+    var currentStructureItem = 0
+    var score = 0
 
     lateinit var structures: List<Structure>
     lateinit var currentLessoen: String
@@ -30,10 +30,19 @@ class IsAOrB : BasicActivity() {
     override fun goToNext() {
         openActivity(CategorizeWords::class.java) {
             putInt(Constants.UNIT, unitNum)
-            putInt(Constants.SCORE_KEY, 0 + prevScore)
+            putInt(Constants.SCORE_KEY, score + prevScore)
         }
         // so no back
         finish()
+    }
+
+    override fun retryGame() {
+        supportFragmentManager.popBackStack()
+        score = 0
+        btnNext.visibility = View.VISIBLE
+
+        currentStructure = 0
+        currentStructureItem = 0
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,7 +70,7 @@ class IsAOrB : BasicActivity() {
             loadLesson()
 
             btnNext.setOnClickListener {
-                currentGrammerItem += 1
+                currentStructureItem += 1
                 loadNextItem()
             }
 
@@ -80,24 +89,23 @@ class IsAOrB : BasicActivity() {
     }
 
     private fun loadLesson() {
-        if (currentGrammer < structures.size) {
-            stucureName.text = structures[currentGrammer].name
-            listItems = structures[currentGrammer].getItems()
+        if (currentStructure < structures.size) {
+            stucureName.text = structures[currentStructure].name
+            listItems = structures[currentStructure].getItems()
             loadNextItem()
         } else {
-            FinshGame.showFinish(this, R.id.home, 0, 2)
+            btnNext.visibility = View.INVISIBLE
+            FinshGame.showFinish(this, R.id.home, score, gameTotalScore)
         }
     }
 
-    override fun retryGame() {}
-
 
     private fun loadNextItem() {
-        if (currentGrammerItem < listItems.size)
-            strucureValue.text = listItems[currentGrammerItem]
+        if (currentStructureItem < listItems.size)
+            strucureValue.text = listItems[currentStructureItem]
         else {
-            currentGrammer += 1
-            currentGrammerItem = 0
+            currentStructure += 1
+            currentStructureItem = 0
             loadLesson()
         }
     }

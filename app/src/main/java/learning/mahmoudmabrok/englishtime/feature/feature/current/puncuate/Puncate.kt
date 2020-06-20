@@ -105,7 +105,7 @@ class Puncate : BasicActivity() {
             SoundHelper.playCorrect(this)
         } else {
             SoundHelper.playFail(this)
-            this.show("Try Later")
+//            this.show("Try Later")
         }
         edPuncate.isEnabled = false
 

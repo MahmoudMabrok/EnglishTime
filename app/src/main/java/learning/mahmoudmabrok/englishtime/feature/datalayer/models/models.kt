@@ -46,4 +46,15 @@ data class Structure(val name: String, val examples: String) {
     fun getItems(): List<String> {
         return examples.split("#")
     }
+
+    fun toItems(): List<StructureItem> {
+        return examples.split("#").map {
+            val src = it.replace(" +", " ").toLowerCase()
+            StructureItem(src,
+                    it.replace(" +", " ").toLowerCase())
+        }
+    }
 }
+
+
+data class StructureItem(val src: String, val answer: String = "")
