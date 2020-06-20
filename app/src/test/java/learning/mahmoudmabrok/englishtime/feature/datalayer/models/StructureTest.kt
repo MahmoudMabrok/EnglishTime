@@ -10,6 +10,8 @@ class StructureTest {
     fun toItems() {
         val item = Structure("a", "A#bA a    A")
         val expected = listOf(StructureItem("a", "a"), StructureItem("ba a a", "ba a a"))
+
+        //act
         val result = item.toItems()
 
         assertEquals(expected, result)

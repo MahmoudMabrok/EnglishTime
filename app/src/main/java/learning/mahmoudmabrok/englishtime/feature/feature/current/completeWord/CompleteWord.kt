@@ -69,10 +69,16 @@ class CompleteWord : BasicActivity() {
         // start from 0 again
         current = 0
         score = 0
-        tvScoreForm.animateTo(score, 1000)
+        lengthToMissed = 0
+        scoreView()
         // fill data into adapter
         loadData()
 
+    }
+
+    private fun scoreView() {
+        tvScoreForm.setMessage("Score:: ")
+        tvScoreForm.animateTo(score, 1000)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -92,8 +98,7 @@ class CompleteWord : BasicActivity() {
 
         loadData()
 
-        tvScoreForm.setMessage("Score:: ")
-        tvScoreForm.setValue(score, 100)
+
 
         imPlaySound.setOnClickListener {
             playSound(data[current])
@@ -115,7 +120,8 @@ class CompleteWord : BasicActivity() {
             // remove last one as it "NA"
             categories.removeAt(categories.size - 1)
             //todo   remove
-            data = categories.flatMap { it.getWords() }.subList(0, 2).sortedBy { it.length }
+            data = categories.flatMap { it.getWords() }.subList(0, 6).sortedBy { it.length }
+            groupSize = data.size / 3
             adapter = CompleteWordAdapter(getSplitedData())
         } else {
             finish()
@@ -172,6 +178,7 @@ class CompleteWord : BasicActivity() {
      * form word to list of chars and make some of them missed
      */
     private fun getSplitedData(): MutableList<Char> {
+        lengthToMissed = (data.size / groupSize) + 1
         return CharacterUtil.splitWord(lengthToMissed, data[current])
     }
 
