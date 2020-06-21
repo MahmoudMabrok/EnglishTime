@@ -3,7 +3,11 @@ package learning.mahmoudmabrok.englishtime.feature.feature.current.puncuate
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import kotlinx.android.synthetic.main.activity_grammer.*
 import kotlinx.android.synthetic.main.activity_puncate.*
+import kotlinx.android.synthetic.main.activity_puncate.home
+import kotlinx.android.synthetic.main.activity_puncate.imPlaySound
+import kotlinx.android.synthetic.main.activity_puncate.tvScoreForm
 import learning.mahmoudmabrok.englishtime.R
 import learning.mahmoudmabrok.englishtime.feature.datalayer.DataSet
 import learning.mahmoudmabrok.englishtime.feature.datalayer.models.PunctuateItem
@@ -79,6 +83,12 @@ class Puncate : BasicActivity() {
         tvScoreForm.setMessage("Score:: ")
         tvScoreForm.animateTo(0, 100)
 
+
+        setupSound()
+
+        imPlaySound.setOnClickListener {
+            playSound(puncateItem.expected)
+        }
     }
 
     private fun startGame() {

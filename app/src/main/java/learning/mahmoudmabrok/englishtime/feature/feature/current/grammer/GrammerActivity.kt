@@ -47,6 +47,9 @@ class GrammerActivity : BasicActivity() {
 
         tvCOnvertGrammer.visibility = View.VISIBLE
 
+        currentGrammer = 0
+        currentGrammerItem = 0
+
         startGame()
     }
 
@@ -56,6 +59,12 @@ class GrammerActivity : BasicActivity() {
         setContentView(R.layout.activity_grammer)
 
         startGame()
+
+        setupSound()
+
+        imPlaySound.setOnClickListener {
+            playSound(listItems[currentGrammerItem].start)
+        }
     }
 
     private fun startGame() {
@@ -105,6 +114,7 @@ class GrammerActivity : BasicActivity() {
         if (userAnswer == listItems[currentGrammerItem].end) {
             tvScoreForm.updateValue(Constants.SCORE_UNIT, 1000)
             SoundHelper.playCorrect(this)
+            score += 1
         } else {
             SoundHelper.playFail(this)
         }

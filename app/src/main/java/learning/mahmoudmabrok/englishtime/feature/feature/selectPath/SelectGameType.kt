@@ -41,7 +41,7 @@ class SelectGameType : AppCompatActivity() {
     }
 
     private fun openOne() {
-        val openAcivity = Intent(this, GrammerActivity::class.java)
+        val openAcivity = Intent(this, CompleteWord::class.java)
         openAcivity.putExtra(Constants.UNIT, unit)
         startActivity(openAcivity)
     }
