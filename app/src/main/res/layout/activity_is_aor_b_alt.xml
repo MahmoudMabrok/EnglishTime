@@ -7,6 +7,20 @@
     tools:context=".feature.feature.current.aorb.IsAOrB">
 
 
+    <views.mahmoudmabrok.animatedtextview.AnimatedNumberedTextView
+        android:id="@+id/tvScoreForm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center_horizontal"
+        android:textSize="@dimen/_20ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
     <TextView
         android:id="@+id/stucureName"
         android:layout_width="0dp"
@@ -17,7 +31,7 @@
         android:textSize="@dimen/_18ssp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/tvScoreForm" />
 
     <TextView
         android:id="@+id/strucureValue"
@@ -64,7 +78,7 @@
         android:id="@+id/home"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone">
+        android:visibility="visible">
 
 
     </FrameLayout>

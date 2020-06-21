@@ -6,6 +6,7 @@ import android.os.PersistableBundle
 import android.speech.tts.TextToSpeech
 import android.speech.tts.TextToSpeech.OnInitListener
 import androidx.appcompat.app.AppCompatActivity
+import learning.mahmoudmabrok.englishtime.feature.datalayer.LocalDB
 import learning.mahmoudmabrok.englishtime.feature.utils.Constants
 import learning.mahmoudmabrok.englishtime.feature.utils.SoundHelper
 import learning.mahmoudmabrok.englishtime.feature.utils.log
@@ -15,6 +16,8 @@ abstract class BasicActivity : AppCompatActivity() {
     private var textToSpeech: TextToSpeech? = null
 
     val mTag = javaClass.simpleName
+    val localDB = LocalDB.getINSTANCE(this)
+    var score = 0
 
     var unitNum = 0
     /**
@@ -23,7 +26,7 @@ abstract class BasicActivity : AppCompatActivity() {
     var prevScore = 0
 
     /**
-     *
+     * game scroe as total
      */
     var gameTotalScore = 0
 
@@ -66,5 +69,9 @@ abstract class BasicActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         SoundHelper.stop()
+        "onStop فخفشك  ${prevScore + score} $unitNum".log(mTag)
+
+        // save values
+        localDB.setScoreUnit(unitNum, prevScore + score)
     }
 }

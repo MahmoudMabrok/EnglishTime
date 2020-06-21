@@ -9,18 +9,18 @@ import learning.mahmoudmabrok.englishtime.feature.feature.current.categorizeWord
 import learning.mahmoudmabrok.englishtime.feature.feature.current.categorizeWords.CategorizeWordsTwo
 import learning.mahmoudmabrok.englishtime.feature.feature.current.completeWord.CompleteWord
 import learning.mahmoudmabrok.englishtime.feature.feature.current.completeWord.CompleteWordTwo
+import learning.mahmoudmabrok.englishtime.feature.feature.current.grammer.GrammerActivity
 import learning.mahmoudmabrok.englishtime.feature.utils.Constants
 
 class SelectGameType : AppCompatActivity() {
 
-    var type = ""
+
     var unit = 6
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_select_game_type)
 
-        type = intent.getStringExtra(Constants.TYPE)
         unit = intent.getIntExtra(Constants.UNIT, unit)
 
 
@@ -35,26 +35,13 @@ class SelectGameType : AppCompatActivity() {
     }
 
     private fun openTwo() {
-        val openAcivity = getDestin(2)
+        val openAcivity = Intent(this, CompleteWordTwo::class.java)
         openAcivity.putExtra(Constants.UNIT, unit)
         startActivity(openAcivity)
     }
 
-    private fun getDestin(mode: Int): Intent {
-        return if (mode == 1)
-            when (type) {
-                Constants.CATEGORIES -> Intent(this, CategorizeWords::class.java)
-                else -> Intent(this, CompleteWord::class.java)
-            } else {
-            when (type) {
-                Constants.CATEGORIES -> Intent(this, CategorizeWordsTwo::class.java)
-                else -> Intent(this, CompleteWordTwo::class.java)
-            }
-        }
-    }
-
     private fun openOne() {
-        val openAcivity = getDestin(1)
+        val openAcivity = Intent(this, GrammerActivity::class.java)
         openAcivity.putExtra(Constants.UNIT, unit)
         startActivity(openAcivity)
     }

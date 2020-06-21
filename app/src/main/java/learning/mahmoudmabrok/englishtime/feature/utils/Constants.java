@@ -4,6 +4,7 @@ public interface Constants {
     String LESSION = "lesson";
     String UNIT = "unit";
     String SCORE_KEY = "score";
+    String SCORE_PER_UNIT = "score unit ";
     String SCORE_Total = "total";
     String TYPE = "type";
 

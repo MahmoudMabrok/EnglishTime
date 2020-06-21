@@ -18,6 +18,7 @@ import java.util.Locale;
 import learning.mahmoudmabrok.englishtime.R;
 import learning.mahmoudmabrok.englishtime.feature.feature.activities.Activities;
 import learning.mahmoudmabrok.englishtime.feature.feature.current.completeWord.CompleteWord;
+import learning.mahmoudmabrok.englishtime.feature.feature.selectPath.SelectGameType;
 import learning.mahmoudmabrok.englishtime.feature.utils.Constants;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.Holder> {
@@ -61,7 +62,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.Holder> {
 
                     @Override
                     public void onAnimationEnd(Animation animation) {
-                        Intent openAcivity = new Intent(holder.itemView.getContext(), CompleteWord.class);
+                        Intent openAcivity = new Intent(holder.itemView.getContext(), SelectGameType.class);
                         openAcivity.putExtra(Constants.UNIT, i);
                         holder.itemView.getContext().startActivity(openAcivity);
                     }

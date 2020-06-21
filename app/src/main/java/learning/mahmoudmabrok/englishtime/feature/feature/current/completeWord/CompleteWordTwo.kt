@@ -13,20 +13,21 @@ import kotlinx.android.synthetic.main.names.*
 import learning.mahmoudmabrok.englishtime.R
 import learning.mahmoudmabrok.englishtime.feature.datalayer.DataSet
 import learning.mahmoudmabrok.englishtime.feature.datalayer.LocalDB
+import learning.mahmoudmabrok.englishtime.feature.feature.current.categorizeWords.CategorizeWordsTwo
+import learning.mahmoudmabrok.englishtime.feature.feature.current.puncuate.Puncate
+import learning.mahmoudmabrok.englishtime.feature.parents.BasicActivity
 import learning.mahmoudmabrok.englishtime.feature.utils.*
 import kotlin.random.Random
 
-class CompleteWordTwo : AppCompatActivity() {
+class CompleteWordTwo : BasicActivity() {
 
     private var groupSize = 3
-    private lateinit var db: LocalDB
     var data = listOf("play", "score", "winner", "play", "score", "winner")
     var current = 0
     var lengthToMissed = 1
 
     val adapter: CompleteWordAdapter = CompleteWordAdapter(getSplitedData())
 
-    var score = 0
 
     var score1 = 0
     var score2 = 0
@@ -35,6 +36,24 @@ class CompleteWordTwo : AppCompatActivity() {
     var name2 = ""
 
     var currentPlayer = 0
+
+    override fun retryGame() {
+        currentPlayer = 0
+        var score1 = 0
+        var score2 = 0
+        lengthToMissed = 1
+        current = 0
+        //todo  logic for retry
+
+    }
+
+    override fun goToNext() {
+        openActivity(CategorizeWordsTwo::class.java) {
+            putInt(Constants.UNIT, unitNum)
+        }
+        // so no back
+        finish()
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

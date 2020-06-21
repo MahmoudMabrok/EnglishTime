@@ -31,6 +31,14 @@ public class LocalDB {
         preferences.edit().putInt(Constants.SCORE_KEY, value).apply();
     }
 
+    public int getScoreUnint(int unit) {
+        return preferences.getInt(unit + "", 0);
+    }
+
+    public void setScoreUnit(int unit, int value) {
+        preferences.edit().putInt(unit + "", value).apply();
+    }
+
 
     public Boolean visited(String s) {
         return preferences.getBoolean(s, false);

@@ -12,12 +12,16 @@ import learning.mahmoudmabrok.englishtime.feature.utils.waitForLayout
 
 class HomeActivity : AppCompatActivity() {
 
+    val mTag = javaClass.simpleName
+
     private var adapter: HomeAdapter? = null
+    private lateinit var localDB: LocalDB
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         ButterKnife.bind(this)
+        localDB = LocalDB.getINSTANCE(this)
         initRV()
         tvvvvv.setMessage("Score")
         rvHome.waitForLayout { "onCreate ".log("aa") }
@@ -29,10 +33,13 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun loadScore() {
-        val localDB = LocalDB.getINSTANCE(this)
-        val score = localDB.score
-        "score Home $score".log()
-        tvvvvv.animateTo(score, 3000)
+        var total = 0
+        for (i: Int in 0..5) {
+            total += localDB.getScoreUnint(i)
+            "loadScore $i ,$total".log(mTag)
+        }
+        "score Home $total".log()
+        tvvvvv.animateTo(total, 1000)
     }
 
     private fun initRV() {

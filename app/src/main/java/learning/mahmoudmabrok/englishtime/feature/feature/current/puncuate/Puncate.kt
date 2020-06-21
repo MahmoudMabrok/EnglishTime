@@ -21,8 +21,6 @@ import learning.mahmoudmabrok.englishtime.feature.utils.show
 class Puncate : BasicActivity() {
 
 
-    private var score: Int = 0
-
     lateinit var puncateItem: PunctuateItem
     lateinit var puncateList: List<PunctuateItem>
     var current = 0
