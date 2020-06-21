@@ -1,6 +1,7 @@
 package learning.mahmoudmabrok.englishtime.feature.feature.current.grammer
 
 import android.os.Bundle
+import android.view.View
 import kotlinx.android.synthetic.main.activity_grammer.*
 import learning.mahmoudmabrok.englishtime.R
 import learning.mahmoudmabrok.englishtime.feature.datalayer.DataSet
@@ -44,6 +45,7 @@ class GrammerActivity : BasicActivity() {
         score = 0
         tvScoreForm.animateTo(score, 1000)
 
+        tvCOnvertGrammer.visibility = View.VISIBLE
 
         startGame()
     }
@@ -89,6 +91,7 @@ class GrammerActivity : BasicActivity() {
 
     private fun finishGame() {
         FinshGame.showFinish(this, R.id.home, score, gameTotalScore)
+        tvCOnvertGrammer.visibility = View.GONE
     }
 
     private fun handleCOnvertCLick() {
