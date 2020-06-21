@@ -10,12 +10,13 @@ object CharacterUtil {
      * return same string ig num is equal or more length of word
      */
     fun splitWord(num: Int, word: String): MutableList<Char> {
-        if (num >= word.length) return word.toMutableList()
+        val numberMissed = if (num >= word.length) word.length - 1 else num
+
         // first prepare random index to be removed
         val setOfNums = mutableSetOf<Int>()
         val rand = Random(Date().time)
 
-        while (setOfNums.size < num)
+        while (setOfNums.size < numberMissed)
             setOfNums.add(rand.nextInt(word.length))
 
 

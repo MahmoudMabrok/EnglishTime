@@ -24,9 +24,6 @@ import learning.mahmoudmabrok.englishtime.feature.utils.show
 import kotlin.random.Random
 
 class CompleteWord : BasicActivity() {
-    private var exist: Boolean = false
-
-    var INDEX = 2
 
     private var groupSize = 3
     private lateinit var db: LocalDB
@@ -42,10 +39,6 @@ class CompleteWord : BasicActivity() {
     var lengthToMissed = 1
 
     lateinit var adapter: CompleteWordAdapter
-    /**
-     * local score (score of current game)
-     */
-    var score = 0
 
     /**
      * this will be called after finish
@@ -120,7 +113,7 @@ class CompleteWord : BasicActivity() {
             // remove last one as it "NA"
             categories.removeAt(categories.size - 1)
             //todo   remove
-            data = categories.flatMap { it.getWords() }.subList(0, 6).sortedBy { it.length }
+            data = categories.flatMap { it.getWords() }.subList(0, 2).sortedBy { it.length }
             groupSize = data.size / 3
             adapter = CompleteWordAdapter(getSplitedData())
         } else {
@@ -178,7 +171,8 @@ class CompleteWord : BasicActivity() {
      * form word to list of chars and make some of them missed
      */
     private fun getSplitedData(): MutableList<Char> {
-        lengthToMissed = (data.size / groupSize) + 1
+        lengthToMissed = (current / 3) + 1
+        "getSplitedData  lengthToMissed$lengthToMissed".log(mTag)
         return CharacterUtil.splitWord(lengthToMissed, data[current])
     }
 

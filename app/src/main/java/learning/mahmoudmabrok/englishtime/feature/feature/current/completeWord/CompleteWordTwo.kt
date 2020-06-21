@@ -28,7 +28,6 @@ class CompleteWordTwo : BasicActivity() {
 
     val adapter: CompleteWordAdapter = CompleteWordAdapter(getSplitedData())
 
-    var score = 0
 
     var score1 = 0
     var score2 = 0

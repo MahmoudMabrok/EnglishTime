@@ -21,7 +21,7 @@ class IsAOrB : BasicActivity() {
 
     var currentStructureIndex = 0
     var currentStructureItemIndex = 0
-    var score = 0
+
 
     lateinit var structures: List<Structure>
 
@@ -99,6 +99,7 @@ class IsAOrB : BasicActivity() {
         }
         currentStructureItemIndex++
         loadNextItem()
+        edAnswer.setText("")
 
     }
 

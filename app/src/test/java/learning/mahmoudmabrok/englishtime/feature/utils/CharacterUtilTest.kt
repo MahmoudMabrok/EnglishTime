@@ -11,7 +11,7 @@ class CharacterUtilTest {
         // arrange
         val input = "aa"
         val numToRemove = 3
-        val expected = input.length
+        val expected = 1
 
         // act
         val wordAfter = CharacterUtil.splitWord(word = input, num = numToRemove)
@@ -35,6 +35,8 @@ class CharacterUtilTest {
 
         //assert
         assertEquals(expected, result)
+
+        assertEquals("a hmed", wordAfter)
     }
 
     @Test

@@ -198,10 +198,6 @@ object DataSet {
                 Structure("Verbs + Nouns", "Skip lunch# go to bed late#  get a good mark#make a mistake# takeoff my jacket#  win aprize #turn off the  fan  # forget my homework# lose my favorite pencil# fall my chair# go on sale#found out#launch")
         ))
 
-
-
-
-
     }
 
     fun getIsA(x: Int): IsAItem = isAdata[x]
