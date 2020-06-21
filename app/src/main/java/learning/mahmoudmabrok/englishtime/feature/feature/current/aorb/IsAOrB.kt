@@ -92,6 +92,7 @@ class IsAOrB : BasicActivity() {
     private fun checkAnswer() {
         val userAnswer = edAnswer.text.toString().trim()
         if (userAnswer == currentStructureItem?.answer) {
+            score += 1
             tvScoreForm.updateValue(Constants.SCORE_UNIT, 1000)
             SoundHelper.playCorrect(this)
         } else {

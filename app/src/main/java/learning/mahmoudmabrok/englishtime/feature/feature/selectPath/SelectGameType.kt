@@ -9,18 +9,18 @@ import learning.mahmoudmabrok.englishtime.feature.feature.current.categorizeWord
 import learning.mahmoudmabrok.englishtime.feature.feature.current.categorizeWords.CategorizeWordsTwo
 import learning.mahmoudmabrok.englishtime.feature.feature.current.completeWord.CompleteWord
 import learning.mahmoudmabrok.englishtime.feature.feature.current.completeWord.CompleteWordTwo
+import learning.mahmoudmabrok.englishtime.feature.feature.current.grammer.GrammerActivity
 import learning.mahmoudmabrok.englishtime.feature.utils.Constants
 
 class SelectGameType : AppCompatActivity() {
 
-    var type = ""
+
     var unit = 6
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_select_game_type)
 
-        type = intent.getStringExtra(Constants.TYPE)
         unit = intent.getIntExtra(Constants.UNIT, unit)
 
 
@@ -41,7 +41,7 @@ class SelectGameType : AppCompatActivity() {
     }
 
     private fun openOne() {
-        val openAcivity = Intent(this, CompleteWord::class.java)
+        val openAcivity = Intent(this, GrammerActivity::class.java)
         openAcivity.putExtra(Constants.UNIT, unit)
         startActivity(openAcivity)
     }

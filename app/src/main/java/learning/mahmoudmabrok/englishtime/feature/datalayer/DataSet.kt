@@ -115,12 +115,7 @@ object DataSet {
         ))
 
 
-
-
         gammers.add(listOf(
-                GrammerLesson("Adverb:", "الحال يصف الفعل وياتى بعده ",
-                        "Good#well bad#badly quiet#quietly loud#loudly quick#quicly slow#slowly happy#happily sad#sadly soft#softly"
-                ),
 
                 GrammerLesson("Present simple", "\u202Bمتكرر\u202C \u202Bفعل\u202C \u202Bاو\u202C \u202Bعادة\u202C \u202Bاو\u202C \u202Bحقيقه\u202C \u202Bعن\u202C \u202Bللتعبير\u202C \u202Bيستخدم\u202C",
                         "play#plays watch#watches work#works"),
@@ -169,8 +164,9 @@ object DataSet {
 
         // 6
         structures.add(listOf(
-                Structure("preposition", "At school# a lot of# in the first year# on the violin"),
-                Structure("Verbs and nouns", "Give a performance# have a party# perform music# perform a play"))
+                Structure("Adverb", "Good*well#bad*badly#quiet*quietly#loud*loudly#quick*quicly#slow*slowly#happy*happily#sad*sadly#soft*softly"),
+                Structure("preposition", "...school*At# a lot..*of# ... the first year*in# ... the violin*on"),
+                Structure("Verbs and nouns", ".... a performance*Give# ... a party*have# ... music*perform# ... a play*perform"))
         )
 
         // 7

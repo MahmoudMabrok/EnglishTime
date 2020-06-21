@@ -49,9 +49,11 @@ data class Structure(val name: String, val examples: String) {
 
     fun toItems(): List<StructureItem> {
         return examples.split("#").map {
-            val src = it.replace("\\s+".toRegex(), " ").toLowerCase()
+            val parts = it.split("*")
+            val src = parts.first().replace("\\s+".toRegex(), " ").toLowerCase()
+            val answer = parts.last().replace("\\s+".toRegex(), " ").toLowerCase()
             StructureItem(src,
-                    src)
+                    answer)
         }
     }
 }

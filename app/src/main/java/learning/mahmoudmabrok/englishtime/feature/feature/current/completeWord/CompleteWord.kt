@@ -113,7 +113,7 @@ class CompleteWord : BasicActivity() {
             // remove last one as it "NA"
             categories.removeAt(categories.size - 1)
             //todo   remove
-            data = categories.flatMap { it.getWords() }.subList(0, 2).sortedBy { it.length }
+            data = categories.flatMap { it.getWords() }.toList().sortedBy { it.length }
             groupSize = data.size / 3
             adapter = CompleteWordAdapter(getSplitedData())
         } else {

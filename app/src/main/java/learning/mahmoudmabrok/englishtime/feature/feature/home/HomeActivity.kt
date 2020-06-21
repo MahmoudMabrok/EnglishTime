@@ -39,7 +39,7 @@ class HomeActivity : AppCompatActivity() {
             "loadScore $i ,$total".log(mTag)
         }
         "score Home $total".log()
-        tvvvvv.animateTo(total, 3000)
+        tvvvvv.animateTo(total, 1000)
     }
 
     private fun initRV() {
