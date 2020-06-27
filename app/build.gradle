@@ -9,8 +9,8 @@ android {
         applicationId "learning.mahmoudmabrok.englishtime"
         minSdkVersion 19
         targetSdkVersion 29
-        versionCode 9
-        versionName "1.6.4"
+        versionCode 10
+        versionName "1.6.6"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         // multiDexEnabled true
 
