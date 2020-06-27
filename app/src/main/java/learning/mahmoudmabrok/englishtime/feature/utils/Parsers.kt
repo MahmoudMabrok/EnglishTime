@@ -2,19 +2,15 @@ package learning.mahmoudmabrok.englishtime.feature.utils
 
 fun main() {
 
-    val input = "\n" +
-            "-----tree*climb\n" +
-            " ---- a fish* eat\n" +
-            "  -----a nap*take* \n" +
-            " ------sun screen*use\n" +
-            " ---- makeup*put on\n" +
-            " -------the car* wash\n" +
-            "------anew paper*read\n" +
-            " ------the birds*feed\n" +
-            "vegetable....*chop\n" +
-            "\twatch*\t------TV\n" +
-            "-------tree*climb\n" +
-            "----------the rubbish*take out"
+    val input = "He ---playing football*is\n" +
+            " He-- playing football, yesterday*was\n" +
+            "They ----playing football*are\n" +
+            "They--- playing football. Yesterday*were\n" +
+            "Could—couldn't*can*cannot\n" +
+            "I --- speak English*can\n" +
+            " He ----- speak English*cannot\n" +
+            "I ------speak *could\n" +
+            "They -----speak English*could not"
     val parser = StrucutreParse()
     val res = parser.parse(input)
 

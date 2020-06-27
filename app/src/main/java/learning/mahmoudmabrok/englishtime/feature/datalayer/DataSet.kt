@@ -28,38 +28,37 @@ object DataSet {
 
         // 6
         categories.add(listOf(
-                Category("Musical Instruments", "Concert MusicRoom Bass Flute Drums Cello Xylophone Recorder Trumpet Cymbals"),//10
-                Category("Seasons of year", "spring autumn summer winter"), // 4
-                Category("NA", "Tiger parrot eagle"))
+                Category("Musical Instruments", "Concert*MusicRoom*Bass*Flute*Drums*Cello*Xylophone*Recorder*Trumpet*Cymbals"),//10
+                Category("Seasons of year", "spring*autumn*summer*winter"), // 4
+                Category("NA", "Tiger*parrot*eagle"))
         )
 
         // 7
         categories.add(listOf(
-                Category("Animals", "Tiger parrot eagle deer camel panda bear lion giraffe kangaroo"), //10
-                Category("Misc", "Emergency address officer operator wild animal"), // 6
-                Category("NA", "Concert MusicRoom Bass"))
+                Category("Animals", "Tiger*parrot*eagle*deer*camel*panda*bear*lion*giraffe*kangaroo"), //10
+                Category("NA", "Emergency*address*officer*operator*wild*animal"))
         )
 
         // 8
         categories.add(listOf(
-                Category("Board", "letter chair sorry hard easy hundred why how"), // 8
-                Category("On the board", " letme easyfor passout"), // 3
-                Category("NA", " Cairo Paris Tokyo"))
+                Category("at the kindergarten", "Board*letter*chair*sorry*hard*easy*hundred*why*how"), // 8
+                Category("NA", "Cookie*lookout*bee*behind*howoften*haircut*onceamonth*howaboutyou?*" +
+                        "Moveaway*kindergarten*funny*break*soon*miss*enormous*makefriends*sad*new*little*old*"))
         )
 
         // 9
         categories.add(listOf(
-                Category("Unit 9 ", "Captain interview female pilot copilot airline aboardflight overseas flight onethird newspapers million available tour information thousand " +
-                        "People daily hotel room basketball ticket boat walkingtours " +
-                        "Boattours bustourrs"),
-                Category("NA", "Tiger parrot Concert may"))
+                Category("Cities around the world", "Captain*interview*female*pilot*copilot*airline*aboardflight*overseas*flight*onethird*newspapers*million*available*tour*information*thousand*" +
+                        "People*daily*hotel*room*basketball*ticket*boat*walkingtours*" +
+                        "Boattours*bustourrs"),
+                Category("NA", "Tiger*parrot*Concert*may"))
         )
 
         // 10
         categories.add(listOf(
-                Category("Unit 10 ", "programme Africa gorilla comeover news besides fun funny afternoon football film match gamebell borrow today's special positive mood beef " +
-                        "website findout begin satellite Egyptian invent videogames percent internet TV broadcasting remotecontrol electriccomputer history million black white first"),
-                Category("NA", "Tiger parrot Concert may Department store museum theatre"))
+                Category("Unit 10 ", "programme*Africa*gorilla*comeover*news*besides*fun*funny*afternoon*football*film*match*gamebell*borrow*today's*special*positive*mood*beef*" +
+                        "website*findout*begin*satellite*Egyptian*invent*videogames*percent*internet*TV*broadcasting*remotecontrol*electriccomputer*history*million*black*white*first"),
+                Category("NA", "Tiger*parrot*Concert*may*Department*store*museum*theatre"))
         )
 
 
@@ -113,7 +112,7 @@ object DataSet {
         gammers.add(listOf(
 
                 GrammerLesson("Present simple", "\u202Bمتكرر\u202C \u202Bفعل\u202C \u202Bاو\u202C \u202Bعادة\u202C \u202Bاو\u202C \u202Bحقيقه\u202C \u202Bعن\u202C \u202Bللتعبير\u202C \u202Bيستخدم\u202C",
-                        "play#plays watch#watches work#works"),
+                        "play*plays#watch*watches#work*works"),
 
                 GrammerLesson("Past simple", "\u202Bالماضى\u202C \u202Bفى\u202C \u202Bوانتهى\u202C \u202Bشئ\u202C \u202Bعن\u202C \u202Bللتعبير\u202C \u202Bيستخدم\u202C",
                         "Last year, she ---the harp.*played")
@@ -123,24 +122,27 @@ object DataSet {
 
         gammers.add(listOf(
                 GrammerLesson("\u202Bالصفات\u202C \u202Bمقارنه\u202C", "\u202Bما\u202C \u202Bصفه\u202C \u202Bفى\u202C \u202Bاتين\u202C \u202Bبين\u202C \u202Bمقارنه\u202C \u202Bعند\u202C \u202Bالصفات\u202C \u202Bستخدم\u202C",
-                        "Small#smaller fast#faster slow#slower quick#quicker"),
+                        "Small*smaller fast*faster slow*slower quick*quicker"),
 
                 GrammerLesson("\u202Bالمستمر\u202C \u202Bالماضى\u202C", "حدث استمر فى الماضي وقطعه احدث اخر فى الماضي البسيط ",
-                        "play#playing watch#watching")
+                        "play*playing#watch*watching")
         ))
 
-        gammers.add(null)
+        gammers.add(listOf(
+                GrammerLesson("Past Cont, Preent Cont.", "Vtobe past (was -were) \npresent (am –is- are)",
+                        "He ---playing football*is#He-- playing football, yesterday*was#They ----playing football*are#They--- playing football. Yesterday*were#Could—couldn't*cannot#I --- speak English*can#He ----- speak English*cannot#I ------speak*could#They -----speak English*could not")
+        ))
 
 
         // 9
         gammers.add(
                 listOf(
-                        GrammerLesson("in", "In تأتى معها سنه", "My birthday in May.#", oneWay = true),
-                        GrammerLesson("at", "Atتأتي مع الساعة", "At two o'clock.#", oneWay = true),
-                        GrammerLesson("on", "Atتأتي مع يوم", "On I meet him on Monday#", oneWay = true),
+                        GrammerLesson("in", "In تأتى معها سنه", "My birthday ... May.*in"),
+                        GrammerLesson("at", "Atتأتي مع الساعة", "... two o'clock*at"),
+                        GrammerLesson("on", "Atتأتي مع يوم", ".... I meet him on Monday*On"),
                         GrammerLesson("السؤال  بمعنى  ما المدة ومتى في الماضي", "When +did+sub+ inf? ",
-                                "When did Omar go to Hong Kong?#", oneWay = true),
-                        GrammerLesson("structure", "فاعل+was#were+for++مدة زمنية", "I was there for one week#", oneWay = true)
+                                "... did Omar go to Hong Kong?*When"),
+                        GrammerLesson("structure", "فاعل+was#were+for++مدة زمنية", "I was there ... one week*for")
 
 
                 )
@@ -150,7 +152,7 @@ object DataSet {
         gammers.add(
                 listOf(
                         GrammerLesson("قاعده if الحاله الاولى", "قاعده if الحاله الاولى  تعبر عن احتما ل حدوث شى فى المستقبل\n" +
-                                "If+مضارع  بسيط +مستقبل بسيط", "If  he runs , he will win the race #If I study well', I will  get  high marks", oneWay = true)
+                                "If+مضارع  بسيط +مستقبل بسيط", "If he runs, he will -----the race.*win#If I study well', I will ---high marks*get")
                 )
         )
 
