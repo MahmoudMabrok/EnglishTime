@@ -11,6 +11,7 @@ public interface Constants {
     String SCORE2 = "score2";
     String TYPE = "type";
     String OVERALL_TOTAL = "oveto";
+    String LAST = "last";
 
     String CATEGORIES = "cat";
     String WORDS = "words";

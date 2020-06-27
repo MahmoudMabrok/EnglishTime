@@ -1,9 +1,7 @@
 package learning.mahmoudmabrok.englishtime.feature.feature.current.completeWord
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.activity_complete_word.*
 import learning.mahmoudmabrok.englishtime.R
@@ -19,9 +17,6 @@ import learning.mahmoudmabrok.englishtime.feature.utils.animItem
 import learning.mahmoudmabrok.englishtime.feature.utils.dismissKeyboard
 import learning.mahmoudmabrok.englishtime.feature.utils.log
 import learning.mahmoudmabrok.englishtime.feature.utils.openActivity
-import learning.mahmoudmabrok.englishtime.feature.utils.setValue
-import learning.mahmoudmabrok.englishtime.feature.utils.show
-import kotlin.random.Random
 
 class CompleteWord : BasicActivity() {
 
@@ -131,7 +126,7 @@ class CompleteWord : BasicActivity() {
     }
 
     private fun finishGame() {
-        FinshGame.showFinish(this, home.id, score, gameTotalScore)
+        FinshGame.showFinish(this, home.id, score, gameTotalScore, true)
     }
 
     /**

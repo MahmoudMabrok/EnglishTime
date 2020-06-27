@@ -1,7 +1,5 @@
 package learning.mahmoudmabrok.englishtime.feature.datalayer.models
 
-import java.util.*
-
 data class IsAItem(val types: List<String>, val values: List<String>, val answers: List<Int>)
 
 data class Word(val word: String, val mean: String) {
@@ -21,7 +19,7 @@ data class Category(
 }
 
 
-data class PunctuateItem(val expected: String, val actual: String, val numWrong:Int = 2 )
+data class PunctuateItem(val expected: String, val actual: String, val numWrong: Int = 2)
 
 data class GrammerItem(val start: String, val end: String)
 
@@ -43,10 +41,6 @@ data class GrammerLesson(val name: String,
 }
 
 data class Structure(val name: String, val examples: String) {
-    fun getItems(): List<String> {
-        return examples.split("#")
-    }
-
     fun toItems(): List<StructureItem> {
         return examples.split("#").map {
             val parts = it.split("*")
@@ -59,4 +53,9 @@ data class Structure(val name: String, val examples: String) {
 }
 
 
-data class StructureItem(val src: String, val answer: String = "")
+data class StructureItem(val src: String, val answer: String = "") {
+    val fullSentence = if (src.contains("(\\.)+"))
+        src.replace("(\\.)+".toRegex(), answer)
+    else answer
+
+}

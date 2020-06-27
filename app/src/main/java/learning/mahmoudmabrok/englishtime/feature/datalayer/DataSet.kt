@@ -17,6 +17,7 @@ object DataSet {
 
 
     init {
+
         isAdata.add(IsAItem(listOf("Verb", "Noun"), listOf("Ahmed", "is", "Mohamed", "play"), listOf(1, 0, 1, 0)))
         isAdata.add(IsAItem(listOf("Adjective", "Adverb"), listOf("Ahmed", "is", "Mohamed", "play"), listOf(1, 0, 1, 0)))
         isAdata.add(IsAItem(listOf("Verb", "Noun"), listOf("Ahmed", "is", "Mohamed", "play"), listOf(1, 0, 1, 0)))
@@ -166,7 +167,7 @@ object DataSet {
         structures.add(listOf(
                 Structure("Adverb", "Good*well#bad*badly#quiet*quietly#loud*loudly#quick*quicly#slow*slowly#happy*happily#sad*sadly#soft*softly"),
                 Structure("preposition", "...school*At# a lot..*of# ... the first year*in# ... the violin*on"),
-                Structure("Verbs and nouns", ".... a performance*Give# ... a party*have# ... music*perform# ... a play*perform"))
+                Structure("Verbs and nouns", "... a performance*Give# ... a party*have# ... music*perform# ... a play*perform"))
         )
 
         // 7
@@ -176,7 +177,6 @@ object DataSet {
 
         // 8
         structures.add(null)
-
 
         // 9
         structures.add(listOf(

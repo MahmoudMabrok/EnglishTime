@@ -1,10 +1,6 @@
 package learning.mahmoudmabrok.englishtime.feature.feature.current.categorizeWords
 
 import android.os.Bundle
-import android.speech.tts.TextToSpeech
-import android.util.Log
-import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_categorize_words.*
 import kotlinx.android.synthetic.main.activity_form_sentence.*
 import kotlinx.android.synthetic.main.activity_form_sentence.rvAllWords
@@ -13,34 +9,24 @@ import kotlinx.android.synthetic.main.activity_form_sentence.tvCategoryName
 import kotlinx.android.synthetic.main.activity_form_sentence.tvScoreForm
 import learning.mahmoudmabrok.englishtime.R
 import learning.mahmoudmabrok.englishtime.feature.datalayer.DataSet
-import learning.mahmoudmabrok.englishtime.feature.datalayer.LocalDB
 import learning.mahmoudmabrok.englishtime.feature.datalayer.models.Category
+import learning.mahmoudmabrok.englishtime.feature.parents.BasicActivity
 import learning.mahmoudmabrok.englishtime.feature.utils.Constants
 import learning.mahmoudmabrok.englishtime.feature.utils.Dialoges
 import learning.mahmoudmabrok.englishtime.feature.utils.FinshGame
 import learning.mahmoudmabrok.englishtime.feature.utils.SoundHelper
 import learning.mahmoudmabrok.englishtime.feature.utils.isSame
-import java.util.*
 
 
-class CategorizeWords : AppCompatActivity() {
-
+class CategorizeWords : BasicActivity() {
 
     val INDEX = "1"
-    var unitNum = 0
 
-    private lateinit var db: LocalDB
     private val TAG: String = "CategorizeWords"
     private val adapterTop: CategoryAdapter = CategoryAdapter()
     private val adapterBottom: CategoryAdapter = CategoryAdapter()
 
     var currentSentence = 0
-    var score = 0
-
-    var exist = false
-
-
-    lateinit var textToSpeech: TextToSpeech
 
     private lateinit var categories: List<Category>
     private lateinit var currentCategory: Category
@@ -48,8 +34,6 @@ class CategorizeWords : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_categorize_words)
-        db = LocalDB.getINSTANCE(this)
-
 
         initRv()
         setUpSentences()
@@ -58,17 +42,15 @@ class CategorizeWords : AppCompatActivity() {
         tvScoreForm.animateTo(score, 500)
         tvScoreForm.setMessage(getString(R.string.scrore_message))
 
-        textToSpeech = TextToSpeech(this, TextToSpeech.OnInitListener { status ->
-            if (status != TextToSpeech.ERROR) {
-                textToSpeech.language = Locale.ENGLISH
-            }
-        })
-
         overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
 
         btnCheck.setOnClickListener {
             checkAnsers()
         }
+
+        setupSound()
+
+
 
     }
 
@@ -76,8 +58,8 @@ class CategorizeWords : AppCompatActivity() {
         // check if top is correct
         if (currentCategory.getWords().isSame(adapterTop.list)) {
             SoundHelper.playCorrect(this)
-            updateScore(2 * Constants.SCORE_UNIT)
-
+            // get Score as word collects
+            updateScore(5 * Constants.SCORE_UNIT)
             // point to next item
             currentSentence += 1
             // load new challenge
@@ -139,7 +121,7 @@ class CategorizeWords : AppCompatActivity() {
     }
 
     private fun speakWord(item: String) {
-        textToSpeech.speak(item, TextToSpeech.QUEUE_FLUSH, null)
+        playSound(item)
     }
 
     private fun updateScore(i: Int) {
@@ -150,19 +132,17 @@ class CategorizeWords : AppCompatActivity() {
     private fun setUpSentences() {
         if (intent.hasExtra(Constants.UNIT)) {
             unitNum = intent.getIntExtra(Constants.UNIT, 0)
-            exist = db.visited("$unitNum$INDEX")
-            categories = DataSet.getCategory(unitNum)
+            categories = DataSet.getCategory(unitNum).subList(0, 1)
+            gameTotalScore = (categories.size - 1 * 5)
             laodDataOfAllWords()
         } else {
-            categories = DataSet.getCategory(0)
-            laodDataOfAllWords()
             finish()
         }
 
     }
 
     private fun finishGame() {
-        FinshGame.showFinish(this, home.id, score, score + 2)
+        FinshGame.showFinish(this, home.id, prevScore + score, overallTotal + gameTotalScore, isLast = true)
     }
 
     /**
@@ -188,43 +168,22 @@ class CategorizeWords : AppCompatActivity() {
             // clear them first
             adapterTop.clear()
             if (currentSentence == categories.size - 1) {
-                finish()
+                finishGame()
             }
             currentCategory = categories.get(currentSentence)
             // set name to view
             tvCategoryName.text = currentCategory.name
 
         } catch (e: Exception) {
-            Log.v(TAG, e.localizedMessage)
-            if (!exist) {
-                btnCheck.visibility = View.INVISIBLE
-                finishGame()
-            } else {
-                db.saveVisited("$unitNum$INDEX")
-                finish()
-            }
+
+
         }
     }
 
-    override fun onStop() {
-        super.onStop()
-        try {
-            textToSpeech.stop()
-            textToSpeech.shutdown()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        exist = db.visited("$unitNum$INDEX")
-        if (exist) {
-            return
-        } else {
-            db.saveVisited("$unitNum$INDEX")
-        }
+    override fun retryGame() {
+    }
 
-        var totalScore = db.score
-        totalScore += score
-        db.score = totalScore
-
+    override fun goToNext() {
     }
 
 

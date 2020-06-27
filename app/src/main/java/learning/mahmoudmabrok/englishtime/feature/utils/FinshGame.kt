@@ -1,9 +1,6 @@
 package learning.mahmoudmabrok.englishtime.feature.utils
 
-import android.app.Activity
-import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import learning.mahmoudmabrok.englishtime.feature.feature.finishView.FinishGameFragment
 import learning.mahmoudmabrok.englishtime.feature.feature.finishView.FinishGameTwoPlayerFragment
@@ -12,11 +9,12 @@ import learning.mahmoudmabrok.englishtime.feature.feature.finishView.FinishGameT
 class FinshGame {
     companion object {
 
-        fun showFinish(ctx: FragmentActivity, cont: Int, score: Int, total: Int) {
+        fun showFinish(ctx: FragmentActivity, cont: Int, score: Int, total: Int, isLast: Boolean = false) {
             val fragment = FinishGameFragment().apply {
                 arguments = Bundle().apply {
                     putInt(Constants.SCORE_KEY, score)
                     putInt(Constants.SCORE_Total, total)
+                    putBoolean(Constants.LAST, isLast)
                 }
             }
 
@@ -26,12 +24,13 @@ class FinshGame {
                     .commit()
         }
 
-        fun showFinishTwo(ctx: FragmentActivity, cont: Int, score: Int, total: Int, name: String) {
+        fun showFinishTwo(ctx: FragmentActivity, cont: Int, score: Int, total: Int, name: String, isLast: Boolean = false) {
             val fragment = FinishGameTwoPlayerFragment().apply {
                 arguments = Bundle().apply {
                     putInt(Constants.SCORE_KEY, score)
                     putInt(Constants.SCORE_Total, total)
                     putString(Constants.WINNER_NAME, name)
+                    putBoolean(Constants.LAST, isLast)
                 }
             }
 

@@ -3,7 +3,6 @@ package learning.mahmoudmabrok.englishtime.feature.feature.current.puncuate
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
-import kotlinx.android.synthetic.main.activity_grammer.*
 import kotlinx.android.synthetic.main.activity_puncate.*
 import kotlinx.android.synthetic.main.activity_puncate.home
 import kotlinx.android.synthetic.main.activity_puncate.imPlaySound
@@ -20,7 +19,6 @@ import learning.mahmoudmabrok.englishtime.feature.utils.TestText
 import learning.mahmoudmabrok.englishtime.feature.utils.animItem
 import learning.mahmoudmabrok.englishtime.feature.utils.log
 import learning.mahmoudmabrok.englishtime.feature.utils.openActivity
-import learning.mahmoudmabrok.englishtime.feature.utils.show
 
 class Puncate : BasicActivity() {
 
@@ -126,7 +124,7 @@ class Puncate : BasicActivity() {
             gameTotalScore += (puncateItem.numWrong * Constants.SCORE_UNIT)
         } catch (e: Exception) {
             btnCHeckPuncate.visibility = View.GONE
-            FinshGame.showFinish(this, home.id, score, gameTotalScore)
+            FinshGame.showFinish(this, home.id, score, gameTotalScore, true)
         }
 
     }

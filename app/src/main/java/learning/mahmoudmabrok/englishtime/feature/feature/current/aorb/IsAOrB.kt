@@ -2,9 +2,8 @@ package learning.mahmoudmabrok.englishtime.feature.feature.current.aorb
 
 import android.os.Bundle
 import android.view.View
-import kotlinx.android.synthetic.main.activity_complete_word.*
 import kotlinx.android.synthetic.main.activity_is_aor_b_alt.*
-import kotlinx.android.synthetic.main.activity_is_aor_b_alt.tvScoreForm
+
 import learning.mahmoudmabrok.englishtime.R
 import learning.mahmoudmabrok.englishtime.feature.datalayer.DataSet
 import learning.mahmoudmabrok.englishtime.feature.datalayer.models.Structure
@@ -69,6 +68,15 @@ class IsAOrB : BasicActivity() {
         scoreView()
 
         setupSound()
+
+        imPlaySound.setOnClickListener {
+            playSound(currentStructureItem?.fullSentence ?: "")
+        }
+
+        btnNext.setOnClickListener {
+            checkAnswer()
+        }
+
     }
 
     private fun scoreView() {
@@ -83,12 +91,9 @@ class IsAOrB : BasicActivity() {
             return
         }
         // all structure
-        structures = data
+        structures = data.subList(0, 1)
         loadNextStructure()
 
-        btnNext.setOnClickListener {
-            checkAnswer()
-        }
 
     }
 
@@ -126,7 +131,7 @@ class IsAOrB : BasicActivity() {
             // this case, all structure are finished
             // hide button as it appeare with finish fragment
             btnNext.visibility = View.INVISIBLE
-            FinshGame.showFinish(this, R.id.home, score, gameTotalScore)
+            FinshGame.showFinish(this, R.id.home, score, gameTotalScore, true)
         }
     }
 

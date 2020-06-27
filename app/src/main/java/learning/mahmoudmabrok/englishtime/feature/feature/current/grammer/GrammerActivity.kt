@@ -99,7 +99,7 @@ class GrammerActivity : BasicActivity() {
     }
 
     private fun finishGame() {
-        FinshGame.showFinish(this, R.id.home, score, gameTotalScore)
+        FinshGame.showFinish(this, R.id.home, score, gameTotalScore, true)
         tvCOnvertGrammer.visibility = View.GONE
     }
 
