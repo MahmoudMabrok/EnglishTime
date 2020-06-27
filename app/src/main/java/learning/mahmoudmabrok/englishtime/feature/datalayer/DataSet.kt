@@ -72,21 +72,20 @@ object DataSet {
         )
 
 
-
-
+        // 6
         puncates.add(listOf(
-                PunctuateItem("She played  the cello softly.", "she played  the cello softly"), // 2
-                PunctuateItem("Rana played the drums badly.", "rana played the drums badly"),// 2
-                PunctuateItem("Can he ride the bike quickly?", "can he ride the bike quickly"),// 2
-                PunctuateItem("Ali is ahappy boy.", "ali is ahappy boy")// 2
+                PunctuateItem("Now, he plays the harp.", "now he plays the harp", 3),
+                PunctuateItem("He doesn't hit the drum.", "he doesnt hit the drum", 3),
+                PunctuateItem("We don't blow the trumpt.", "we dont blow the trumpet", 3),
+                PunctuateItem("Last year, he played the cello.", "last year,he played the cello", 3),
+                PunctuateItem("Last year, she played the harp.", "last year,she played the harp", 3),
+                PunctuateItem("Last year, she blow the trumpet.", "last year,she blow the trumpet", 3)
         ))
 
 
         puncates.add(listOf(
-                PunctuateItem("What  are you doing,Karim?", "what  are you doing,karim", 3),
-                PunctuateItem("Can I help you?", "can I help you"),// 2
-                PunctuateItem("I'm cleaning up the music room.", "i'm cleaning up the music room"),// 2
-                PunctuateItem("Youssef was the soloist on the violin.", "youssef was the soloist on the violin")// 2
+                PunctuateItem("She was watching TV at 8 o'clock yesterday.", "she was watching tv at 8 oclock yesterday", 4),
+                PunctuateItem("They were feeding the birds, when I walk.", "they were feeding the birds when I walk ", 3)
         ))
 
 
