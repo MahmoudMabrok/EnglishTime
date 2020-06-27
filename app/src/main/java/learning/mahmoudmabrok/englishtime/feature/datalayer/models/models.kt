@@ -14,7 +14,7 @@ data class Category(
         val name: String,
         val words: String) {
     fun getWords(): List<String> {
-        return words.toLowerCase().split(" ")
+        return words.toLowerCase().split("*")
     }
 }
 
@@ -26,16 +26,11 @@ data class GrammerItem(val start: String, val end: String)
 
 data class GrammerLesson(val name: String,
                          val description: String,
-                         val examples: String,
-                         val oneWay: Boolean = false) {
+                         val examples: String) {
     fun toGrammerItems(): List<GrammerItem> {
-        return if (oneWay) {
-            examples.split("#").map { GrammerItem(it, "") }
-        } else {
-            examples.split(" ").map {
-                val list = it.split("#")
-                GrammerItem(list[0], list[1])
-            }
+        return examples.split("#").map {
+            val list = it.split("*")
+            GrammerItem(list[0], list[1])
         }
     }
 }
