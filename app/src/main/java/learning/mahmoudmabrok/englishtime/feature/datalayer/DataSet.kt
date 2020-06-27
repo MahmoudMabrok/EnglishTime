@@ -40,15 +40,6 @@ object DataSet {
                 Category("NA", "Concert MusicRoom Bass"))
         )
 
-
-        /*    // 8
-            categories.add(listOf(
-                    Category("Cities", "Rome NewYorkCity Cairo Paris Tokyo HongKong London Honolulu Seoul SanFrancisco"), // 10
-                    Category("Months of the years", "January February march April may June July august September October November December"),// 12
-                    Category("Places", "Department store museum theatre statueOfLiberty  DisneyWorld universalStudios"),// 7
-                    Category("NA", "Tiger parrot eagles"))
-            )*/
-
         // 8
         categories.add(listOf(
                 Category("Board", "letter chair sorry hard easy hundred why how"), // 8
@@ -125,7 +116,7 @@ object DataSet {
                         "play#plays watch#watches work#works"),
 
                 GrammerLesson("Past simple", "\u202Bالماضى\u202C \u202Bفى\u202C \u202Bوانتهى\u202C \u202Bشئ\u202C \u202Bعن\u202C \u202Bللتعبير\u202C \u202Bيستخدم\u202C",
-                        "Perform#performed give#gave write#wrote sing#sang")
+                        "Last year, she ---the harp.*played")
 
         ))
 
@@ -155,7 +146,6 @@ object DataSet {
                 )
         )
 
-
         // 10
         gammers.add(
                 listOf(
@@ -165,36 +155,46 @@ object DataSet {
         )
 
 
+        //region structures
         // 6
         structures.add(listOf(
                 Structure("Adverb", "Good*well#bad*badly#quiet*quietly#loud*loudly#quick*quicly#slow*slowly#happy*happily#sad*sadly#soft*softly"),
                 Structure("preposition", "...school*At# a lot..*of# ... the first year*in# ... the violin*on"),
-                Structure("Verbs and nouns", "... a performance*Give# ... a party*have# ... music*perform# ... a play*perform"))
+                Structure("Verbs and nouns", "... a performance*Give# ... a party*have# ... music*perform# ... a play*perform"),
+                Structure("Verbs and nouns", "Perform*performed#give*gave#write*wrote#sing*sang"))
         )
 
         // 7
         structures.add(listOf(
-                Structure("Verbs and nouns", "Climb tree# eat a fish# take a nap# use sun screen# put on makeup# wash the car# read anew paper# feed the birds# chop vegetables# watch TV# climb tree# take out the rubbish")
+                Structure("Verbs and nouns", "-----tree*climb#---- a fish*eat#-----a nap*#------sun screen*use#---- makeup*put on#-------the car*wash#------anew paper*read#------the birds*feed#vegetable....*chop#watch*------TV#-------tree*climb#----------the rubbish*take out"),
+                Structure("Adjective Comparison", "Small*smaller#fast*faster# slow*slower# quick *quicker# fat *fatter# big*bigger#thin*thinner"),
+                Structure("Past Verbs", "Wash* washed# climb *climbed# chop* chopped# hop* hopped# watch* watched# talk* talked# put *put# take* took #read* read# feed* fed# fly *flew# run* ran")
         ))
 
         // 8
-        structures.add(null)
-
-        // 9
         structures.add(listOf(
-                Structure("Expressions", "Would you like ='d like#Go ahead#by yourself#thanks for your time#my pleasure"),
-                Structure("Verbs", "Interview interviewed# ask asked#visit visited#thank thanked #fly flew#have had"),
-                Structure("Places", "Rome#new York city#Cairo#Paris#Tokyo#hang Kong#London# Honolulu"),
-                Structure("Months of the year", "January# February# march# April #may# June# July# august# September# October#November#December ")
+                Structure("Past Verbs", "Miss*missed*remember#remembered#want*wanted#live*lived"),
+                Structure("Expressions", "----- the board*on#----sorry*I'm#let —*me#easy ---*for#pass----*out#That's key come---*on#—work*good#----the board*clean"),
+                Structure("Verbs + Nouns", "---the alphabet*say#--- build a sandcastle*bluid#----- the bubble*blow#----- butterfly*catch#---- an orange*peel#-----a ball*throw#------to ten*count#------award*spell#-----out heart*cut out#------English*speak")
+        )
+
+        )// 9
+        structures.add(listOf(
+                Structure("Past Verbs", "Interview*interviewed#ask*asked#visit*visited#thank*thanked*#fly*flew#have*had"),
+                Structure("Expressions", "-----you like*would#I --- sure*'m#-----ahead*go#---yourself*by#thanks ----your time*for"),
+                Structure("Write Months of the year", "1*January# 2*February# 3*march#4*April#5*may# 6*June#7*July# 8*august# 9*September# 10*October#11*November#12*December ")
         )
         )
 
         // 10
         structures.add(listOf(
-                Structure("Adjectives", "real# good # cool# bad# hungry# nervous# tired#embarrassed# happy#sad# disappointed#cold hot#proud"),
-                Structure("Exxpresssions", "what was on?# On TV # too bad#i missed it #me, neither# time for class #a school night"),
-                Structure("Verbs + Nouns", "Skip lunch# go to bed late#  get a good mark#make a mistake# takeoff my jacket#  win aprize #turn off the  fan  # forget my homework# lose my favorite pencil# fall my chair# go on sale#found out#launch")
+                Structure("Past Verbs", "Skip*skipped#turn off*turned off#turn on*turned on#dream*dreamed#win*won#fall*fell#lose*lost#takeoff*took off#forget*forgot#launch*launched#happen*happened#invent*invented#use*used#begin*began#found out*found out#know*knew"),
+                Structure("Expressions", "... was on?*what#...TV*on#...bad*too#I missed...*it#..., neither*me#time ...class a school night*for"),
+                Structure("Verbs + Nouns", "...lunch*skip#...to bed late*go#...a good mark*get#...a mistake*make#... my jacket*takeoff#...a prize turn off the fan*win#...my homework*forget#... my favorite pencil*lose#...my chair*fall#...on sale*go#found ...*out")
         ))
+
+
+        //endregion
 
     }
 
