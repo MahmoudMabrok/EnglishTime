@@ -72,6 +72,7 @@ object DataSet {
         )
 
 
+        //region puncatuete
         // 6
         puncates.add(listOf(
                 PunctuateItem("Now, he plays the harp.", "now he plays the harp", 3),
@@ -82,37 +83,40 @@ object DataSet {
                 PunctuateItem("Last year, she blow the trumpet.", "last year,she blow the trumpet", 3)
         ))
 
-
+        // 7
         puncates.add(listOf(
                 PunctuateItem("She was watching TV at 8 o'clock yesterday.", "she was watching tv at 8 oclock yesterday", 4),
                 PunctuateItem("They were feeding the birds, when I walk.", "they were feeding the birds when I walk ", 3)
         ))
 
 
+        //8
         puncates.add(listOf(
-                PunctuateItem("These wild animals escaped from the zoo.", "these wild animals escaped from the zoo"),// 2
-                PunctuateItem("An eagle is flying above the giraffe.", "an eagle is flying above the giraffe"),// 2
-                PunctuateItem("A kangaroo is hopped behind Maria.", "a kangaroo is hopped behind maria"),// 2
-                PunctuateItem("A gaint panda are near Mustafa's house.", "a gaint panda are near mustafas house", 4)
+                PunctuateItem("he is playing football", "He is playing football.", 2),
+                PunctuateItem("They are playing football.", "they are playing football ", 3),
+                PunctuateItem("They were playing football , yesterday.", "they were playing football Yesterday", 4),
+                PunctuateItem("I can speak English.", "i can speak english", 3),
+                PunctuateItem("he cannot speak english", "He cannot speak English.", 3),
+                PunctuateItem("I could speak English.", "i could speak english", 3),
+                PunctuateItem("They could not speak English", "they could not speak english.", 3)
         ))
 
 
         // 9
         puncates.add(listOf(
-                PunctuateItem("There is no statically significant difference between the expert mental and groups means.",
-                        "there is no statically significant difference between the expert mental and groups means"),// 2
-
-                PunctuateItem("The bear in the zoo was a big one.", "the bear in the zoo was a big one") // 2
+                PunctuateItem("When did Omar go to Hong Kong?", "when did omar go to hong kong", 5),
+                PunctuateItem("How was she there?", "how was she there", 2)
 
         ))
 
 
         // 10
         puncates.add(listOf(
-                PunctuateItem("How much coffee do you drink?", "how much coffee do you drink"),// 2
-                PunctuateItem("They were there for one week.", "they were there for one week") // 2
+                PunctuateItem("If he runs , she will win the race.", "if he run she will win the race", 3),
+                PunctuateItem("If I study well, I will get high marks.", "if I study well', I will get high marks", 3)
 
         ))
+        //endregion
 
 
         gammers.add(listOf(
@@ -122,7 +126,6 @@ object DataSet {
 
                 GrammerLesson("Past simple", "\u202Bالماضى\u202C \u202Bفى\u202C \u202Bوانتهى\u202C \u202Bشئ\u202C \u202Bعن\u202C \u202Bللتعبير\u202C \u202Bيستخدم\u202C",
                         "Perform#performed give#gave write#wrote sing#sang")
-
 
         ))
 

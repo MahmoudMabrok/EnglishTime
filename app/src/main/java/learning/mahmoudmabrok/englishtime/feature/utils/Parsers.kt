@@ -1,18 +1,9 @@
 package learning.mahmoudmabrok.englishtime.feature.utils
 
-import learning.mahmoudmabrok.englishtime.feature.datalayer.models.PunctuateItem
-import learning.mahmoudmabrok.englishtime.feature.feature.current.puncuate.Puncate
-
 fun main() {
 
-    val input = "He is playing football.*he is playing football\n" +
-            "they are playing football *They are playing football.\n" +
-            "they were playing football Yesterday*They were playing football , yesterday.\n" +
-            "i can speak english*I can speak English.\n" +
-            "He cannot speak English.** he cannot speak english\n" +
-            "i could speak english*I could speak English.\n" +
-            "they could not speak english.*They could  not  speak English"
-
+    val input = "if he run she will win the race*If he runs , she will win the race.\n" +
+            "if I study well', I will get high marks*If I study well, I will get high marks."
     val parser = PuncatuateParse()
     val res = parser.parse(input)
 
@@ -20,8 +11,26 @@ fun main() {
 }
 
 interface BaseParser {
-    abstract fun parse(input: String): String
+    fun parse(input: String): String
+
+    fun stringToLiines(input: String, mainSeperator: String = "\n"): List<String> {
+        // replace all +1 spaces with one space
+        return input.replace("( )+".toRegex(), " ")
+                // then split it to lines each one ended with new line
+                .split(mainSeperator)
+                // then trim it to remove any trailing spaces
+                .map { it.trim() }
+    }
 }
+
+class StrucutreParse : BaseParser {
+
+    override fun parse(input: String): String {
+        val lines = stringToLiines(input)
+        return ""
+    }
+}
+
 
 class PuncatuateParse : BaseParser {
     /*
@@ -41,17 +50,25 @@ i could speak english*I could speak English.
 they could not speak english.*They could  not  speak English
 
 
+PunctuateItem("he is playing football" ,"He is playing football." , 2 ) ,
+PunctuateItem("They are playing football." ,"they are playing football " , 3 ) ,
+PunctuateItem("They were playing football , yesterday." ,"they were playing football Yesterday" , 11 ) ,
+PunctuateItem("I can speak English." ,"i can speak english" , 3 ) ,
+PunctuateItem(" he cannot speak english" ,"He cannot speak English." , 24 ) ,
+PunctuateItem("I could speak English." ,"i could speak english" , 3 ) ,
+PunctuateItem("They could not speak English" ,"they could not speak english." , 3 )
+
+
+
+if he run she will win the race*If he runs , she will win the race.
+if I study well', I will get high marks*If I study well, I will get high marks.
+
+
+
 */
 
-
     override fun parse(input: String): String {
-        val lines =
-                // replace all +1 spaces with one space
-                input.replace("( )+".toRegex(), " ")
-                        // then split it to lines each one ended with new line
-                        .split("\n")
-                        // then trim it to remove any trailing spaces
-                        .map { it.trim() }
+        val lines = stringToLiines(input)
 
         val puncatuatePairs = lines.map { line ->
             // println("line $line")
