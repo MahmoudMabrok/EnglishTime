@@ -126,7 +126,7 @@ class CompleteWord : BasicActivity() {
     }
 
     private fun finishGame() {
-        FinshGame.showFinish(this, home.id, score, gameTotalScore, true)
+        FinshGame.showFinish(this, home.id, score, gameTotalScore, false)
     }
 
     /**

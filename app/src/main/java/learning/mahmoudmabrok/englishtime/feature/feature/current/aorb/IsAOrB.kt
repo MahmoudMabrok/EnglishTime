@@ -13,6 +13,7 @@ import learning.mahmoudmabrok.englishtime.feature.parents.BasicActivity
 import learning.mahmoudmabrok.englishtime.feature.utils.Constants
 import learning.mahmoudmabrok.englishtime.feature.utils.FinshGame
 import learning.mahmoudmabrok.englishtime.feature.utils.SoundHelper
+import learning.mahmoudmabrok.englishtime.feature.utils.dismissKeyboard
 import learning.mahmoudmabrok.englishtime.feature.utils.openActivity
 
 
@@ -50,8 +51,6 @@ class IsAOrB : BasicActivity() {
         supportFragmentManager.popBackStack()
         score = 0
         btnNext.visibility = View.VISIBLE
-
-
         currentStructureIndex = 0
         currentStructureItemIndex = 0
         startGame()
@@ -81,7 +80,7 @@ class IsAOrB : BasicActivity() {
 
     private fun scoreView() {
         tvScoreForm.setMessage("Score:: ")
-        tvScoreForm.animateTo(score, 1000)
+        tvScoreForm.animateTo(score, 200)
     }
 
     private fun startGame() {
@@ -131,7 +130,8 @@ class IsAOrB : BasicActivity() {
             // this case, all structure are finished
             // hide button as it appeare with finish fragment
             btnNext.visibility = View.INVISIBLE
-            FinshGame.showFinish(this, R.id.home, score, gameTotalScore, true)
+            this.dismissKeyboard()
+            FinshGame.showFinish(this, R.id.home, score, gameTotalScore, false)
         }
     }
 

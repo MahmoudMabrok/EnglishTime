@@ -1,21 +1,19 @@
 package learning.mahmoudmabrok.englishtime.feature.feature.current.categorizeWords
 
+import android.content.Intent
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_categorize_words.*
-import kotlinx.android.synthetic.main.activity_form_sentence.*
-import kotlinx.android.synthetic.main.activity_form_sentence.rvAllWords
-import kotlinx.android.synthetic.main.activity_form_sentence.rvCategory
-import kotlinx.android.synthetic.main.activity_form_sentence.tvCategoryName
-import kotlinx.android.synthetic.main.activity_form_sentence.tvScoreForm
 import learning.mahmoudmabrok.englishtime.R
 import learning.mahmoudmabrok.englishtime.feature.datalayer.DataSet
 import learning.mahmoudmabrok.englishtime.feature.datalayer.models.Category
+import learning.mahmoudmabrok.englishtime.feature.feature.home.HomeActivity
 import learning.mahmoudmabrok.englishtime.feature.parents.BasicActivity
 import learning.mahmoudmabrok.englishtime.feature.utils.Constants
 import learning.mahmoudmabrok.englishtime.feature.utils.Dialoges
 import learning.mahmoudmabrok.englishtime.feature.utils.FinshGame
 import learning.mahmoudmabrok.englishtime.feature.utils.SoundHelper
 import learning.mahmoudmabrok.englishtime.feature.utils.isSame
+import learning.mahmoudmabrok.englishtime.feature.utils.log
 
 
 class CategorizeWords : BasicActivity() {
@@ -30,6 +28,7 @@ class CategorizeWords : BasicActivity() {
 
     private lateinit var categories: List<Category>
     private lateinit var currentCategory: Category
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,8 +49,6 @@ class CategorizeWords : BasicActivity() {
 
         setupSound()
 
-
-
     }
 
     private fun checkAnsers() {
@@ -60,15 +57,11 @@ class CategorizeWords : BasicActivity() {
             SoundHelper.playCorrect(this)
             // get Score as word collects
             updateScore(5 * Constants.SCORE_UNIT)
-            // point to next item
-            currentCategoryIndex += 1
-            // load new challenge
-            loadSentence()
+
+            gotoNext()
 
         } else {
             SoundHelper.playFail(this)
-            //todo  re-think
-            // remove all words from list
 
             // show dialog with correct words
             val dialoge = Dialoges.showCorrectWords(this, currentCategory.name, currentCategory.getWords().joinToString(separator = ",", prefix = "{ ", postfix = " }") { it })
@@ -84,11 +77,12 @@ class CategorizeWords : BasicActivity() {
     }
 
     private fun gotoNext() {
-
         // point to next item
         currentCategoryIndex += 1
         // load new challenge
         loadSentence()
+
+        "gotoNext $currentCategoryIndex, ${categories.size}".log(mTag)
     }
 
 
@@ -133,7 +127,7 @@ class CategorizeWords : BasicActivity() {
         if (intent.hasExtra(Constants.UNIT)) {
             unitNum = intent.getIntExtra(Constants.UNIT, 0)
             categories = DataSet.getCategory(unitNum)
-            gameTotalScore = (categories.size - 1 * 5)
+            gameTotalScore = ((categories.size - 1) * 5)
             laodDataOfAllWords()
         } else {
             finish()
@@ -142,6 +136,7 @@ class CategorizeWords : BasicActivity() {
     }
 
     private fun finishGame() {
+        "finishGame ".log(mTag)
         FinshGame.showFinish(this, home.id, prevScore + score, overallTotal + gameTotalScore, isLast = true)
     }
 
@@ -151,12 +146,6 @@ class CategorizeWords : BasicActivity() {
     private fun laodDataOfAllWords() {
         val res = categories.flatMap { it.getWords() }
         adapterBottom.setSentenceList(res)
-
-        val last: Category = categories.filter { it.name == "NA" }.first()
-        categories = categories.toMutableList().apply {
-            remove(last)
-        }
-
     }
 
     /**
@@ -169,16 +158,16 @@ class CategorizeWords : BasicActivity() {
         try {
             // clear them first
             adapterTop.clear()
+            "loadSentence $currentCategoryIndex ${categories.size} , ${currentCategoryIndex == categories.size - 1}".log(mTag)
             if (currentCategoryIndex == categories.size - 1) {
+                // now we with NA catgeory
                 finishGame()
+            } else {
+                currentCategory = categories.get(currentCategoryIndex)
+                // set name to view
+                tvCategoryName.text = currentCategory.name
             }
-            currentCategory = categories.get(currentCategoryIndex)
-            // set name to view
-            tvCategoryName.text = currentCategory.name
-
         } catch (e: Exception) {
-
-
         }
     }
 
@@ -186,6 +175,7 @@ class CategorizeWords : BasicActivity() {
     }
 
     override fun goToNext() {
+        finish()
     }
 
 
