@@ -43,7 +43,7 @@ class SelectGameType : AppCompatActivity() {
     }
 
     private fun openOne() {
-        val openAcivity = Intent(this, IsAOrB::class.java)
+        val openAcivity = Intent(this, CompleteWord::class.java)
         openAcivity.putExtra(Constants.UNIT, unit)
         startActivity(openAcivity)
         finish()

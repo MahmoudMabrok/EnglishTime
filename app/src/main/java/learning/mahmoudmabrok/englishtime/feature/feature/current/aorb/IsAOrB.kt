@@ -90,7 +90,7 @@ class IsAOrB : BasicActivity() {
             return
         }
         // all structure
-        structures = data.subList(0, 1)
+        structures = data
         loadNextStructure()
 
 
