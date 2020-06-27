@@ -109,33 +109,37 @@ object DataSet {
         //endregion
 
 
+        //region grammers
         gammers.add(listOf(
 
                 GrammerLesson("Present simple", "\u202Bمتكرر\u202C \u202Bفعل\u202C \u202Bاو\u202C \u202Bعادة\u202C \u202Bاو\u202C \u202Bحقيقه\u202C \u202Bعن\u202C \u202Bللتعبير\u202C \u202Bيستخدم\u202C",
-                        "play*plays#watch*watches#work*works"),
+                        "play*plays#watch*watches#work*works"), //3
 
                 GrammerLesson("Past simple", "\u202Bالماضى\u202C \u202Bفى\u202C \u202Bوانتهى\u202C \u202Bشئ\u202C \u202Bعن\u202C \u202Bللتعبير\u202C \u202Bيستخدم\u202C",
-                        "Last year, she ---the harp.*played")
+                        "Last year, she ---the harp.*played") //1
 
         ))
 
 
+        // 7
         gammers.add(listOf(
                 GrammerLesson("\u202Bالصفات\u202C \u202Bمقارنه\u202C", "\u202Bما\u202C \u202Bصفه\u202C \u202Bفى\u202C \u202Bاتين\u202C \u202Bبين\u202C \u202Bمقارنه\u202C \u202Bعند\u202C \u202Bالصفات\u202C \u202Bستخدم\u202C",
-                        "Small*smaller fast*faster slow*slower quick*quicker"),
+                        "Small*smaller#fast*faster#slow*slower#quick*quicker"), //4
 
                 GrammerLesson("\u202Bالمستمر\u202C \u202Bالماضى\u202C", "حدث استمر فى الماضي وقطعه احدث اخر فى الماضي البسيط ",
-                        "play*playing#watch*watching")
+                        "play*playing#watch*watching") //2
         ))
 
+        // 8
         gammers.add(listOf(
+                //9
                 GrammerLesson("Past Cont, Preent Cont.", "Vtobe past (was -were) \npresent (am –is- are)",
                         "He ---playing football*is#He-- playing football, yesterday*was#They ----playing football*are#They--- playing football. Yesterday*were#Could—couldn't*cannot#I --- speak English*can#He ----- speak English*cannot#I ------speak*could#They -----speak English*could not")
         ))
 
 
         // 9
-        gammers.add(
+        gammers.add(                                        //5
                 listOf(
                         GrammerLesson("in", "In تأتى معها سنه", "My birthday ... May.*in"),
                         GrammerLesson("at", "Atتأتي مع الساعة", "... two o'clock*at"),
@@ -149,12 +153,13 @@ object DataSet {
         )
 
         // 10
-        gammers.add(
+        gammers.add(                                    //1
                 listOf(
                         GrammerLesson("قاعده if الحاله الاولى", "قاعده if الحاله الاولى  تعبر عن احتما ل حدوث شى فى المستقبل\n" +
                                 "If+مضارع  بسيط +مستقبل بسيط", "If he runs, he will -----the race.*win#If I study well', I will ---high marks*get")
                 )
         )
+        //endregion
 
 
         //region structures
@@ -163,7 +168,7 @@ object DataSet {
                 Structure("Adverb", "Good*well#bad*badly#quiet*quietly#loud*loudly#quick*quicly#slow*slowly#happy*happily#sad*sadly#soft*softly"),
                 Structure("preposition", "...school*At# a lot..*of# ... the first year*in# ... the violin*on"),
                 Structure("Verbs and nouns", "... a performance*Give# ... a party*have# ... music*perform# ... a play*perform"),
-                Structure("Verbs and nouns", "Perform*performed#give*gave#write*wrote#sing*sang"))
+                Structure("Past Verbs", "Perform*performed#give*gave#write*wrote#sing*sang"))
         )
 
         // 7
