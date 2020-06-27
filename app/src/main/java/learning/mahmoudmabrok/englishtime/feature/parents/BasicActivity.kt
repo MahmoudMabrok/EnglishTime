@@ -30,6 +30,8 @@ abstract class BasicActivity : AppCompatActivity() {
      */
     var gameTotalScore = 0
 
+    var overallTotal = 0
+
     fun setupSound() {
         "setupSound start".log(mTag)
         textToSpeech = TextToSpeech(this, OnInitListener { status ->
@@ -48,6 +50,7 @@ abstract class BasicActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         prevScore = intent.getIntExtra(Constants.SCORE_KEY, 0)
+        overallTotal = intent.getIntExtra(Constants.OVERALL_TOTAL, 0)
         "onResume score:$prevScore".log(mTag)
     }
 

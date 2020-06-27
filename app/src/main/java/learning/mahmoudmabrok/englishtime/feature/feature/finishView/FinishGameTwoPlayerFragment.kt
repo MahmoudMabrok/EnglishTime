@@ -27,8 +27,6 @@ class FinishGameTwoPlayerFragment : Fragment() {
 
     val mTag = javaClass.simpleName
 
-    var sys1: ParticleSystem? = null
-    var sys2: ParticleSystem? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -44,7 +42,6 @@ class FinishGameTwoPlayerFragment : Fragment() {
 
         btnRetry.setOnClickListener {
             (activity as? BasicActivity)?.retryGame()
-            releaseEmits()
         }
 
         val score = arguments?.getInt(Constants.SCORE_KEY) ?: 0
@@ -57,31 +54,6 @@ class FinishGameTwoPlayerFragment : Fragment() {
         tvScoreTotal.text = total.toString()
 
         tvWinnerName.text = name
-    }
-
-
-    private fun releaseEmits() {
-        sys1?.stopEmitting()
-        sys2?.stopEmitting()
-    }
-
-    private fun an() {
-        sys1 = ParticleSystem(requireActivity(), 30, R.drawable.favicon1, 1000)
-                .setAcceleration(0.00013f, 90)
-                .setSpeedByComponentsRange(0f, 0f, 0.05f, 0.1f)
-                .setFadeOut(200, AccelerateInterpolator()).also {
-                    it.emitWithGravity(topLeft, Gravity.BOTTOM, 30)
-                }
-
-        sys2 = ParticleSystem(requireActivity(), 30, R.drawable.favicon2, 1000)
-                .setAcceleration(0.00013f, 90)
-                .setSpeedByComponentsRange(0f, 0f, 0.05f, 0.1f)
-                .setFadeOut(200, AccelerateInterpolator()).also {
-                    it.emitWithGravity(topLeft, Gravity.BOTTOM, 30)
-                }
-
-        Handler().postDelayed({ releaseEmits() }, 1000)
-
     }
 
 }

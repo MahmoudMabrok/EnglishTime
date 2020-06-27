@@ -50,6 +50,7 @@ class CompleteWordTwo : BasicActivity() {
         current = 0
 
         setupPlay()
+        loadData()
 
     }
 
@@ -139,7 +140,7 @@ class CompleteWordTwo : BasicActivity() {
         if (intent.hasExtra(Constants.UNIT)) {
             unitNum = intent.getIntExtra(Constants.UNIT, 0)
             val categories = DataSet.getCategory(unitNum).toMutableList().subList(0, 1)
-            data = categories.flatMap { it.getWords() }.toList().sortedBy { it.length }.subList(0, 3)
+            data = categories.flatMap { it.getWords() }.toList().sortedBy { it.length }.subList(0, 1)
             adapter = CompleteWordAdapter(mutableListOf())
         } else {
         }
@@ -155,17 +156,22 @@ class CompleteWordTwo : BasicActivity() {
             "error $e".log()
             btnCHeckCompleteWord.postDelayed({ btnCHeckCompleteWord.visibility = View.GONE }, 500)
             val wName = if (score1 > score2) name1 else name2
-            FinshGame.showFinishTwo(this, home.id, score, gameTotalScore, wName)
+            val wScore = if (score1 > score2) score1 else score2
+            FinshGame.showFinishTwo(this, home.id, wScore, gameTotalScore, wName)
         }
     }
+
+    var isSecondWrong = false
 
     /**
      * Check answer if correct increase score else show correct one and go to next one
      */
+
     private fun checkAnswer() {
         val word = String(adapter.data.toCharArray())
         val isSame = data[current] == word
         if (isSame) {
+            isSecondWrong = false
             updateScore(lengthToMissed * Constants.SCORE_UNIT)
             this.show("Right")
             // point to next word
@@ -178,15 +184,29 @@ class CompleteWordTwo : BasicActivity() {
                 btnCHeckCompleteWord.isEnabled = true
             }
             SoundHelper.playCorrect(this)
+
         } else {
             this.show("Wrong")
             SoundHelper.playFail(this)
+            if (isSecondWrong) {
+                // disable button to allow user to see actions
+                btnCHeckCompleteWord.isEnabled = false
+                adapter.setData(data.get(current).toMutableList())
+                current += 1
+                // make anim then load new data
+                btnCHeckCompleteWord.animItem {
+                    loadData()
+                    btnCHeckCompleteWord.isEnabled = true
+                }
+            }
+            isSecondWrong = isSecondWrong.not()
         }
 
         currentPlayer = when (currentPlayer) {
             1 -> 2
             else -> 1
         }
+
         updatePlayerBoardUI()
 
     }

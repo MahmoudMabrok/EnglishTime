@@ -39,7 +39,7 @@ class ShareScore : AppCompatActivity() {
             val bitmap = layoutH.drawingCache
 
             try {
-                val file = File(getCacheDir(), name.toString() + ".png")
+                val file = File(cacheDir, name.toString() + ".png")
                 val fOut = FileOutputStream(file)
                 "onCreate aa".log("")
                 bitmap.compress(CompressFormat.PNG, 100, fOut)

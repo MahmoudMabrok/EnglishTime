@@ -46,6 +46,7 @@ class CompleteWord : BasicActivity() {
         openActivity(Puncate::class.java) {
             putInt(Constants.UNIT, unitNum)
             putInt(Constants.SCORE_KEY, score + prevScore)
+            putInt(Constants.OVERALL_TOTAL, overallTotal + gameTotalScore)
         }
         // so no back
         finish()
@@ -95,6 +96,8 @@ class CompleteWord : BasicActivity() {
         }
 
         setupSound()
+
+        scoreView()
     }
 
     private fun initRv() {
@@ -107,7 +110,7 @@ class CompleteWord : BasicActivity() {
         if (intent.hasExtra(Constants.UNIT)) {
             unitNum = intent.getIntExtra(Constants.UNIT, 0)
             val categories = DataSet.getCategory(unitNum).toMutableList().subList(0, 1)
-            data = categories.flatMap { it.getWords() }.toList().sortedBy { it.length }
+            data = categories.flatMap { it.getWords() }.toList().sortedBy { it.length }.subList(0, 1)
             adapter = CompleteWordAdapter(getSplitedData())
         } else {
             finish()

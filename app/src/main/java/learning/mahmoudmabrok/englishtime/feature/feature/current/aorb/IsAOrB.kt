@@ -40,6 +40,7 @@ class IsAOrB : BasicActivity() {
         openActivity(CategorizeWords::class.java) {
             putInt(Constants.UNIT, unitNum)
             putInt(Constants.SCORE_KEY, score + prevScore)
+            putInt(Constants.OVERALL_TOTAL, gameTotalScore + overallTotal)
         }
         // so no back
         finish()
@@ -66,6 +67,8 @@ class IsAOrB : BasicActivity() {
         startGame()
 
         scoreView()
+
+        setupSound()
     }
 
     private fun scoreView() {

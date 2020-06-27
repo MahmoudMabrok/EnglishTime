@@ -10,6 +10,7 @@ public interface Constants {
     String SCORE1 = "score1";
     String SCORE2 = "score2";
     String TYPE = "type";
+    String OVERALL_TOTAL = "oveto";
 
     String CATEGORIES = "cat";
     String WORDS = "words";
