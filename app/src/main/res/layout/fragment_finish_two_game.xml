@@ -11,8 +11,8 @@
 
     <com.eralp.circleprogressview.CircleProgressView
         android:id="@+id/circle_progress_view"
-        android:layout_width="@dimen/_150sdp"
-        android:layout_height="@dimen/_150sdp"
+        android:layout_width="125dp"
+        android:layout_height="122dp"
         android:layout_gravity="center"
         app:cpv_background_circle_color="#5b253048"
         app:cpv_background_circle_width="20dp"
@@ -20,27 +20,11 @@
         app:cpv_circle_width="6dp"
         app:cpv_text_color="-1"
         app:cpv_text_size="40"
-        app:layout_constraintBottom_toTopOf="@+id/tvMessage"
-        app:layout_constraintEnd_toEndOf="@+id/tvMessage"
-        app:layout_constraintStart_toStartOf="@+id/tvMessage"
+        app:layout_constraintBottom_toTopOf="@+id/btnRetry"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-    <TextView
-        android:id="@+id/tvMessage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:lineSpacingExtra="18sp"
-        android:text="@string/you_have_finished_this_challenge"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#F4EDED"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.68" />
 
     <Button
         android:id="@+id/btnFinish"
@@ -127,6 +111,31 @@
         app:layout_constraintEnd_toEndOf="@+id/circle_progress_view"
         app:layout_constraintStart_toStartOf="@+id/circle_progress_view"
         app:layout_constraintTop_toTopOf="@+id/circle_progress_view" />
+
+    <TextView
+        android:id="@+id/tvWinnerName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintBottom_toTopOf="@+id/circle_progress_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topLeft"
+        app:layout_constraintVertical_bias="0.74" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Winner......"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintBottom_toTopOf="@+id/tvWinnerName"
+        app:layout_constraintEnd_toEndOf="@+id/tvWinnerName"
+        app:layout_constraintStart_toStartOf="@+id/tvWinnerName"
+        app:layout_constraintTop_toBottomOf="@+id/topLeft"
+        app:layout_constraintVertical_bias="0.47000003" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

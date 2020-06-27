@@ -10,13 +10,20 @@ import android.view.animation.AccelerateInterpolator
 import androidx.fragment.app.Fragment
 import com.plattysoft.leonids.ParticleSystem
 import kotlinx.android.synthetic.main.fragment_finish_game.*
+import kotlinx.android.synthetic.main.fragment_finish_game.btnFinish
+import kotlinx.android.synthetic.main.fragment_finish_game.btnRetry
+import kotlinx.android.synthetic.main.fragment_finish_game.topLeft
+import kotlinx.android.synthetic.main.fragment_finish_game.tvScoreFrom
+import kotlinx.android.synthetic.main.fragment_finish_game.tvScoreTotal
+import kotlinx.android.synthetic.main.fragment_finish_two_game.*
 import learning.mahmoudmabrok.englishtime.R
 import learning.mahmoudmabrok.englishtime.feature.parents.BasicActivity
 import learning.mahmoudmabrok.englishtime.feature.utils.Constants
 import learning.mahmoudmabrok.englishtime.feature.utils.Utils
+import learning.mahmoudmabrok.englishtime.feature.utils.log
 
 
-class FinishGameFragment : Fragment() {
+class FinishGameTwoPlayerFragment : Fragment() {
 
     val mTag = javaClass.simpleName
 
@@ -25,7 +32,7 @@ class FinishGameFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_finish_game, container, false)
+        return inflater.inflate(R.layout.fragment_finish_two_game, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,22 +49,16 @@ class FinishGameFragment : Fragment() {
 
         val score = arguments?.getInt(Constants.SCORE_KEY) ?: 0
         val total = arguments?.getInt(Constants.SCORE_Total) ?: 0
+        val name = arguments?.getString(Constants.WINNER_NAME) ?: "ahmed"
+
+        "onViewCreated $score $total".log(mTag)
 
         tvScoreFrom.text = score.toString()
         tvScoreTotal.text = total.toString()
 
-        fillPercentage(Utils.getPercentage(score, total))
-
+        tvWinnerName.text = name
     }
 
-    private fun fillPercentage(percentage: Int) {
-
-        if (percentage >= 50) {
-            tvMessage.text = getString(R.string.good)
-        } else {
-            tvMessage.text = getString(R.string.bad)
-        }
-    }
 
     private fun releaseEmits() {
         sys1?.stopEmitting()

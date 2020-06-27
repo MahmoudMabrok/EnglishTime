@@ -25,7 +25,6 @@ import kotlin.random.Random
 
 class CompleteWord : BasicActivity() {
 
-    private var groupSize = 3
     private lateinit var db: LocalDB
 
     var data = emptyList<String>()
@@ -91,8 +90,6 @@ class CompleteWord : BasicActivity() {
 
         loadData()
 
-
-
         imPlaySound.setOnClickListener {
             playSound(data[current])
         }
@@ -110,11 +107,7 @@ class CompleteWord : BasicActivity() {
         if (intent.hasExtra(Constants.UNIT)) {
             unitNum = intent.getIntExtra(Constants.UNIT, 0)
             val categories = DataSet.getCategory(unitNum).toMutableList().subList(0, 1)
-            /*  // remove last one as it "NA"
-              categories.removeAt(categories.size - 1)*/
-            //todo   remove
             data = categories.flatMap { it.getWords() }.toList().sortedBy { it.length }
-            groupSize = data.size / 3
             adapter = CompleteWordAdapter(getSplitedData())
         } else {
             finish()

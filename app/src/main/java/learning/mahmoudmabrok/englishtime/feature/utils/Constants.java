@@ -6,6 +6,9 @@ public interface Constants {
     String SCORE_KEY = "score";
     String SCORE_PER_UNIT = "score unit ";
     String SCORE_Total = "total";
+    String WINNER_NAME = "winner";
+    String SCORE1 = "score1";
+    String SCORE2 = "score2";
     String TYPE = "type";
 
     String CATEGORIES = "cat";
