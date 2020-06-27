@@ -26,7 +26,7 @@ class CategorizeWords : BasicActivity() {
     private val adapterTop: CategoryAdapter = CategoryAdapter()
     private val adapterBottom: CategoryAdapter = CategoryAdapter()
 
-    var currentSentence = 0
+    var currentCategoryIndex = 0
 
     private lateinit var categories: List<Category>
     private lateinit var currentCategory: Category
@@ -61,7 +61,7 @@ class CategorizeWords : BasicActivity() {
             // get Score as word collects
             updateScore(5 * Constants.SCORE_UNIT)
             // point to next item
-            currentSentence += 1
+            currentCategoryIndex += 1
             // load new challenge
             loadSentence()
 
@@ -86,7 +86,7 @@ class CategorizeWords : BasicActivity() {
     private fun gotoNext() {
 
         // point to next item
-        currentSentence += 1
+        currentCategoryIndex += 1
         // load new challenge
         loadSentence()
     }
@@ -132,7 +132,7 @@ class CategorizeWords : BasicActivity() {
     private fun setUpSentences() {
         if (intent.hasExtra(Constants.UNIT)) {
             unitNum = intent.getIntExtra(Constants.UNIT, 0)
-            categories = DataSet.getCategory(unitNum).subList(0, 1)
+            categories = DataSet.getCategory(unitNum)
             gameTotalScore = (categories.size - 1 * 5)
             laodDataOfAllWords()
         } else {
@@ -152,9 +152,11 @@ class CategorizeWords : BasicActivity() {
         val res = categories.flatMap { it.getWords() }
         adapterBottom.setSentenceList(res)
 
-        /*val last:Category = categories.filter { it.name == "NA" }.first()
-        categories.toMutableList().remove(last)
-        */
+        val last: Category = categories.filter { it.name == "NA" }.first()
+        categories = categories.toMutableList().apply {
+            remove(last)
+        }
+
     }
 
     /**
@@ -167,10 +169,10 @@ class CategorizeWords : BasicActivity() {
         try {
             // clear them first
             adapterTop.clear()
-            if (currentSentence == categories.size - 1) {
+            if (currentCategoryIndex == categories.size - 1) {
                 finishGame()
             }
-            currentCategory = categories.get(currentSentence)
+            currentCategory = categories.get(currentCategoryIndex)
             // set name to view
             tvCategoryName.text = currentCategory.name
 

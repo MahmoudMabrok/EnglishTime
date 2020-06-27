@@ -42,11 +42,16 @@ class FinishGameFragment : Fragment() {
 
         val score = arguments?.getInt(Constants.SCORE_KEY) ?: 0
         val total = arguments?.getInt(Constants.SCORE_Total) ?: 0
+        val isLast = arguments?.getBoolean(Constants.LAST) ?: false
 
         tvScoreFrom.text = score.toString()
         tvScoreTotal.text = total.toString()
 
         fillPercentage(Utils.getPercentage(score, total))
+
+        if (isLast) {
+            btnRetry.visibility = View.GONE
+        }
 
     }
 

@@ -63,7 +63,7 @@ class GrammerActivity : BasicActivity() {
         setupSound()
 
         imPlaySound.setOnClickListener {
-            playSound(listItems[currentGrammerItem].start)
+            playSound(listItems[currentGrammerItem].end)
         }
     }
 
