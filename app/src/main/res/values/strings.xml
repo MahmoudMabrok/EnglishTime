@@ -31,4 +31,5 @@
     <string name="bad">You did a good work, you can try again to get a better results</string>
     <string name="final_name">This certificate said that %s has got %d out of %d in English App Practice</string>
     <string name="check">check</string>
+    <string name="score_message">Score:: </string>
 </resources>

@@ -175,12 +175,13 @@ class CategorizeWords : BasicActivity() {
     }
 
     override fun goToNext() {
+        saveScore(4)
         finish()
     }
 
     override fun onStop() {
         super.onStop()
-        saveScore(4)
+        // saveScore(4)
     }
 
 }

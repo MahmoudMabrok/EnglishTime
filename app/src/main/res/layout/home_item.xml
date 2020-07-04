@@ -5,13 +5,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/itemHolder"
     android:layout_height="wrap_content"
-    android:background="@color/colorPrimaryDark">
+    android:layout_margin="8dp"
+    android:clipToPadding="false"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_6sdp">
-
 
         <TextView
             android:id="@+id/tvUnitNO"
@@ -19,8 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_2sdp"
             android:layout_marginBottom="@dimen/_10sdp"
-            android:background="@color/colorPrimaryDark"
-            android:gravity="center_horizontal"
+            android:paddingStart="5dp"
             android:paddingTop="@dimen/_16sdp"
             android:paddingBottom="@dimen/_16sdp"
             android:text="@string/unit_1"
@@ -32,9 +33,10 @@
             android:id="@+id/tvScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/green"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="25" />

@@ -61,7 +61,7 @@ class CategorizeWordsTwo : AppCompatActivity() {
         setUpSentences()
         loadSentence()
 
-        tvScoreForm.setMessage("Score:: ")
+        tvScoreForm.setMessage(getString(R.string.score_message))
 
 
         textToSpeech = TextToSpeech(this, TextToSpeech.OnInitListener { status ->

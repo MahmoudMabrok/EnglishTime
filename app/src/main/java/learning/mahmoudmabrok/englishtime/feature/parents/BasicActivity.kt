@@ -3,6 +3,7 @@ package learning.mahmoudmabrok.englishtime.feature.parents
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.speech.tts.TextToSpeech.OnInitListener
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import learning.mahmoudmabrok.englishtime.feature.datalayer.LocalDB
 import learning.mahmoudmabrok.englishtime.feature.utils.Constants
@@ -49,7 +50,8 @@ abstract class BasicActivity : AppCompatActivity() {
         super.onResume()
         prevScore = intent.getIntExtra(Constants.SCORE_KEY, 0)
         overallTotal = intent.getIntExtra(Constants.OVERALL_TOTAL, 0)
-        "onResume score:$prevScore".log(mTag)
+        "onResume prevUserScore:$prevScore prevToatal: $overallTotal".log(mTag)
+
     }
 
     abstract fun retryGame()

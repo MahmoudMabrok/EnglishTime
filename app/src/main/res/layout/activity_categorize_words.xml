@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <views.mahmoudmabrok.animatedtextview.AnimatedNumberedTextView
+            <learning.mahmoudmabrok.englishtime.feature.custimeviews.AnimatedNumberedTextView
                 android:id="@+id/tvScoreForm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

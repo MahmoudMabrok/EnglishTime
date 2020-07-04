@@ -79,7 +79,7 @@ class IsAOrB : BasicActivity() {
     }
 
     private fun scoreView() {
-        tvScoreForm.setMessage("Score:: ")
+        tvScoreForm.setMessage(getString(R.string.score_message))
         tvScoreForm.animateTo(score, 200)
     }
 
@@ -97,8 +97,8 @@ class IsAOrB : BasicActivity() {
     }
 
     private fun checkAnswer() {
-        val userAnswer = edAnswer.text.toString().trim()
-        if (userAnswer == currentStructureItem?.answer) {
+        val userAnswer = edAnswer.text.toString().trim().toLowerCase()
+        if (userAnswer == currentStructureItem?.answer?.toLowerCase()) {
             score += 1
             tvScoreForm.updateValue(Constants.SCORE_UNIT, 1000)
             SoundHelper.playCorrect(this)

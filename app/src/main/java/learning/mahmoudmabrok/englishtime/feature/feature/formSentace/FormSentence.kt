@@ -10,7 +10,7 @@ import learning.mahmoudmabrok.englishtime.R
 import learning.mahmoudmabrok.englishtime.feature.datalayer.LocalDB
 import learning.mahmoudmabrok.englishtime.feature.models.Sentence
 import learning.mahmoudmabrok.englishtime.feature.utils.ListsOpt
-import learning.mahmoudmabrok.englishtime.feature.utils.setValue
+
 
 
 class FormSentence : AppCompatActivity() {
@@ -30,7 +30,7 @@ class FormSentence : AppCompatActivity() {
         setUpSentences()
         initRv()
         loadSentence()
-        tvScoreForm.setMessage("Score:: ")
+        tvScoreForm.setMessage(getString(R.string.score_message))
 
     }
 
@@ -42,7 +42,7 @@ class FormSentence : AppCompatActivity() {
     private fun loadScore() {
         db = LocalDB.getINSTANCE(this)
         score = db.score
-        tvScoreForm.setValue(score, 1500)
+        //  tvScoreForm.setValue(score, 1500)
     }
     override fun onPause() {
         super.onPause()

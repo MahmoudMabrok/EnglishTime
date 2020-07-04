@@ -53,7 +53,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.Holder> {
         if (item.getScore() > 0)
             holder.mScore.setText(item.getScore() + "");
 
-        holder.mTvUnitNO.setText(String.format(Locale.ENGLISH, "Unit %d", i + 1 + 5));
+        holder.mTvUnitNO.setText(String.format(Locale.ENGLISH, "%d. %s", i + 1 + 5, item.getName()));
         holder.mTvUnitNO.setOnClickListener(e -> {
             Intent openAcivity = new Intent(holder.itemView.getContext(), SelectGameType.class);
             openAcivity.putExtra(Constants.UNIT, i);

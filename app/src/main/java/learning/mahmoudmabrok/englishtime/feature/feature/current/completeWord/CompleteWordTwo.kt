@@ -58,6 +58,7 @@ class CompleteWordTwo : BasicActivity() {
         openActivity(CategorizeWordsTwo::class.java) {
             putInt(Constants.UNIT, unitNum)
             putInt(Constants.SCORE_KEY, score + prevScore)
+            putInt(Constants.OVERALL_TOTAL, overallTotal + gameTotalScore)
         }
         // so no back
         finish()

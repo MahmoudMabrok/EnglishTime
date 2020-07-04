@@ -36,6 +36,7 @@ class Puncate : BasicActivity() {
         openActivity(GrammerActivity::class.java) {
             putInt(Constants.UNIT, unitNum)
             putInt(Constants.SCORE_KEY, score + prevScore)
+            putInt(Constants.OVERALL_TOTAL, overallTotal + gameTotalScore)
         }
         // so no back
         finish()
@@ -78,7 +79,7 @@ class Puncate : BasicActivity() {
             }
         }
 
-        tvScoreForm.setMessage("Score:: ")
+        tvScoreForm.setMessage(getString(R.string.score_message))
         tvScoreForm.animateTo(0, 100)
 
 
@@ -124,7 +125,7 @@ class Puncate : BasicActivity() {
             gameTotalScore += (puncateItem.numWrong * Constants.SCORE_UNIT)
         } catch (e: Exception) {
             btnCHeckPuncate.visibility = View.GONE
-            FinshGame.showFinish(this, home.id, score, gameTotalScore, true)
+            FinshGame.showFinish(this, home.id, score, gameTotalScore, false)
         }
 
     }

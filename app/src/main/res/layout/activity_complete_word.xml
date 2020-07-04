@@ -10,7 +10,7 @@
     tools:context=".feature.feature.current.completeWord.CompleteWord">
 
 
-    <views.mahmoudmabrok.animatedtextview.AnimatedNumberedTextView
+    <learning.mahmoudmabrok.englishtime.feature.custimeviews.AnimatedNumberedTextView
         android:id="@+id/tvScoreForm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,6 +19,7 @@
         android:layout_marginEnd="16dp"
         android:gravity="center_horizontal"
         android:textSize="@dimen/_20ssp"
+        tools:text="sasa 12 "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

@@ -36,6 +36,7 @@ class GrammerActivity : BasicActivity() {
         openActivity(IsAOrB::class.java) {
             putInt(Constants.UNIT, unitNum)
             putInt(Constants.SCORE_KEY, score + prevScore)
+            putInt(Constants.OVERALL_TOTAL, overallTotal + gameTotalScore)
         }
         // so no back
         finish()
@@ -82,7 +83,7 @@ class GrammerActivity : BasicActivity() {
             }
         }
 
-        tvScoreForm.setMessage("Score:: ")
+        tvScoreForm.setMessage(getString(R.string.score_message))
         tvScoreForm.animateTo(score, 1000)
     }
 
@@ -134,6 +135,7 @@ class GrammerActivity : BasicActivity() {
                 loadLesson()
             } else {
                 finishGame()
+                this.dismissKeyboard()
             }
         }
     }

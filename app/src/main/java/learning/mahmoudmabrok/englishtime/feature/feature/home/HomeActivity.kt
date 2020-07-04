@@ -33,12 +33,18 @@ class HomeActivity : AppCompatActivity() {
         var total = 0
         var unitScore = 0
         val data = mutableListOf<HomeItem>()
-        for (i: Int in 0..5) {
+        for (i: Int in 0..4) {
             unitScore = localDB.getUnitScore("" + i)
-            data.add(HomeItem(i, unitScore))
+            data.add(HomeItem(index = i, score = unitScore))
             total += unitScore
             "loadScore $i ,$total".log(mTag)
         }
+        data[0].name = "Musical Instrument "
+        data[1].name = "zoo animal escape"
+        data[2].name = "at the kindergarten"
+        data[3].name = "Cities around the world  "
+        data[4].name = "at school"
+
         "score Home $total".log()
         tvvvvv.animateTo(total, 1000)
         adapter?.list = data

@@ -65,7 +65,7 @@ class CompleteWord : BasicActivity() {
     }
 
     private fun scoreView() {
-        tvScoreForm.setMessage("Score:: ")
+        tvScoreForm.setMessage(getString(R.string.score_message))
         tvScoreForm.animateTo(score, 1000)
     }
 
@@ -161,6 +161,10 @@ class CompleteWord : BasicActivity() {
      */
     private fun getSplitedData(): MutableList<Char> {
         lengthToMissed = (current / 3) + 1
+        val currentLength = data[current].length
+        if (lengthToMissed > currentLength / 2)
+            lengthToMissed = currentLength / 2
+
         "getSplitedData  lengthToMissed$lengthToMissed".log(mTag)
         return CharacterUtil.splitWord(lengthToMissed, data[current])
     }
