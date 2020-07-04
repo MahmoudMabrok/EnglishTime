@@ -105,7 +105,7 @@ class CompleteWord : BasicActivity() {
         if (intent.hasExtra(Constants.UNIT)) {
             unitNum = intent.getIntExtra(Constants.UNIT, 0)
             val categories = DataSet.getCategory(unitNum).toMutableList().subList(0, 1)
-            data = categories.flatMap { it.getWords() }.toList().sortedBy { it.length }
+            data = categories.flatMap { it.getWords() }.toList().sortedBy { it.length }.subList(0, 1)
             adapter = CompleteWordAdapter(getSplitedData())
         } else {
             finish()
@@ -137,11 +137,9 @@ class CompleteWord : BasicActivity() {
         val isSame = data[current] == word
         if (isSame) {
             updateScore(lengthToMissed * Constants.SCORE_UNIT)
-//            this.show("Right")
             SoundHelper.playCorrect(this)
         } else {
             SoundHelper.playFail(this)
-//            this.show("Wrong")
             adapter.setData(data[current].toMutableList())
         }
         current += 1
@@ -168,6 +166,10 @@ class CompleteWord : BasicActivity() {
     }
 
 
+    override fun onStop() {
+        super.onStop()
+        saveScore(0)
+    }
 
 }
 

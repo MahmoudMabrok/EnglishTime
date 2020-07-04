@@ -31,22 +31,20 @@ public class LocalDB {
         preferences.edit().putInt(Constants.SCORE_KEY, value).apply();
     }
 
-    public int getScoreUnint(int unit) {
-        return preferences.getInt(unit + "", 0);
+    public int getScorePerTrain(String unit) {
+        return preferences.getInt(unit, 0);
     }
 
-    public void setScoreUnit(int unit, int value) {
-        preferences.edit().putInt(unit + "", value).apply();
+    public void setScorePerTrain(String key, int value) {
+        preferences.edit().putInt(key, value).apply();
     }
 
-
-    public Boolean visited(String s) {
-        return preferences.getBoolean(s, false);
+    public int getUnitScore(String unit) {
+        int score = 0;
+        for (int i = 0; i < 5; i++) {
+            score += getScorePerTrain(unit + i);
+        }
+        return score;
     }
-
-    public void saveVisited(String s) {
-        preferences.edit().putBoolean(s, true).apply();
-    }
-
 
 }

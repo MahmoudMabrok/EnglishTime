@@ -143,6 +143,11 @@ class GrammerActivity : BasicActivity() {
         tvGrammerEnd.setText("")
     }
 
+    override fun onStop() {
+        super.onStop()
+        saveScore(2)
+    }
+
 }
 
 private fun GrammerLesson.getItems(): List<GrammerItem> {

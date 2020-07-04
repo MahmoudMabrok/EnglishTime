@@ -1,8 +1,6 @@
 package learning.mahmoudmabrok.englishtime.feature.parents
 
-import android.content.Context
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.speech.tts.TextToSpeech
 import android.speech.tts.TextToSpeech.OnInitListener
 import androidx.appcompat.app.AppCompatActivity
@@ -72,9 +70,12 @@ abstract class BasicActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         SoundHelper.stop()
-        "onStop فخفشك  ${prevScore + score} $unitNum".log(mTag)
+        "onStop scccore  ${prevScore + score} $unitNum".log(mTag)
+    }
 
-        // save values
-        localDB.setScoreUnit(unitNum, prevScore + score)
+    fun saveScore(trainNum: Int = 0) {
+        val lastScore = localDB.getScorePerTrain("$unitNum$trainNum")
+        if (score > lastScore)
+            localDB.setScorePerTrain("$unitNum$trainNum", score)
     }
 }

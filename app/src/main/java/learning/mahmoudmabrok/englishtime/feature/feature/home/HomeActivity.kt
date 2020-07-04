@@ -6,9 +6,7 @@ import butterknife.ButterKnife
 import kotlinx.android.synthetic.main.activity_home.*
 import learning.mahmoudmabrok.englishtime.R
 import learning.mahmoudmabrok.englishtime.feature.datalayer.LocalDB
-import learning.mahmoudmabrok.englishtime.feature.utils.FinshGame
 import learning.mahmoudmabrok.englishtime.feature.utils.log
-import learning.mahmoudmabrok.englishtime.feature.utils.waitForLayout
 
 class HomeActivity : AppCompatActivity() {
 
@@ -24,7 +22,6 @@ class HomeActivity : AppCompatActivity() {
         localDB = LocalDB.getINSTANCE(this)
         initRV()
         tvvvvv.setMessage("Score")
-        rvHome.waitForLayout { "onCreate ".log("aa") }
     }
 
     override fun onResume() {
@@ -34,19 +31,23 @@ class HomeActivity : AppCompatActivity() {
 
     private fun loadScore() {
         var total = 0
+        var unitScore = 0
+        val data = mutableListOf<HomeItem>()
         for (i: Int in 0..5) {
-            total += localDB.getScoreUnint(i)
+            unitScore = localDB.getUnitScore("" + i)
+            data.add(HomeItem(i, unitScore))
+            total += unitScore
             "loadScore $i ,$total".log(mTag)
         }
         "score Home $total".log()
         tvvvvv.animateTo(total, 1000)
+        adapter?.list = data
     }
 
     private fun initRV() {
         adapter = HomeAdapter()
         rvHome.adapter = adapter
         rvHome.setHasFixedSize(true)
-
     }
 
     companion object {

@@ -154,4 +154,9 @@ class IsAOrB : BasicActivity() {
         // place it
         strucureValue.text = currentStructureItem?.src ?: ""
     }
+
+    override fun onStop() {
+        super.onStop()
+        saveScore(3)
+    }
 }

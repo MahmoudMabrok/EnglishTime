@@ -178,5 +178,9 @@ class CategorizeWords : BasicActivity() {
         finish()
     }
 
+    override fun onStop() {
+        super.onStop()
+        saveScore(4)
+    }
 
 }

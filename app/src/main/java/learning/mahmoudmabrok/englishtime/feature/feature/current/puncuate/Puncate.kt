@@ -145,5 +145,9 @@ class Puncate : BasicActivity() {
         tvScoreForm.animateTo(score, 500)
     }
 
+    override fun onStop() {
+        super.onStop()
+        saveScore(1)
+    }
 
 }
