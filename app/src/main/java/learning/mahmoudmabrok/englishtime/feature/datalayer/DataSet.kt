@@ -28,8 +28,7 @@ object DataSet {
 
         // 6
         categories.add(listOf(
-                // Category("Musical Instruments", "Concert*MusicRoom*Bass*Flute*Drums*Cello*Xylophone*Recorder*Trumpet*Cymbals"),//10
-                Category("Musical Instruments", "Concert*MusicRoom*Bass"),//10
+                Category("Musical Instruments", "Concert*MusicRoom*Bass*Flute*Drums*Cello*Xylophone*Recorder*Trumpet*Cymbals"),//10
                 Category("Seasons of year", "spring*autumn*summer*winter"), // 4
                 Category("NA", "Tiger*parrot*eagle"))
         )
@@ -66,13 +65,12 @@ object DataSet {
         //region puncatuete
         // 6
         puncates.add(listOf(
-                PunctuateItem("Now, he plays the harp.", "now he plays the harp", 3)
-                /*    ,
-                    PunctuateItem("He doesn't hit the drum.", "he doesnt hit the drum", 3),
-                    PunctuateItem("We don't blow the trumpt.", "we dont blow the trumpet", 3),
-                    PunctuateItem("Last year, he played the cello.", "last year,he played the cello", 3),
-                    PunctuateItem("Last year, she played the harp.", "last year,she played the harp", 3),
-                    PunctuateItem("Last year, she blow the trumpet.", "last year,she blow the trumpet", 3)*/
+                PunctuateItem("Now, he plays the harp.", "now he plays the harp", 3),
+                PunctuateItem("He doesn't hit the drum.", "he doesnt hit the drum", 3),
+                PunctuateItem("We don't blow the trumpt.", "we dont blow the trumpet", 3),
+                PunctuateItem("Last year, he played the cello.", "last year,he played the cello", 3),
+                PunctuateItem("Last year, she played the harp.", "last year,she played the harp", 3),
+                PunctuateItem("Last year, she blow the trumpet.", "last year,she blow the trumpet", 3)
         ))
 
         // 7
@@ -114,20 +112,20 @@ object DataSet {
         gammers.add(listOf(
 
                 GrammerLesson("Present simple", "\u202Bمتكرر\u202C \u202Bفعل\u202C \u202Bاو\u202C \u202Bعادة\u202C \u202Bاو\u202C \u202Bحقيقه\u202C \u202Bعن\u202C \u202Bللتعبير\u202C \u202Bيستخدم\u202C",
-                        "play*plays"//"play*plays#watch*watches#work*works"
+                        "play*plays#watch*watches#work*works"
                 )
 
-                /*    ,
+                ,
 
-                    GrammerLesson("Past simple", "\u202Bالماضى\u202C \u202Bفى\u202C \u202Bوانتهى\u202C \u202Bشئ\u202C \u202Bعن\u202C \u202Bللتعبير\u202C \u202Bيستخدم\u202C",
-                            "Last year, she ---the harp.*played")*/
+                GrammerLesson("Past simple", "\u202Bالماضى\u202C \u202Bفى\u202C \u202Bوانتهى\u202C \u202Bشئ\u202C \u202Bعن\u202C \u202Bللتعبير\u202C \u202Bيستخدم\u202C",
+                        "Last year, she ---the harp.*played")
 
         ))
 
 
         gammers.add(listOf(
                 GrammerLesson("\u202Bالصفات\u202C \u202Bمقارنه\u202C", "\u202Bما\u202C \u202Bصفه\u202C \u202Bفى\u202C \u202Bاتين\u202C \u202Bبين\u202C \u202Bمقارنه\u202C \u202Bعند\u202C \u202Bالصفات\u202C \u202Bستخدم\u202C",
-                        "Small*smaller#fast*faster#slow*slower#quick*quicker"),
+                        "Small*smaller#fast*faster# slow*slower# quick *quicker# fat *fatter# big*bigger#thin*thinner"),
 
                 GrammerLesson("الماضى المستمر", "حدث استمر فى الماضي وقطعه احدث اخر فى الماضي البسيط ",
                         "play*playing#watch*watching")
@@ -165,19 +163,17 @@ object DataSet {
         //region structures
         // 6
         structures.add(listOf(
-                Structure("Adverb", "Good*well")
-                //  Structure("Adverb", "Good*well#bad*badly#quiet*quietly#loud*loudly#quick*quickly#slow*slowly#happy*happily#sad*sadly#soft*softly")
-//                ,
-//                Structure("preposition", "...school*At# a lot..*of# ... the first year*in# ... the violin*on"),
-//                Structure("Verbs and nouns", "... a performance*Give# ... a party*have# ... music*perform# ... a play*perform"),
-//                Structure("Past Verbs", "Perform*performed#give*gave#write*wrote#sing*sang")
+                Structure("Adverb", "Good*well#bad*badly#quiet*quietly#loud*loudly#quick*quickly#slow*slowly#happy*happily#sad*sadly#soft*softly"),
+                Structure("preposition", "...school*At# a lot..*of# ... the first year*in# ... the violin*on"),
+                Structure("Verbs and nouns", "... a performance*Give# ... a party*have# ... music*perform# ... a play*perform"),
+                Structure("Past Verbs", "Perform*performed#give*gave#write*wrote#sing*sang")
         )
         )
 
         // 7
         structures.add(listOf(
                 Structure("Verbs and nouns", "-----tree*climb#---- a fish*eat#-----a nap*#------sun screen*use#---- makeup*put on#-------the car*wash#------anew paper*read#------the birds*feed#vegetable....*chop#watch*------TV#-------tree*climb#----------the rubbish*take out"),
-                Structure("Adjective Comparison", "Small*smaller#fast*faster# slow*slower# quick *quicker# fat *fatter# big*bigger#thin*thinner"),
+//                Structure("Adjective Comparison", "Small*smaller#fast*faster# slow*slower# quick *quicker# fat *fatter# big*bigger#thin*thinner"),
                 Structure("Past Verbs", "Wash* washed# climb *climbed# chop* chopped# hop* hopped# watch* watched# talk* talked# put *put# take* took #read* read# feed* fed# fly *flew# run* ran")
         ))
 

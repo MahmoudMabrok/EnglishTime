@@ -51,10 +51,10 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.Holder> {
     public void onBindViewHolder(@NonNull Holder holder, int i) {
         HomeItem item = list.get(i);
         if (item.getScore() > 0)
-            holder.mScore.setText(item.getScore() + "");
+            holder.mScore.setText(String.format(Locale.ENGLISH, "%d / %d", item.getScore(), item.getTotalScore()));
 
         holder.mTvUnitNO.setText(String.format(Locale.ENGLISH, "%d. %s", i + 1 + 5, item.getName()));
-        holder.mTvUnitNO.setOnClickListener(e -> {
+        holder.itemView.setOnClickListener(e -> {
             Intent openAcivity = new Intent(holder.itemView.getContext(), SelectGameType.class);
             openAcivity.putExtra(Constants.UNIT, i);
             holder.itemView.getContext().startActivity(openAcivity);

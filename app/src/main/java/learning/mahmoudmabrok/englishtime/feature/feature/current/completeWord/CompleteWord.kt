@@ -105,7 +105,7 @@ class CompleteWord : BasicActivity() {
         if (intent.hasExtra(Constants.UNIT)) {
             unitNum = intent.getIntExtra(Constants.UNIT, 0)
             val categories = DataSet.getCategory(unitNum).toMutableList().subList(0, 1)
-            data = categories.flatMap { it.getWords() }.toList().sortedBy { it.length }.subList(0, 1)
+            data = categories.flatMap { it.getWords() }.toList().sortedBy { it.length }
             adapter = CompleteWordAdapter(getSplitedData())
         } else {
             finish()
@@ -118,6 +118,13 @@ class CompleteWord : BasicActivity() {
             gameTotalScore += lengthToMissed
             adapter.setData(wordMissed)
             (rvCompleteWord.layoutManager as GridLayoutManager).spanCount = wordMissed.size
+            /*  gameTotalScore = 0
+              data.forEach {
+                  getSplitedData()
+                  gameTotalScore += lengthToMissed
+                  current += 1
+              }
+              finishGame()*/
         } catch (e: Exception) {
             btnCHeckCompleteWord.visibility = View.INVISIBLE
             "error $e".log(mTag)

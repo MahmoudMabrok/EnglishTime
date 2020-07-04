@@ -93,7 +93,6 @@ class IsAOrB : BasicActivity() {
         structures = data
         loadNextStructure()
 
-
     }
 
     private fun checkAnswer() {

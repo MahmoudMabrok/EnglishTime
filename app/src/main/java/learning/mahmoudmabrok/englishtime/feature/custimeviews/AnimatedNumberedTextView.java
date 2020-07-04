@@ -15,8 +15,19 @@ import learning.mahmoudmabrok.englishtime.R;
 public class AnimatedNumberedTextView extends AppCompatTextView implements ValueAnimator.AnimatorUpdateListener {
 
     int currentValue = 0;
+    int total = 0;
     private ValueAnimator animator;
     private String message = "";
+
+    private Boolean isHome = false;
+
+    public void setHome(Boolean home) {
+        isHome = home;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
 
     public AnimatedNumberedTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -60,7 +71,12 @@ public class AnimatedNumberedTextView extends AppCompatTextView implements Value
     @Override
     public void onAnimationUpdate(ValueAnimator animation) {
         int value = (int) animation.getAnimatedValue();
-        setText(String.format("%s %d", message, value, Locale.US));
+
+        if (isHome) {
+            setText(String.format("%s %d / %d", message, value, total, Locale.US));
+        } else {
+            setText(String.format("%s %d", message, value, Locale.US));
+        }
     }
 
 }

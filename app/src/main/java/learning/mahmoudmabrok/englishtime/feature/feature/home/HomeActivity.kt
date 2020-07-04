@@ -22,6 +22,7 @@ class HomeActivity : AppCompatActivity() {
         localDB = LocalDB.getINSTANCE(this)
         initRV()
         tvvvvv.setMessage("Score")
+        tvvvvv.setHome(true)
     }
 
     override fun onResume() {
@@ -32,6 +33,7 @@ class HomeActivity : AppCompatActivity() {
     private fun loadScore() {
         var total = 0
         var unitScore = 0
+        var totalScore = 0
         val data = mutableListOf<HomeItem>()
         for (i: Int in 0..4) {
             unitScore = localDB.getUnitScore("" + i)
@@ -45,6 +47,16 @@ class HomeActivity : AppCompatActivity() {
         data[3].name = "Cities around the world  "
         data[4].name = "at school"
 
+
+        data[0].totalScore = 72
+        data[1].totalScore = 66
+        data[2].totalScore = 74
+        data[3].totalScore = 129
+        data[4].totalScore = 163
+
+
+        totalScore = data.map { it.totalScore }.sum()
+        tvvvvv.setTotal(totalScore)
         "score Home $total".log()
         tvvvvv.animateTo(total, 1000)
         adapter?.list = data

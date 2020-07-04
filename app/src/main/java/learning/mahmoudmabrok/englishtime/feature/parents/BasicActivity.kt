@@ -80,4 +80,9 @@ abstract class BasicActivity : AppCompatActivity() {
         if (score > lastScore)
             localDB.setScorePerTrain("$unitNum$trainNum", score)
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+    }
 }
