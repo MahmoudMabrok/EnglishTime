@@ -84,6 +84,7 @@ class IsAOrB : BasicActivity() {
     }
 
     private fun startGame() {
+        unitNum = intent.getIntExtra(Constants.UNIT, 0)
         val data = DataSet.getStructure(unitNum)
         if (data == null) {
             goToNext()

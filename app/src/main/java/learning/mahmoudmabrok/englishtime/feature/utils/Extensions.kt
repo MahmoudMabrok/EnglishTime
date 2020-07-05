@@ -50,7 +50,7 @@ fun Activity.dismissKeyboard() {
 }
 
 
-fun View.animItem(animeDuration: Long = 1000, a: () -> Unit) {
+fun View.animItem(animeDuration: Long = 500, a: () -> Unit) {
     val scalx = PropertyValuesHolder.ofFloat(View.SCALE_X, 0.5f, 1f)
     val scaly = PropertyValuesHolder.ofFloat(View.SCALE_Y, 0.5f, 1f)
     val alpha = PropertyValuesHolder.ofFloat(View.ALPHA, 0f, 1f)

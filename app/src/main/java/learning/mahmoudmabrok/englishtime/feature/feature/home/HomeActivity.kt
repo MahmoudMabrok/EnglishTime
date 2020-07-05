@@ -50,7 +50,7 @@ class HomeActivity : AppCompatActivity() {
 
         data[0].totalScore = 75
         data[1].totalScore = 66
-        data[2].totalScore = 74
+        data[2].totalScore = 73
         data[3].totalScore = 129
         data[4].totalScore = 163
 

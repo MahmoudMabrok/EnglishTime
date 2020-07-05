@@ -11,6 +11,7 @@ import learning.mahmoudmabrok.englishtime.feature.feature.current.categorizeWord
 import learning.mahmoudmabrok.englishtime.feature.feature.current.completeWord.CompleteWord
 import learning.mahmoudmabrok.englishtime.feature.feature.current.completeWord.CompleteWordTwo
 import learning.mahmoudmabrok.englishtime.feature.feature.current.grammer.GrammerActivity
+import learning.mahmoudmabrok.englishtime.feature.feature.current.puncuate.Puncate
 import learning.mahmoudmabrok.englishtime.feature.utils.Constants
 
 class SelectGameType : AppCompatActivity() {

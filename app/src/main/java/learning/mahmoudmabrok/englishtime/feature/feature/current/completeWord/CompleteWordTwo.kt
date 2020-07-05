@@ -238,6 +238,11 @@ class CompleteWordTwo : BasicActivity() {
      */
     private fun getRandomMissed(cur: String): MutableList<Char> {
         lengthToMissed = (current / 3) + 1
-        return CharacterUtil.splitWord(lengthToMissed, cur)
+        val currentLength = data[current].length
+        if (lengthToMissed > currentLength / 2)
+            lengthToMissed = currentLength / 2
+
+        "getSplitedData  lengthToMissed$lengthToMissed".log(mTag)
+        return CharacterUtil.splitWord(lengthToMissed, data[current])
     }
 }

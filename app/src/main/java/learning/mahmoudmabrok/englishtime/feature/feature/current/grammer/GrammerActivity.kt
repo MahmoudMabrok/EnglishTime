@@ -71,7 +71,8 @@ class GrammerActivity : BasicActivity() {
 
     private fun startGame() {
         if (intent.hasExtra(Constants.UNIT)) {
-            val unit = DataSet.getGrammer(intent.getIntExtra(Constants.UNIT, 0))
+            unitNum = intent.getIntExtra(Constants.UNIT, 0)
+            val unit = DataSet.getGrammer(unitNum)
             if (unit == null) {
                 this.show("No Grammer for This Unit")
                 goToNext()

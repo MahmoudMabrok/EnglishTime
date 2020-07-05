@@ -43,7 +43,7 @@ object DataSet {
         categories.add(listOf(
                 Category("at the kindergarten", "Board*letter*chair*sorry*hard*easy*hundred*why*how"), // 8
                 Category("NA", "Cookie*lookout*bee*behind*howoften*haircut*onceamonth*howaboutyou?*" +
-                        "Moveaway*kindergarten*funny*break*soon*miss*enormous*makefriends*sad*new*little*old*"))
+                        "Moveaway*kindergarten*funny*break*soon*miss*enormous*makefriends*sad*new*little*old"))
         )
 
         // 9
@@ -56,7 +56,7 @@ object DataSet {
 
         // 10
         categories.add(listOf(
-                Category("Unit 10 ", "programme*Africa*gorilla*comeover*news*besides*fun*funny*afternoon*football*film*match*gamebell*borrow*today's*special*positive*mood*beef*" +
+                Category("at school", "programme*Africa*gorilla*comeover*news*besides*fun*funny*afternoon*football*film*match*gamebell*borrow*today's*special*positive*mood*beef*" +
                         "website*findout*begin*satellite*Egyptian*invent*videogames*percent*internet*TV*broadcasting*remotecontrol*electriccomputer*history*million*black*white*first"),
                 Category("NA", "Tiger*parrot*Concert*may*Department*store*museum*theatre"))
         )
@@ -75,34 +75,34 @@ object DataSet {
 
         // 7
         puncates.add(listOf(
-                PunctuateItem("She was watching TV at 8 o'clock yesterday.", "she was watching tv at 8 oclock yesterday", 4),
+                PunctuateItem("She was watching TV at 8 o'clock yesterday.", "she was watching tv at 8 oclock yesterday ", 4),
                 PunctuateItem("They were feeding the birds, when I walk.", "they were feeding the birds when I walk ", 3)
         ))
 
 
         //8
         puncates.add(listOf(
-                PunctuateItem("he is playing football", "he is playing football.", 2),
+                PunctuateItem("He is playing football.", "he is playing football ", 2),
                 PunctuateItem("They are playing football.", "they are playing football ", 3),
-                PunctuateItem("They were playing football , yesterday.", "they were playing football Yesterday", 4),
+                PunctuateItem("They were playing football , yesterday.", "they were playing football yesterday ", 4),
                 PunctuateItem("I can speak English.", "i can speak english", 3),
-                PunctuateItem("he cannot speak english", "He cannot speak English.", 3),
-                PunctuateItem("I could speak English.", "i could speak english", 3),
-                PunctuateItem("They could not speak English", "they could not speak english.", 3)
+                PunctuateItem("He cannot speak english.", "he cannot speak english ", 3),
+                PunctuateItem("I could speak English.", "i could speak english ", 3),
+                PunctuateItem("They could not speak English", "they could not speak english ", 3)
         ))
 
 
         // 9
         puncates.add(listOf(
-                PunctuateItem("When did Omar go to Hong Kong?", "when did omar go to hong kong", 5),
-                PunctuateItem("How was she there?", "how was she there", 2)
+                PunctuateItem("When did Omar go to Hong Kong?", "when did omar go to hong kong ", 5),
+                PunctuateItem("How was she there?", "how was she there ", 2)
 
         ))
 
 
         // 10
         puncates.add(listOf(
-                PunctuateItem("If he runs , she will win the race.", "if he run she will win the race", 3),
+                PunctuateItem("If he runs , she will win the race.", "if he run she will win the race ", 3),
                 PunctuateItem("If I study well, I will get high marks.", "if I study well', I will get high marks", 3)
 
         ))
@@ -118,7 +118,7 @@ object DataSet {
                 ,
 
                 GrammerLesson("Past simple", "\u202Bالماضى\u202C \u202Bفى\u202C \u202Bوانتهى\u202C \u202Bشئ\u202C \u202Bعن\u202C \u202Bللتعبير\u202C \u202Bيستخدم\u202C",
-                        "Last year, she ---the harp.*played")
+                        "Last year, she ...the harp.*played")
 
         ))
 
@@ -133,7 +133,8 @@ object DataSet {
 
         gammers.add(listOf(
                 GrammerLesson("Past Cont, Preent Cont.", "Vtobe past (was -were) \npresent (am –is- are)",
-                        "He ---playing football*is#He-- playing football, yesterday*was#They ----playing football*are#They--- playing football. Yesterday*were#Could—couldn't*cannot#I --- speak English*can#He ----- speak English*cannot#I ------speak*could#They -----speak English*could not")
+                        "He ...playing football*is#He... playing football, yesterday*was#They ...playing football*are#They... playing football. Yesterday*were"),
+                GrammerLesson("Could—couldn't , can -cannot", "", "I ... speak English*can#He ... speak English*cannot#I ...speak*could#They ...speak English*could not")
         ))
 
 
@@ -155,7 +156,7 @@ object DataSet {
         gammers.add(
                 listOf(
                         GrammerLesson("قاعده if الحاله الاولى", "قاعده if الحاله الاولى  تعبر عن احتما ل حدوث شى فى المستقبل\n" +
-                                "If+مضارع  بسيط +مستقبل بسيط", "If he runs, he will -----the race.*win#If I study well', I will ---high marks*get")
+                                "If+مضارع  بسيط +مستقبل بسيط", "If he runs, he will ...the race.*win#If I study well', I will ...high marks*get")
                 )
         )
 
@@ -172,22 +173,21 @@ object DataSet {
 
         // 7
         structures.add(listOf(
-                Structure("Verbs and nouns", "-----tree*climb#---- a fish*eat#-----a nap*#------sun screen*use#---- makeup*put on#-------the car*wash#------anew paper*read#------the birds*feed#vegetable....*chop#watch*------TV#-------tree*climb#----------the rubbish*take out"),
-//                Structure("Adjective Comparison", "Small*smaller#fast*faster# slow*slower# quick *quicker# fat *fatter# big*bigger#thin*thinner"),
+                Structure("Verbs and nouns", "...tree*climb#... a fish*eat#...a nap*take#...sun screen*use#... makeup*put on#...the car*wash#...anews paper*read#...the birds*feed#vegetable....*chop#watch*...TV#...tree*climb#...the rubbish*take out"),
                 Structure("Past Verbs", "Wash* washed# climb *climbed# chop* chopped# hop* hopped# watch* watched# talk* talked# put *put# take* took #read* read# feed* fed# fly *flew# run* ran")
         ))
 
         // 8
         structures.add(listOf(
                 Structure("Past Verbs", "Miss*missed*remember#remembered#want*wanted#live*lived"),
-                Structure("Expressions", "----- the board*on#----sorry*I'm#let —*me#easy ---*for#pass----*out#That's key come---*on#—work*good#----the board*clean"),
-                Structure("Verbs + Nouns", "---the alphabet*say#--- build a sandcastle*bluid#----- the bubble*blow#----- butterfly*catch#---- an orange*peel#-----a ball*throw#------to ten*count#------award*spell#-----out heart*cut out#------English*speak")
+                Structure("Expressions", "... the board*on#...sorry*I'm#let —*me#easy ...*for#pass...*out#That's key come...*on#—work*good#...the board*clean"),
+                Structure("Verbs + Nouns", "...the alphabet*say#... build a sandcastle*bluid#... the bubble*blow#... butterfly*catch#... an orange*peel#...a ball*throw#...to ten*count#...award*spell#...out heart*cut out#...English*speak")
         )
 
         )// 9
         structures.add(listOf(
-                Structure("Past Verbs", "Interview*interviewed#ask*asked#visit*visited#thank*thanked*#fly*flew#have*had"),
-                Structure("Expressions", "-----you like*would#I --- sure*'m#-----ahead*go#---yourself*by#thanks ----your time*for"),
+                Structure("Past Verbs", "Interview*interviewed#ask*asked#visit*visited#thank*thanked#fly*flew#have*had"),
+                Structure("Expressions", "...you like*would#I ... sure*'m#...ahead*go#...yourself*by#thanks ...your time*for"),
                 Structure("Write Months of the year", "1*January# 2*February# 3*march#4*April#5*may# 6*June#7*July# 8*august# 9*September# 10*October#11*November#12*December ")
         )
         )
