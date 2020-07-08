@@ -1,25 +1,18 @@
 package learning.mahmoudmabrok.englishtime.feature.feature.finishView
 
 import android.os.Bundle
-import android.os.Handler
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AccelerateInterpolator
 import androidx.fragment.app.Fragment
-import com.plattysoft.leonids.ParticleSystem
-import kotlinx.android.synthetic.main.fragment_finish_game.*
 import kotlinx.android.synthetic.main.fragment_finish_game.btnFinish
 import kotlinx.android.synthetic.main.fragment_finish_game.btnRetry
-import kotlinx.android.synthetic.main.fragment_finish_game.topLeft
 import kotlinx.android.synthetic.main.fragment_finish_game.tvScoreFrom
 import kotlinx.android.synthetic.main.fragment_finish_game.tvScoreTotal
 import kotlinx.android.synthetic.main.fragment_finish_two_game.*
 import learning.mahmoudmabrok.englishtime.R
 import learning.mahmoudmabrok.englishtime.feature.parents.BasicActivity
 import learning.mahmoudmabrok.englishtime.feature.utils.Constants
-import learning.mahmoudmabrok.englishtime.feature.utils.Utils
 import learning.mahmoudmabrok.englishtime.feature.utils.log
 
 

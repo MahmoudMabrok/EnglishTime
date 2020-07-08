@@ -56,10 +56,9 @@ object DataSet {
 
         // 10
         categories.add(listOf(
-                Category("at school", "programme*Africa*gorilla*comeover*news*besides*fun*funny*afternoon*football*film*match*gamebell*borrow*today's*special*positive*mood*beef*" +
-                        "website*findout*begin*satellite*Egyptian*invent*videogames*percent*internet*TV*broadcasting*remotecontrol*electriccomputer*history*million*black*white*first"),
-                Category("NA", "Tiger*parrot*Concert*may*Department*store*museum*theatre"))
-        )
+                Category("at school", "school*funny*electriccomputer*flag*table*board*playground*internet"),
+                Category("NA", "programme*Africa*gorilla*comeover*news*besides*fun*afternoon*football*film*match*gamebell*borrow*today's*special*positive*mood*beef*" +
+                        "website*findout*begin*satellite*Egyptian*invent*videogames*percent*TV*broadcasting*remotecontrol*history*million*black*white*first")))
 
 
         //region puncatuete
@@ -75,19 +74,19 @@ object DataSet {
 
         // 7
         puncates.add(listOf(
-                PunctuateItem("She was watching TV at 8 o'clock yesterday.", "she was watching tv at 8 oclock yesterday ", 4),
-                PunctuateItem("They were feeding the birds, when I walk.", "they were feeding the birds when I walk ", 3)
+                PunctuateItem("She was watching TV at 8 o'clock yesterday.", "she was watching tv at 8 oclock yesterday", 4),
+                PunctuateItem("They were feeding the birds, when I walk.", "they were feeding the birds when I walk", 3)
         ))
 
 
         //8
         puncates.add(listOf(
-                PunctuateItem("He is playing football.", "he is playing football ", 2),
-                PunctuateItem("They are playing football.", "they are playing football ", 3),
-                PunctuateItem("They were playing football , yesterday.", "they were playing football yesterday ", 4),
+                PunctuateItem("He is playing football.", "he is playing football", 2),
+                PunctuateItem("They are playing football.", "they are playing football", 3),
+                PunctuateItem("They were playing football , yesterday.", "they were playing football yesterday", 4),
                 PunctuateItem("I can speak English.", "i can speak english", 3),
-                PunctuateItem("He cannot speak english.", "he cannot speak english ", 3),
-                PunctuateItem("I could speak English.", "i could speak english ", 3),
+                PunctuateItem("He cannot speak english.", "he cannot speak english", 3),
+                PunctuateItem("I could speak English.", "i could speak english", 3),
                 PunctuateItem("They could not speak English", "they could not speak english ", 3)
         ))
 
@@ -143,9 +142,8 @@ object DataSet {
                 listOf(
                         GrammerLesson("in", "In تأتى معها سنه", "My birthday ... May.*in"),
                         GrammerLesson("at", "Atتأتي مع الساعة", "... two o'clock*at"),
-                        GrammerLesson("on", "Atتأتي مع يوم", ".... I meet him on Monday*On"),
-                        GrammerLesson("السؤال  بمعنى  ما المدة ومتى في الماضي", "When +did+sub+ inf? ",
-                                "... did Omar go to Hong Kong?*When"),
+                        GrammerLesson("on", "on تأتي مع يوم", ".... I meet him on Monday*on"),
+                        GrammerLesson("السؤال  بمعنى  ما المدة ومتى في الماضي", "When +did+sub+ inf? ", "... did Omar go to Hong Kong?*When"),
                         GrammerLesson("structure", "فاعل+was#were+for++مدة زمنية", "I was there ... one week*for")
 
 

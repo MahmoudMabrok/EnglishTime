@@ -62,21 +62,7 @@ class Puncate : BasicActivity() {
 
         startGame()
         btnCHeckPuncate.setOnClickListener {
-            if (!toCkeck) {
-                it.animItem(1000) {
-                    it.isEnabled = true
-                    current++
-                    placeItem()
-                }
-                toCkeck = true
-                btnCHeckPuncate.text = "Check"
-                edPuncate.isEnabled = true
-            } else {
-                checkAnswer()
-                toCkeck = false
-                btnCHeckPuncate.text = "Next"
-
-            }
+            doCheck(it)
         }
 
         tvScoreForm.setMessage(getString(R.string.score_message))
@@ -87,6 +73,26 @@ class Puncate : BasicActivity() {
 
         imPlaySound.setOnClickListener {
             playSound(puncateItem.expected)
+        }
+
+
+    }
+
+    private fun doCheck(it: View) {
+        if (!toCkeck) {
+            it.animItem(1000) {
+                it.isEnabled = true
+                current++
+                placeItem()
+            }
+            toCkeck = true
+            btnCHeckPuncate.text = "Check"
+            edPuncate.isEnabled = true
+        } else {
+            checkAnswer()
+            toCkeck = false
+            btnCHeckPuncate.text = "Next"
+
         }
     }
 
@@ -108,7 +114,7 @@ class Puncate : BasicActivity() {
 
         "wrong $wrong exp $expWrongs userscore $userScore".log()
         if (userScore > 0) {
-            updateScore(userScore)
+            updateScore(Constants.SCORE_UNIT)
             SoundHelper.playCorrect(this)
         } else {
             SoundHelper.playFail(this)
@@ -122,18 +128,24 @@ class Puncate : BasicActivity() {
         try {
             puncateItem = puncateList[current]
             edPuncate.setText(puncateItem.actual)
-            gameTotalScore += (puncateItem.numWrong * Constants.SCORE_UNIT)
         } catch (e: Exception) {
             btnCHeckPuncate.visibility = View.GONE
-            FinshGame.showFinish(this, home.id, score, gameTotalScore, false)
+            finishGame()
         }
 
+    }
+
+    private fun finishGame() {
+        FinshGame.showFinish(this, home.id, score, gameTotalScore, false)
     }
 
     private fun laodData() {
         if (intent.hasExtra(Constants.UNIT)) {
             unitNum = intent.getIntExtra(Constants.UNIT, 0)
             puncateList = DataSet.getPuncatuate(unitNum)
+            gameTotalScore = puncateList.size
+            "setupWords call $gameTotalScore".log(mTag)
+            finishGame()
         } else {
             finish()
         }

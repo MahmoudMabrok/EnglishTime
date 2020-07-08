@@ -2,6 +2,7 @@ package learning.mahmoudmabrok.englishtime.feature.feature.current.completeWord
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.activity_complete_word.*
 import learning.mahmoudmabrok.englishtime.R
@@ -93,6 +94,8 @@ class CompleteWord : BasicActivity() {
         setupSound()
 
         scoreView()
+
+
     }
 
     private fun initRv() {
@@ -107,6 +110,10 @@ class CompleteWord : BasicActivity() {
             val categories = DataSet.getCategory(unitNum).toMutableList().subList(0, 1)
             data = categories.flatMap { it.getWords() }.toList().sortedBy { it.length }
             adapter = CompleteWordAdapter(getSplitedData())
+            gameTotalScore = data.size
+            Toast.makeText(this, "score $gameTotalScore", Toast.LENGTH_SHORT).show()
+            "setupWords call $gameTotalScore".log(mTag)
+            finishGame()
         } else {
             finish()
         }
@@ -115,7 +122,7 @@ class CompleteWord : BasicActivity() {
     private fun loadData() {
         try {
             val wordMissed = getSplitedData()
-            gameTotalScore += lengthToMissed
+//            gameTotalScore += lengthToMissed
             adapter.setData(wordMissed)
             (rvCompleteWord.layoutManager as GridLayoutManager).spanCount = wordMissed.size
             /*  gameTotalScore = 0

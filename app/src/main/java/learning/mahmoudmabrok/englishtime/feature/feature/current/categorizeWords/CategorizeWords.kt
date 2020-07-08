@@ -6,6 +6,8 @@ import kotlinx.android.synthetic.main.activity_categorize_words.*
 import learning.mahmoudmabrok.englishtime.R
 import learning.mahmoudmabrok.englishtime.feature.datalayer.DataSet
 import learning.mahmoudmabrok.englishtime.feature.datalayer.models.Category
+import learning.mahmoudmabrok.englishtime.feature.feature.Finish.LastActivity
+import learning.mahmoudmabrok.englishtime.feature.feature.current.aorb.IsAOrB
 import learning.mahmoudmabrok.englishtime.feature.feature.home.HomeActivity
 import learning.mahmoudmabrok.englishtime.feature.parents.BasicActivity
 import learning.mahmoudmabrok.englishtime.feature.utils.Constants
@@ -14,6 +16,7 @@ import learning.mahmoudmabrok.englishtime.feature.utils.FinshGame
 import learning.mahmoudmabrok.englishtime.feature.utils.SoundHelper
 import learning.mahmoudmabrok.englishtime.feature.utils.isSame
 import learning.mahmoudmabrok.englishtime.feature.utils.log
+import learning.mahmoudmabrok.englishtime.feature.utils.openActivity
 
 
 class CategorizeWords : BasicActivity() {
@@ -56,7 +59,7 @@ class CategorizeWords : BasicActivity() {
         if (currentCategory.getWords().isSame(adapterTop.list)) {
             SoundHelper.playCorrect(this)
             // get Score as word collects
-            updateScore(5 * Constants.SCORE_UNIT)
+            updateScore(Constants.SCORE_UNIT)
 
             gotoNext()
 
@@ -127,7 +130,7 @@ class CategorizeWords : BasicActivity() {
         if (intent.hasExtra(Constants.UNIT)) {
             unitNum = intent.getIntExtra(Constants.UNIT, 0)
             categories = DataSet.getCategory(unitNum)
-            gameTotalScore = ((categories.size - 1) * 5)
+            gameTotalScore = ((categories.size - 1) * Constants.SCORE_UNIT)
             laodDataOfAllWords()
         } else {
             finish()
@@ -137,7 +140,7 @@ class CategorizeWords : BasicActivity() {
 
     private fun finishGame() {
         "finishGame ".log(mTag)
-        FinshGame.showFinish(this, home.id, prevScore + score, overallTotal + gameTotalScore, isLast = true)
+        FinshGame.showFinish(this, home.id, score, gameTotalScore, isLast = true)
     }
 
     /**
@@ -176,12 +179,18 @@ class CategorizeWords : BasicActivity() {
 
     override fun goToNext() {
         saveScore(4)
+        openActivity(LastActivity::class.java) {
+            putInt(Constants.UNIT, unitNum)
+            putInt(Constants.SCORE_KEY, score + prevScore)
+            putInt(Constants.OVERALL_TOTAL, overallTotal + gameTotalScore)
+        }
+        // so no back
         finish()
     }
 
     override fun onStop() {
         super.onStop()
-        // saveScore(4)
+        saveScore(4)
     }
 
 }

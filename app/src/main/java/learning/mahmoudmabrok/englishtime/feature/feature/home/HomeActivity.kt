@@ -48,11 +48,11 @@ class HomeActivity : AppCompatActivity() {
         data[4].name = "at school"
 
 
-        data[0].totalScore = 75
-        data[1].totalScore = 66
-        data[2].totalScore = 73
-        data[3].totalScore = 129
-        data[4].totalScore = 163
+        data[0].totalScore = 43
+        data[1].totalScore = 46
+        data[2].totalScore = 47
+        data[3].totalScore = 57
+        data[4].totalScore = 46
 
 
         totalScore = data.map { it.totalScore }.sum()

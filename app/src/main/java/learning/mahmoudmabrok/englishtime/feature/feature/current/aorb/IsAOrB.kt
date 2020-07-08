@@ -2,7 +2,12 @@ package learning.mahmoudmabrok.englishtime.feature.feature.current.aorb
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_is_aor_b_alt.*
+import kotlinx.android.synthetic.main.activity_is_aor_b_alt.home
+import kotlinx.android.synthetic.main.activity_is_aor_b_alt.imPlaySound
+import kotlinx.android.synthetic.main.activity_is_aor_b_alt.tvScoreForm
+import kotlinx.android.synthetic.main.activity_puncate.*
 
 import learning.mahmoudmabrok.englishtime.R
 import learning.mahmoudmabrok.englishtime.feature.datalayer.DataSet
@@ -14,6 +19,7 @@ import learning.mahmoudmabrok.englishtime.feature.utils.Constants
 import learning.mahmoudmabrok.englishtime.feature.utils.FinshGame
 import learning.mahmoudmabrok.englishtime.feature.utils.SoundHelper
 import learning.mahmoudmabrok.englishtime.feature.utils.dismissKeyboard
+import learning.mahmoudmabrok.englishtime.feature.utils.log
 import learning.mahmoudmabrok.englishtime.feature.utils.openActivity
 
 
@@ -78,6 +84,10 @@ class IsAOrB : BasicActivity() {
 
     }
 
+    private fun finishGame() {
+        FinshGame.showFinish(this, home.id, score, gameTotalScore, false)
+    }
+
     private fun scoreView() {
         tvScoreForm.setMessage(getString(R.string.score_message))
         tvScoreForm.animateTo(score, 200)
@@ -94,6 +104,10 @@ class IsAOrB : BasicActivity() {
         structures = data
         loadNextStructure()
 
+        gameTotalScore = structures.flatMap { it.toItems() }.size
+        "setupWords call $gameTotalScore".log(mTag)
+        finishGame()
+
     }
 
     private fun checkAnswer() {
@@ -104,6 +118,7 @@ class IsAOrB : BasicActivity() {
             SoundHelper.playCorrect(this)
         } else {
             SoundHelper.playFail(this)
+            Toast.makeText(this, currentStructureItem?.answer, Toast.LENGTH_SHORT).show()
         }
         currentStructureItemIndex++
         loadNextItem()
@@ -124,7 +139,6 @@ class IsAOrB : BasicActivity() {
             // map it to items
             structureItems = structures[currentStructureIndex].toItems()
             // calculate total score of game
-            gameTotalScore += structureItems.size
             loadNextItem()
         } else {
             // this case, all structure are finished

@@ -9,8 +9,8 @@ android {
         applicationId "learning.mahmoudmabrok.englishtime"
         minSdkVersion 19
         targetSdkVersion 29
-        versionCode 15
-        versionName "1.7.7"
+        versionCode 16
+        versionName "1.7.8"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         // multiDexEnabled true
 
@@ -60,14 +60,13 @@ dependencies {
      implementation "androidx.multidex:multidex:$multidex_version"
      */
 
-    implementation 'com.plattysoft.leonids:LeonidsLib:1.3.2'
+    //  implementation 'com.plattysoft.leonids:LeonidsLib:1.3.2'
 
     implementation "androidx.core:core-ktx:1.3.0"
 
     implementation 'com.github.delight-im:Android-Commons:v1.0.1'
 
     implementation 'com.github.eralpyucel:CircleProgressView:v1.1'
-
 
 
 }

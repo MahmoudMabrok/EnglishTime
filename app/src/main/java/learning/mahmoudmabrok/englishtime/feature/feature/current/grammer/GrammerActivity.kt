@@ -2,6 +2,7 @@ package learning.mahmoudmabrok.englishtime.feature.feature.current.grammer
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_grammer.*
 import learning.mahmoudmabrok.englishtime.R
 import learning.mahmoudmabrok.englishtime.feature.datalayer.DataSet
@@ -67,6 +68,8 @@ class GrammerActivity : BasicActivity() {
         imPlaySound.setOnClickListener {
             playSound(listItems[currentGrammerItem].end)
         }
+
+
     }
 
     private fun startGame() {
@@ -79,6 +82,9 @@ class GrammerActivity : BasicActivity() {
             } else {
                 grammers = unit
                 gameTotalScore += grammers.flatMap { it.toGrammerItems() }.size * 1
+                "setupWords call $gameTotalScore".log(mTag)
+                finishGame()
+
                 loadLesson()
                 handleCOnvertCLick()
             }
@@ -114,13 +120,14 @@ class GrammerActivity : BasicActivity() {
     }
 
     private fun checkAnswer() {
-        val userAnswer = tvGrammerEnd.text.toString().trim()
-        if (userAnswer == listItems[currentGrammerItem].end) {
+        val userAnswer = tvGrammerEnd.text.toString().trim().toLowerCase()
+        if (userAnswer == listItems[currentGrammerItem].end.toLowerCase()) {
             tvScoreForm.updateValue(Constants.SCORE_UNIT, 1000)
             SoundHelper.playCorrect(this)
             score += 1
         } else {
             SoundHelper.playFail(this)
+            Toast.makeText(this, listItems[currentGrammerItem].end, Toast.LENGTH_SHORT).show()
         }
         currentGrammerItem += 1
 
