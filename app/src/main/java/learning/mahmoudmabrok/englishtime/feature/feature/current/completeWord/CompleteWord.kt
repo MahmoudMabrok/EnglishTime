@@ -111,9 +111,8 @@ class CompleteWord : BasicActivity() {
             data = categories.flatMap { it.getWords() }.toList().sortedBy { it.length }
             adapter = CompleteWordAdapter(getSplitedData())
             gameTotalScore = data.size
-            Toast.makeText(this, "score $gameTotalScore", Toast.LENGTH_SHORT).show()
             "setupWords call $gameTotalScore".log(mTag)
-            finishGame()
+
         } else {
             finish()
         }
@@ -122,16 +121,9 @@ class CompleteWord : BasicActivity() {
     private fun loadData() {
         try {
             val wordMissed = getSplitedData()
-//            gameTotalScore += lengthToMissed
             adapter.setData(wordMissed)
             (rvCompleteWord.layoutManager as GridLayoutManager).spanCount = wordMissed.size
-            /*  gameTotalScore = 0
-              data.forEach {
-                  getSplitedData()
-                  gameTotalScore += lengthToMissed
-                  current += 1
-              }
-              finishGame()*/
+
         } catch (e: Exception) {
             btnCHeckCompleteWord.visibility = View.INVISIBLE
             "error $e".log(mTag)
@@ -150,7 +142,7 @@ class CompleteWord : BasicActivity() {
         val word = String(adapter.data.toCharArray()).toLowerCase()
         val isSame = data[current] == word
         if (isSame) {
-            updateScore(lengthToMissed * Constants.SCORE_UNIT)
+            updateScore(Constants.SCORE_UNIT)
             SoundHelper.playCorrect(this)
         } else {
             SoundHelper.playFail(this)

@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_select_game_type.*
 import learning.mahmoudmabrok.englishtime.R
+import learning.mahmoudmabrok.englishtime.feature.feature.activities.Activities
 import learning.mahmoudmabrok.englishtime.feature.feature.current.aorb.IsAOrB
 import learning.mahmoudmabrok.englishtime.feature.feature.current.categorizeWords.CategorizeWords
 import learning.mahmoudmabrok.englishtime.feature.feature.current.categorizeWords.CategorizeWordsTwo
@@ -44,7 +45,7 @@ class SelectGameType : AppCompatActivity() {
     }
 
     private fun openOne() {
-        val openAcivity = Intent(this, CompleteWord::class.java)
+        val openAcivity = Intent(this, Activities::class.java)
         openAcivity.putExtra(Constants.UNIT, unit)
         startActivity(openAcivity)
         finish()

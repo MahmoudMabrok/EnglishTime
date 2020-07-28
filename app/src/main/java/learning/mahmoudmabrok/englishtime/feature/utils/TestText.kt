@@ -102,10 +102,10 @@ class TestText {
                 spannable.setSpan(ForegroundColorSpan(Color.RED), point.start, point.end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
             }
 
-            for (point in correctPoints!!) {
-                spannable.setSpan(ForegroundColorSpan(Color.GREEN), point.start, point.end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-            }
-
+            if (insertPoints.isEmpty() && delePoint.isEmpty())
+                for (point in correctPoints!!) {
+                    spannable.setSpan(ForegroundColorSpan(Color.GREEN), point.start, point.end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                }
 
             return spannable
 

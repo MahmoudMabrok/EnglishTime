@@ -76,7 +76,10 @@ class Activities : AppCompatActivity() {
 
     private fun openWords() {
         val openAcivity = Intent(this@Activities, SelectGameType::class.java)
-        openAcivity.putExtra(Constants.TYPE, Constants.CATEGORIES)
+        openIntent(openAcivity)
+    }
+
+    private fun openIntent(openAcivity: Intent) {
         openAcivity.putExtra(Constants.UNIT, unit)
         startActivity(openAcivity)
     }

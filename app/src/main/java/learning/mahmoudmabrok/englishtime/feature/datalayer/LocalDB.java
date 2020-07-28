@@ -42,7 +42,7 @@ public class LocalDB {
     public int getUnitScore(String unit) {
         int score = 0;
         for (int i = 0; i < 5; i++) {
-            score += getScorePerTrain(unit + i);
+            score += getScorePerTrain("" + unit + i);
         }
         return score;
     }

@@ -56,7 +56,7 @@ object DataSet {
 
         // 10
         categories.add(listOf(
-                Category("at school", "school*funny*electriccomputer*flag*table*board*playground*internet"),
+                Category("at school", "teacher*school*funny*electriccomputer*flag*table*board*playground*internet"),
                 Category("NA", "programme*Africa*gorilla*comeover*news*besides*fun*afternoon*football*film*match*gamebell*borrow*today's*special*positive*mood*beef*" +
                         "website*findout*begin*satellite*Egyptian*invent*videogames*percent*TV*broadcasting*remotecontrol*history*million*black*white*first")))
 
@@ -66,7 +66,7 @@ object DataSet {
         puncates.add(listOf(
                 PunctuateItem("Now, he plays the harp.", "now he plays the harp", 3),
                 PunctuateItem("He doesn't hit the drum.", "he doesnt hit the drum", 3),
-                PunctuateItem("We don't blow the trumpt.", "we dont blow the trumpet", 3),
+                PunctuateItem("We don't blow the trumpt.", "we dont blow the trumpt", 3),
                 PunctuateItem("Last year, he played the cello.", "last year,he played the cello", 3),
                 PunctuateItem("Last year, she played the harp.", "last year,she played the harp", 3),
                 PunctuateItem("Last year, she blow the trumpet.", "last year,she blow the trumpet", 3)
@@ -102,7 +102,7 @@ object DataSet {
         // 10
         puncates.add(listOf(
                 PunctuateItem("If he runs , she will win the race.", "if he run she will win the race ", 3),
-                PunctuateItem("If I study well, I will get high marks.", "if I study well', I will get high marks", 3)
+                PunctuateItem("If I study well, I will get high marks.", "if I study well I will get high marks", 3)
 
         ))
         //endregion

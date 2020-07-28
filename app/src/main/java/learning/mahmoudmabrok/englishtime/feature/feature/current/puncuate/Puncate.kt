@@ -113,12 +113,11 @@ class Puncate : BasicActivity() {
         val userScore = scoreMax - wrong * Constants.SCORE_UNIT
 
         "wrong $wrong exp $expWrongs userscore $userScore".log()
-        if (userScore > 0) {
+        if (wrong == 0) {
             updateScore(Constants.SCORE_UNIT)
             SoundHelper.playCorrect(this)
         } else {
             SoundHelper.playFail(this)
-//            this.show("Try Later")
         }
         edPuncate.isEnabled = false
 
@@ -145,7 +144,7 @@ class Puncate : BasicActivity() {
             puncateList = DataSet.getPuncatuate(unitNum)
             gameTotalScore = puncateList.size
             "setupWords call $gameTotalScore".log(mTag)
-            finishGame()
+
         } else {
             finish()
         }

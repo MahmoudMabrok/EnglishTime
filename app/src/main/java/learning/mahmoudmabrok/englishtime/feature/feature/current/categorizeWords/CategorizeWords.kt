@@ -56,16 +56,18 @@ class CategorizeWords : BasicActivity() {
 
     private fun checkAnsers() {
         // check if top is correct
-        if (currentCategory.getWords().isSame(adapterTop.list)) {
+        val allCorrect = currentCategory.getWords()
+        val userAnswers = adapterTop.list
+        val similars = allCorrect.filter { userAnswers.any { user -> user == it } }
+        // get Score as word collects
+        updateScore(similars.size * Constants.SCORE_UNIT)
+        "checkAnsers $similars".log(mTag)
+        if (similars.size == allCorrect.size) {
             SoundHelper.playCorrect(this)
-            // get Score as word collects
-            updateScore(Constants.SCORE_UNIT)
-
             gotoNext()
 
         } else {
             SoundHelper.playFail(this)
-
             // show dialog with correct words
             val dialoge = Dialoges.showCorrectWords(this, currentCategory.name, currentCategory.getWords().joinToString(separator = ",", prefix = "{ ", postfix = " }") { it })
             dialoge?.let {
@@ -74,8 +76,8 @@ class CategorizeWords : BasicActivity() {
                     gotoNext()
                 }
             }
-
         }
+
 
     }
 
@@ -130,7 +132,11 @@ class CategorizeWords : BasicActivity() {
         if (intent.hasExtra(Constants.UNIT)) {
             unitNum = intent.getIntExtra(Constants.UNIT, 0)
             categories = DataSet.getCategory(unitNum)
-            gameTotalScore = ((categories.size - 1) * Constants.SCORE_UNIT)
+            if (unitNum == 0) {
+                gameTotalScore = categories.subList(0, 2).flatMap { it.getWords() }.size
+            } else {
+                gameTotalScore = categories.first().getWords().size
+            }
             laodDataOfAllWords()
         } else {
             finish()

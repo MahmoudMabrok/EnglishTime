@@ -83,7 +83,7 @@ class GrammerActivity : BasicActivity() {
                 grammers = unit
                 gameTotalScore += grammers.flatMap { it.toGrammerItems() }.size * 1
                 "setupWords call $gameTotalScore".log(mTag)
-                finishGame()
+
 
                 loadLesson()
                 handleCOnvertCLick()

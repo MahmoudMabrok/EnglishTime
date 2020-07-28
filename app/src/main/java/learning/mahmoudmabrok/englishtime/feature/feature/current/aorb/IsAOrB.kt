@@ -106,7 +106,7 @@ class IsAOrB : BasicActivity() {
 
         gameTotalScore = structures.flatMap { it.toItems() }.size
         "setupWords call $gameTotalScore".log(mTag)
-        finishGame()
+
 
     }
 
